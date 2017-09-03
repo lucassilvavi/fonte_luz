@@ -22,7 +22,7 @@
     <link href="{{asset('assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 
     {{--<!-- Toastr - Notificações -->--}}
-    <link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet">
+    {{--<link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet">--}}
     {{--<!-- Metis Menu -->--}}
     <link href="{{asset('assets/vendor/metisMenu/dist/metisMenu.min.js')}}" rel="stylesheet">
     {{--<!-- Animate CSS -->--}}
@@ -224,8 +224,13 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a  href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -381,8 +386,8 @@
 <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
 
-<!-- Toastr - Notificações -->
-<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>
+{{--<!-- Toastr - Notificações -->--}}
+{{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
 
 <!-- Data Tables -->
 <script src="{{asset('assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
@@ -420,7 +425,7 @@
 
 @show
 
-{!! Toastr::message() !!}
+{{--{!! Toastr::message() !!}--}}
 
 </body>
 

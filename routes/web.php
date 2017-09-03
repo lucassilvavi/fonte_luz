@@ -11,13 +11,13 @@
 |
 */
 
-/**
- * Web Routes dos Exemplos
- */
-
 Route::get('/', function () {
-    return view('example-view.index');
+    return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/cadastro-parlamentar', function () {
     return view('example-view.cadastro-parlamentar');
@@ -76,10 +76,10 @@ Route::get('/tabs', function () {
 Route::get('/progress-bar', function () {
     return view('example-view.progress-bar');
 });
-
-Route::get('/login', function () {
-    return view('example-view.login');
-});
+//
+//Route::get('/login', function () {
+//    return view('example-view.login');
+//});
 
 
 /* CHART.JS */
