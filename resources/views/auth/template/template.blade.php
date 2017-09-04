@@ -24,13 +24,14 @@
 
     <!-- Custom Css -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="login-page">
 <div class="login-box">
     <div class="logo">
-        <a href="javascript:void(0);">Admin<b>BSB</b></a>
-        <small>Admin BootStrap Based - Material Design</small>
+        <a href="javascript:void(0);"><b>Igreja Fonte de Luz</b></a>
+
     </div>
     <div class="card">
         <div class="body">
@@ -50,10 +51,17 @@
 
 <!-- Validation Plugin Js -->
 <script src="{{asset('assets/vendor/jquery-validation/jquery.validate.js')}}"></script>
+<!-- Bootstrap Datepicker -->
+<script src="{{asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('assets/js/datepickerDefaults.js')}}"></script>
 
+<!-- jQuery Mask Plugin -->
+<script src="{{asset('assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
 <!-- Custom Js -->
 <script src="{{asset('assets/js/admin.js')}}"></script>
 <script src="{{asset('assets/js/sign-in.js')}}"></script>
 </body>
-
+<script>
+    $('#money').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});
+</script>
 </html>
