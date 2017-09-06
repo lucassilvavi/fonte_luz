@@ -49,9 +49,16 @@ class RegisterController extends Controller
     {
 
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'cpf' => 'required|string|email|max:255|unique:tb_usuario',
+            'nome' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tb_usuario',
             'password' => 'required|string|min:6|confirmed',
+            'cpf' => 'required|string|max:11',
+            'dt_nascimento' => 'required',
+            'logradouro' => 'required|string|max:55',
+            'bairro' => 'required|string|max:55',
+//            'uf' => 'required',
+//            'cidade' => 'required',
+            'valor' => 'required',
         ]);
 
     }
@@ -65,11 +72,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-dd('lk');
+        $dNnascimento=$this->dateEmMysql( $data['dt_nascimento']);
+
+
         return Usuario::create([
-            'name' => $data['name'],
+            'nome_usuario' => $data['nome'],
+            'nu_cpf' => $data['cpf'],
+            'dt_nascimento' => $dNnascimento,
             'email' => $data['email'],
+            'logradouro' => $data['logradouro'],
+            'bairro' => $data['bairro'],
+//            'uf' => $data['uf'],
+//            'cidade' => $data['cidade'],
+            'valor' => $data['valor'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    public function dateEmMysql($dateSql){
+        $ano= substr($dateSql, 6);
+        $mes= substr($dateSql, 3,-5);
+        $dia= substr($dateSql, 0,-8);
+        return $ano."-".$mes."-".$dia;
     }
 }

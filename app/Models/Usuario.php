@@ -26,9 +26,11 @@ class Usuario extends Authenticatable
         'email',
         'logradouro',
         'bairro',
+        'nu_cep',
         'co_uf',
         'co_cidade',
-        'remember_token'
+        'remember_token',
+        'password'
     ];
 
     /**

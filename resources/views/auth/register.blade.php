@@ -154,7 +154,7 @@
                        placeholder="Confirmação de Senha" required>
             </div>
         </div>
-        <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Cadas</button>
+        <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Cadastrar</button>
         <div class="m-t-25 m-b--5 align-center">
             <a href="login">Você já é Membro?</a>
         </div>
