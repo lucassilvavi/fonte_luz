@@ -21,7 +21,7 @@ class Usuario extends Authenticatable
      */
     protected $fillable = [
         'nu_cpf',
-        'nome_usuario',
+        'no_nome',
         'dt_nascimento',
         'email',
         'logradouro',
@@ -29,7 +29,6 @@ class Usuario extends Authenticatable
         'nu_cep',
         'co_uf',
         'co_cidade',
-        'remember_token',
         'password'
     ];
 
@@ -41,12 +40,7 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    /**
-     * PrimaryKey
-     *
-     * @var array
-     */
-    protected $primaryKey = 'co_seq_usuario';
+
     /**
      * Table
      *
@@ -54,3 +48,4 @@ class Usuario extends Authenticatable
      */
     protected $table = "tb_usuario";
 }
+

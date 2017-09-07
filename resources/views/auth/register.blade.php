@@ -5,30 +5,30 @@
     <form class="form-horizontal" id="sign_up" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
         <div class="msg">Register a new membership</div>
-        <div class="input-group {{ $errors->has('nome') ? ' has-error' : '' }}">
+        <div class="input-group {{ $errors->has('no_nome') ? ' has-error' : '' }}">
               <span class="input-group-addon">
                    <i class="material-icons">person</i>
               </span>
             <div class="form-line">
-                <input type="text" class="form-control" name="nome" value="{{ old('nome') }}" placeholder="Nome Completo"
+                <input type="text" class="form-control" name="no_nome" value="{{ old('no_nome') }}" placeholder="Nome Completo"
                        required autofocus>
-                @if ($errors->has('nome'))
+                @if ($errors->has('no_nome'))
                     <span class="help-block">
-                   <strong>{{ $errors->first('nome') }}</strong>
+                   <strong>{{ $errors->first('no_nome') }}</strong>
                    </span>
                 @endif
             </div>
         </div>
-        <div class="input-group {{ $errors->has('cpf') ? ' has-error' : '' }}">
+        <div class="input-group {{ $errors->has('nu_cpf') ? ' has-error' : '' }}">
               <span class="input-group-addon">
                    <i class="material-icons">border_color</i>
               </span>
             <div class="form-line">
-                <input type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" placeholder="CPF"
+                <input type="text" class="form-control" name="nu_cpf" value="{{ old('nu_cpf') }}" placeholder="CPF"
                        required autofocus>
-                @if ($errors->has('cpf'))
+                @if ($errors->has('nu_cpf'))
                     <span class="help-block">
-                   <strong>{{ $errors->first('cpf') }}</strong>
+                   <strong>{{ $errors->first('nu_cpf') }}</strong>
                    </span>
                 @endif
             </div>
@@ -103,16 +103,16 @@
                 @endif
             </div>
         </div>
-        <div class="input-group {{ $errors->has('valor') ? ' has-error' : '' }}">
+        <div class="input-group {{ $errors->has('vl_contribuicao') ? ' has-error' : '' }}">
                 <span class="input-group-addon">
                     <i class="material-icons">attach_money</i>
                  </span>
             <div class="form-line">
-                <input type="valor" class="form-control" id="money" name="valor" value="{{ old('valor') }}"
+                <input type="vl_contribuicao" class="form-control" id="money" name="vl_contribuicao" value="{{ old('vl_contribuicao') }}"
                        placeholder="Valor Contribuição" required>
-                @if ($errors->has('valor'))
+                @if ($errors->has('vl_contribuicao'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('valor') }}</strong>
+                        <strong>{{ $errors->first('vl_contribuicao') }}</strong>
                     </span>
                 @endif
             </div>
