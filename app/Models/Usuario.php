@@ -47,5 +47,11 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $table = "tb_usuario";
+
+    public function perfil(){
+        return $this->belongsToMany(Perfil::class);
+    }
+
 }
+
 

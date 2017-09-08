@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/perfil', 'Perfil\MembroController@index');
+
 Route::get('/cadastro-parlamentar', function () {
     return view('example-view.cadastro-parlamentar');
 });
