@@ -14,10 +14,10 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pessoal</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Trabalho</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Telefones</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Fotos</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -26,34 +26,55 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                            <label for="no_nome" class="col-form-label">Nome</label>
+                            <input type="text" class="form-control" name="no_nome" id="no_nome" placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4" class="col-form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                            <label for="email" class="col-form-label">E-mail</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="inputAddress" class="col-form-label">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <div class="form-group col-md-4">
+                        <label for="uf" class="col-form-label">UF</label>
+                        <select id="uf" class="form-control">Choose</select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cidade" class="col-form-label">Cidade</label>
+                        <select id="cidade" class="form-control">Choose</select>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="inputAddress2" class="col-form-label">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <label for="logradouro" class="col-form-label">Logradouro</label>
+                        <input type="text" class="form-control" id="logradouro" placeholder="Logradouro">
                     </div>
+                    <div class="form-group col-md-5">
+                        <label for="bairro" class="col-form-label">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+                    </div>
+
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity" class="col-form-label">City</label>
-                            <input type="text" class="form-control" id="inputCity">
+                        <div class="form-group col-md-2">
+                            <label for="nu_cep" class="col-form-label">CEP</label>
+                            <input type="text" class="form-control" id="nu_cep" placeholder="CEP">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState" class="col-form-label">State</label>
+                        <div class="form-group col-md-3">
+                            <label for="naturalidade" class="col-form-label">Naturalidade</label>
+                            <input type="text" class="form-control" id="naturalidade" placeholder="Naturalidade">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Nacionalidade</label>
                             <select id="inputState" class="form-control">Choose</select>
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="inputZip" class="col-form-label">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                        <div class="form-group col-md-3">
+                            <label for="nu_cpf" class="col-form-label">CPF</label>
+                            <input type="text" class="form-control" id="nu_cpf">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="valor" class="col-form-label">Valor Contribuição</label>
+                            <input type="text" class="form-control" id="valor" placeholder="00,00">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="perfil" class="col-form-label">Perfil</label>
+                            <input type="text" class="form-control" id="perfil" placeholder="Administrador">
                         </div>
                     </div>
                 </form>
