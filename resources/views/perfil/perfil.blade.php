@@ -14,24 +14,32 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pessoal</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Trabalho</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Telefones</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Fotos</a></li>
+            <li role="presentation" class="active"><a href="#pessoal" aria-controls="home" role="tab" data-toggle="tab">Pessoal</a>
+            </li>
+            <li role="presentation"><a href="#trabalho" aria-controls="profile" role="tab"
+                                       data-toggle="tab">Trabalho</a></li>
+            <li role="presentation"><a href="#telefones" aria-controls="messages" role="tab"
+                                       data-toggle="tab">Telefones</a></li>
+            <li role="presentation"><a href="#fotos" aria-controls="settings" role="tab" data-toggle="tab">Fotos</a>
+            </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home">
+            <div role="tabpanel" class="tab-pane active" id="pessoal">
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="no_nome" class="col-form-label">Nome</label>
-                            <input type="text" class="form-control" name="no_nome" id="no_nome" placeholder="Nome">
+                            <input type="text" class="form-control" name="no_nome" id="no_nome"
+                                   value="{{ $dados['pessoa']->no_nome}}"
+                                   placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="email" class="col-form-label">E-mail</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
+                            <input type="email" class="form-control" name="email" id="email"
+                                   value="{{ $dados['pessoa']->email}}"
+                                   placeholder="E-mail">
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -44,21 +52,27 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="logradouro" class="col-form-label">Logradouro</label>
-                        <input type="text" class="form-control" id="logradouro" placeholder="Logradouro">
+                        <input type="text" class="form-control" id="logradouro"
+                               value="{{ $dados['pessoa']->logradouro}}"
+                               placeholder="Logradouro">
                     </div>
                     <div class="form-group col-md-5">
                         <label for="bairro" class="col-form-label">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+                        <input type="text" class="form-control" id="bairro" value="{{ $dados['pessoa']->bairro}}"
+                               placeholder="Bairro">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="nu_cep" class="col-form-label">CEP</label>
-                            <input type="text" class="form-control" id="nu_cep" placeholder="CEP">
+                            <input type="text" class="form-control" id="nu_cep" value="{{ $dados['pessoa']->nu_cep}}"
+                                   placeholder="CEP">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="naturalidade" class="col-form-label">Naturalidade</label>
-                            <input type="text" class="form-control" id="naturalidade" placeholder="Naturalidade">
+                            <input type="text" class="form-control" id="naturalidade"
+                                   value="{{ $dados['pessoa']->naturalidade}}"
+                                   placeholder="Naturalidade">
                         </div>
                         <div class="form-group col-md-5">
                             <label for="inputState" class="col-form-label">Nacionalidade</label>
@@ -66,29 +80,70 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="nu_cpf" class="col-form-label">CPF</label>
-                            <input type="text" class="form-control" id="nu_cpf">
+                            <input type="text" class="form-control" id="nu_cpf" value="{{ $dados['pessoa']->nu_cpf}}"
+                                   readonly>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="valor" class="col-form-label">Valor Contribuição</label>
-                            <input type="text" class="form-control" id="valor" placeholder="00,00">
+                            <input type="text" class="form-control" id="valor"
+                                   value="{{ $dados['pessoa']->vl_contribuicao}}"
+                                   placeholder="00,00">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="perfil" class="col-form-label">Perfil</label>
-                            <input type="text" class="form-control" id="perfil" placeholder="Administrador">
+                            <input type="text" class="form-control" id="perfil" placeholder="Administrador" readonly>
                         </div>
                     </div>
                 </form>
             </div>
-            <div role="tabpanel" class="tab-pane" id="profile">
+            <div role="tabpanel" class="tab-pane" id="trabalho">
                 <h3>Conteúdo da Aba Profile</h3>
             </div>
-            <div role="tabpanel" class="tab-pane" id="messages">
+            <div role="tabpanel" class="tab-pane" id="telefones">
                 <h3>Conteúdo da Aba Messages</h3>
             </div>
-            <div role="tabpanel" class="tab-pane" id="settings">
-                <h3>Conteúdo da Aba Settings</h3>
+            <div role="tabpanel" class="tab-pane" id="fotos">
+                <form action="{{URL::to('savePhoto')}}" enctype="multipart/form-data" method="POST">
+                    <div class="alert alert-danger print-error-msg" style="display:none">
+                        <ul></ul>
+                    </div>
+                    <div class="alert alert-success alert-dismissable" hidden>
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong> Foto inserida com sucesso!</strong>
+                    </div>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" name="title" class="form-control"
+                               placeholder="Escreva um nome para a imagem">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imagem:</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success upload-image" type="submit">Upload Image</button>
+                    </div>
+                </form>
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-4">--}}
+                        {{--<div class="thumbnail">--}}
+                            {{--<a href="/w3images/lights.jpg">--}}
+                                {{--<img src="/w3images/lights.jpg" alt="Lights" style="width:100%">--}}
+                                {{--<div class="caption">--}}
+                                    {{--<p>Lorem ipsum...</p>--}}
+                                {{--</div>--}}
+                            {{--</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+                {{--</div>--}}
             </div>
         </div>
-
     </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
 @endsection

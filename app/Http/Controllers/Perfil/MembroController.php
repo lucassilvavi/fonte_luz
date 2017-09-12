@@ -37,9 +37,7 @@ class MembroController extends Controller
      */
     public function index()
     {
-        $oi=$this->usuario->find(auth::user()->id);
-
-
-        return view('perfil.perfil');
+        $dados['pessoa']=$this->usuario->find(auth::user()->id);
+        return view('perfil.perfil')->with('dados',$dados);
     }
 }

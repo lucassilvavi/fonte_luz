@@ -21,6 +21,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/perfil', 'Perfil\MembroController@index');
 
+Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/cadastro-parlamentar', function () {
     return view('example-view.cadastro-parlamentar');
 });
