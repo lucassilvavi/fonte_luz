@@ -7,11 +7,11 @@
  */
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Foto
+class Foto extends Model
 {
-
+    protected $connection = 'mysql';
     /**
      * The attributes that are mass assignable.
      *
@@ -21,10 +21,12 @@ class Foto
         'ds_endereco_foto',
         'dt_cadastro_foto',
         'st_ativo',
-        'dt_desativacao'
-
+        'dt_desativacao',
+        'co_usuario',
+        'no_foto'
     ];
 
+    public $timestamps = false;
     /**
      * Table
      *

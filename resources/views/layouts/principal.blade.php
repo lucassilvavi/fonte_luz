@@ -374,10 +374,8 @@
 <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
-
 {{--<!-- Toastr - Notificações -->--}}
 {{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
-
 <!-- Data Tables -->
 <script src="{{asset('assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
@@ -390,25 +388,12 @@
 <script src="{{asset('assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
 <script src="{{asset('assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
 <script src="{{asset('assets/vendor/jszip/dist/jszip.min.js')}}"></script>
-
 <!-- Bootstrap Datepicker -->
 <script src="{{asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('assets/js/datepickerDefaults.js')}}"></script>
-
 <!-- jQuery Mask Plugin -->
 <script src="{{asset('assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
-
-{{--<script src="{{asset('assets/js/app.js')}}"></script>--}}
-
-{{--<!-- jQuery 2.2.3 -->--}}
-{{--<script src="{{ asset("/admin-lte/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>--}}
-{{--<!-- Bootstrap 3.3.6 -->--}}
-{{--<script src="{{ asset("/admin-lte/bootstrap/js/bootstrap.min.js") }}"></script>--}}
-<!-- AdminLTE App -->
 <script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
-
-
-
 
 @section('scripts')
 

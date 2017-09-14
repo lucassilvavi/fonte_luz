@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Perfil;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 Use App\Models\Usuario;
+use App\Repositories\FotoRepository;
 
 class MembroController extends Controller
 {
@@ -22,12 +23,16 @@ class MembroController extends Controller
      */
     private $auth;
     private $usuario;
+    private $fotoRepository;
 
-    public function __construct(Auth $auth,Usuario $usuario)
+    public function __construct(Auth $auth,
+                                Usuario $usuario,
+                                FotoRepository $fotoRepository)
     {
         $this->middleware('auth');
         $this->auth = $auth;
         $this->usuario = $usuario;
+        $this->fotoRepository = $fotoRepository;
     }
 
     /**
@@ -37,7 +42,8 @@ class MembroController extends Controller
      */
     public function index()
     {
-        $dados['pessoa']=$this->usuario->find(auth::user()->id);
-        return view('perfil.perfil')->with('dados',$dados);
+        $dados['fotos'] = $this->fotoRepository->all();
+        $dados['pessoa'] = $this->usuario->find(auth::user()->id);
+        return view('perfil.perfil')->with('dados', $dados);
     }
 }

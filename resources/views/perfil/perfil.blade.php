@@ -127,19 +127,20 @@
                         <button class="btn btn-success upload-image" type="submit">Upload Image</button>
                     </div>
                 </form>
-                {{--<div class="row">--}}
-                    {{--<div class="col-md-4">--}}
-                        {{--<div class="thumbnail">--}}
-                            {{--<a href="/w3images/lights.jpg">--}}
-                                {{--<img src="/w3images/lights.jpg" alt="Lights" style="width:100%">--}}
-                                {{--<div class="caption">--}}
-                                    {{--<p>Lorem ipsum...</p>--}}
-                                {{--</div>--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
+                <div class="row">
+                    @foreach($dados['fotos'] as $foto)
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <a href="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" target="_blank">
+                                    <img src="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" alt="{{$foto->NO_FOTO}}" style="width:100%">
+                                    <div class="caption">
+                                        <p>{{$foto->NO_FOTO}}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

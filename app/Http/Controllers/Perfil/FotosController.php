@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
 use App\Services\FotoService;
+use Illuminate\Support\Facades\Input;
 
 
 class FotosController extends Controller
@@ -43,13 +44,19 @@ class FotosController extends Controller
             'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $destinationPath = 'fotos/' . $this->usuario->find(auth::user()->id)->id;
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
         if ($validator->passes()) {
+            $file = Input::file('image');
+            $rename = time() . '.' . $request->image->getClientOriginalExtension();
+            $file->move($destinationPath, $rename);
             $input = $request->all();
-            $input['image'] = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->move('uploads', $input['image']);
-            $oi=$this->fotoService->nova( $input['image'],$this->usuario->find(auth::user()->id));
-            dd($oi);
-            return response()->json(['success' => 'done']);
+            $endArquivoProg = $this->usuario->find(auth::user()->id)->id . '/' . $rename;
+
+            return $this->fotoService->nova($endArquivoProg,$this->usuario->find(auth::user()->id)->id,$input['title']);
+
         }
         return response()->json(['error' => $validator->errors()->all()]);
     }
