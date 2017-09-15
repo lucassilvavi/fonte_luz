@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testefoto', function () {
+    return Layout::foto();
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -23,19 +28,7 @@ Route::get('/perfil', 'Perfil\MembroController@index');
 
 Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/index', 'Layout\LayoutController@index');
 
 
 Route::get('/cadastro-parlamentar', function () {

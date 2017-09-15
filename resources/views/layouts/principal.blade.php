@@ -10,7 +10,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <title>@yield('title')</title>
-
     {{--<!-- Ionicons -->--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--}}
     <!-- Bootstrap -->
@@ -32,13 +31,6 @@
 
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
-    {{--<link href="{{asset('assets/css/app.css')}}" rel="stylesheet">--}}
-    {{--<!-- Theme style -->--}}
-    {{--<link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">--}}
-    {{--<!-- AdminLTE Skins. We have chosen the skin-blue for this starter--}}
-      {{--page. However, you can choose any other skin. Make sure you--}}
-      {{--apply the skin class to the body tag so the changes take effect.--}}
-{{---->--}}
     {{--<link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">--}}
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
@@ -48,8 +40,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">
-
-
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -107,7 +97,7 @@
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                                                <img src="{{ asset("fotos/". $dados['foto'][0]->DS_ENDERECO_FOTO) }}" class="img-circle" alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -127,6 +117,7 @@
                     </li>
                     <!-- /.messages-menu -->
 
+                    {{dd(App\Http\Controllers\Layout\::$fotoRepository)}}
                     <!-- Notifications Menu -->
                     <li class="dropdown notifications-menu">
                         <!-- Menu toggle button -->
@@ -191,14 +182,14 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image">
+                            <img src="{{ asset("fotos/". $dados['foto'][0]->DS_ENDERECO_FOTO) }}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{Auth::user()->no_nome}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                                <img src="{{ asset("fotos/". $dados['foto'][0]->DS_ENDERECO_FOTO) }}" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{Auth::user()->no_nome}}
@@ -236,7 +227,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                    <img src="{{ asset("fotos/". $dados['foto'][0]->DS_ENDERECO_FOTO) }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{Auth::user()->no_nome}}</p>
