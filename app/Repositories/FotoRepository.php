@@ -9,18 +9,26 @@
 namespace App\Repositories;
 
 use App\Models\Foto;
+use Illuminate\Support\Facades\Auth;
 
 class FotoRepository extends Repository
 {
-    protected $model;
 
-    public function __construct(Foto $foto)
+
+    public function __construct(Foto $foto,
+                                Auth $auth)
     {
         $this->model = $foto;
+        $this->auth = $auth;
     }
 
     public function getAtiva()
     {
         return $this->model->where('st_ativo', 'S')->get();
+    }
+    public function getAtivaWithUser()
+    {
+        return $this->model->where('st_ativo', 'S')
+            ->where('co_usuario',auth::user()->id)->get();
     }
 }

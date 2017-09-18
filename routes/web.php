@@ -24,18 +24,15 @@ Route::get('/perfil', 'Perfil\MembroController@index');
 Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 
 
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 
+Route::get('/testefoto', function () {
 
-
-
-
-
-
-
-
-
-
-
+   return \App\Http\Controllers\Facade\FotoAtiva::getFoto();
+});
 
 
 Route::get('/cadastro-parlamentar', function () {

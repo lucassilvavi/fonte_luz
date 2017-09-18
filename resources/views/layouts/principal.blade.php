@@ -11,15 +11,16 @@
 
     <title>@yield('title')</title>
 
-    {{--<!-- Ionicons -->--}}
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--}}
-    <!-- Bootstrap -->
+{{--<!-- Ionicons -->--}}
+{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--}}
+<!-- Bootstrap -->
     <link href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<!-- Font Awesome -->--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     {{--<!-- Data Tables -->--}}
     <link href="{{asset('assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
+          rel="stylesheet">
 
     {{--<!-- Toastr - Notificações -->--}}
     {{--<link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet">--}}
@@ -28,19 +29,13 @@
     {{--<!-- Animate CSS -->--}}
     <link href="{{asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
     {{--<!-- Bootstrap Datepicker -->--}}
-    <link href="{{asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}"
+          rel="stylesheet">
 
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
-    {{--<link href="{{asset('assets/css/app.css')}}" rel="stylesheet">--}}
-    {{--<!-- Theme style -->--}}
-    {{--<link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">--}}
-    {{--<!-- AdminLTE Skins. We have chosen the skin-blue for this starter--}}
-      {{--page. However, you can choose any other skin. Make sure you--}}
-      {{--apply the skin class to the body tag so the changes take effect.--}}
-{{---->--}}
-    {{--<link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">--}}
-    <!-- Bootstrap 3.3.6 -->
+
+<!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -60,9 +55,9 @@
 
     @show
     <style>
-        .central{
+        .central {
             margin-left: 2em;
-          margin-right: 2em;
+            margin-right: 2em;
         }
     </style>
 
@@ -98,6 +93,7 @@
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
                         </a>
+
                         <ul class="dropdown-menu">
                             <li class="header">You have 4 messages</li>
                             <li>
@@ -107,7 +103,8 @@
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                                     class="img-circle" alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -172,7 +169,9 @@
                                             <!-- The progress bar -->
                                             <div class="progress xs">
                                                 <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
                                             </div>
@@ -191,14 +190,16 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image">
+                            <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                 class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{Auth::user()->no_nome}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                     class="img-circle" alt="User Image">
 
                                 <p>
                                     {{Auth::user()->no_nome}}
@@ -212,11 +213,13 @@
                                     <a href="/perfil" class="btn btn-default btn-flat">Meu Perfil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a  href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Sair</a>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                       class="btn btn-default btn-flat">Sair</a>
                                 </div>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </li>
@@ -236,7 +239,8 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                         class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{Auth::user()->no_nome}}</p>
@@ -258,7 +262,7 @@
 
             <!-- Sidebar Menu -->
         @include('layouts.menu')
-            <!-- /.sidebar-menu -->
+        <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
     </aside>
