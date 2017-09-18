@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testefoto', function () {
+    return Layout::foto();
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
