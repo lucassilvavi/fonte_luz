@@ -40,25 +40,37 @@ class FotosController extends Controller
      */
     public function savePhoto(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $destinationPath = 'fotos/' . $this->usuario->find(auth::user()->id)->id;
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
-        }
-        if ($validator->passes()) {
+        $valida = $this->valida($request);
+        if ($valida != 'certo') {
+            return $valida;
+        } else {
+            $destinationPath = 'fotos/' . $this->usuario->find(auth::user()->id)->id;
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
             $file = Input::file('image');
             $rename = time() . '.' . $request->image->getClientOriginalExtension();
             $file->move($destinationPath, $rename);
             $input = $request->all();
             $endArquivoProg = $this->usuario->find(auth::user()->id)->id . '/' . $rename;
-
-            return $this->fotoService->nova($endArquivoProg,$this->usuario->find(auth::user()->id)->id,$input['title']);
-
+            return $this->fotoService->nova($endArquivoProg, $this->usuario->find(auth::user()->id)->id, $input['title']);
         }
-        return response()->json(['error' => $validator->errors()->all()]);
+
+
+    }
+
+    public function valida($request)
+    {
+        if (!isset($request->image) && $request->title == null) {
+            return 'image and title';
+        } elseif (!isset($request->image)) {
+            return 'image';
+        } elseif ($request->title == null) {
+            return 'title';
+        } else {
+            return 'certo';
+        }
+
     }
 
 }

@@ -103,7 +103,7 @@
                 <h3>Conteúdo da Aba Messages</h3>
             </div>
             <div role="tabpanel" class="tab-pane" id="fotos">
-                <form action="{{URL::to('savePhoto')}}" enctype="multipart/form-data" method="POST">
+                <form action="{{URL::to('savePhoto')}}" id="salvarImage" enctype="multipart/form-data" method="POST">
                     <div class="alert alert-danger print-error-msg" style="display:none">
                         <ul></ul>
                     </div>
@@ -124,7 +124,7 @@
                         <input type="file" name="image" class="form-control">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success upload-image" type="submit">Upload Image</button>
+                        <button class="btn btn-success upload-image" id="btnSalvar" type="button">Upload Image</button>
                     </div>
                 </form>
                 <div class="row">
@@ -132,7 +132,8 @@
                         <div class="col-md-4">
                             <div class="thumbnail">
                                 <a href="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" target="_blank">
-                                    <img src="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" alt="{{$foto->NO_FOTO}}" style="width:100%">
+                                    <img src="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" alt="{{$foto->NO_FOTO}}"
+                                         style="width:100%">
                                     <div class="caption">
                                         <p>{{$foto->NO_FOTO}}</p>
                                     </div>
@@ -146,5 +147,74 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
+    <script type="text/javascript">
+        $("#btnSalvar").click(function () {
+            $.ajax({
+                url: '/savePhoto',
+                data: new FormData($("#salvarImage")[0]),
+                async: false,
+                type: 'post',
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    if (response == 'true') {
+                        sucessoFoto();
+                    }
+                    else if (response == 'image and title') {
+                        faltaAnexar();
+                    }
+                    else if (response == 'image') {
+                        faltaImage();
+
+                    }
+                    else if (response == 'title') {
+                        faltaTitulo();
+                    }
+                },
+            });
+        });
+
+        function sucessoFoto() {
+// Override global options
+            toastr.success('Foto Anexada com Sucesso!', '', {
+                closeButton: false,
+                progressBar: true,
+                timeOut: "2500",
+                positionClass: 'toast-top-center'
+            });
+            setTimeout(function () {
+                location.reload();
+            }, 2500);
+        }
+
+        function faltaAnexar() {
+// Override global options
+            toastr.warning('Por favor Anexe um Imagem e insira um Titulo para ela!', '', {
+                closeButton: false,
+                progressBar: true,
+                positionClass: 'toast-top-center'
+            });
+        }
+
+        function faltaImage() {
+// Override global options
+            toastr.warning('Por favor Anexe um Imagem!', '', {
+                closeButton: false,
+                progressBar: true,
+                positionClass: 'toast-top-center'
+            });
+
+        }
+
+        function faltaTitulo() {
+// Override global options
+            toastr.warning('Por favor Anexe um Titulo para a Imagem!', '', {
+                closeButton: false,
+                progressBar: true,
+                positionClass: 'toast-top-center'
+            });
+        }
+
+    </script>
 @endsection

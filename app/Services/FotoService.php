@@ -42,7 +42,7 @@ class FotoService
             $this->fotoRepository->create($dados);
 
             DB::commit();
-            return '{"operacao":true}';
+            return 'true';
         } catch (\Illuminate\Database\QueryException $e) {
 
             $exception = $e->getMessage() . $e->getTraceAsString();

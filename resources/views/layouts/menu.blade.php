@@ -12,7 +12,7 @@
             <li><a href="{{url('/inputs')}}">Inputs</a></li>
             <li><a href="{{url('/mascaras')}}">Máscaras</a></li>
             <li><a href="{{url('/tables')}}">Tables</a></li>
-            {{--<li><a href="{{url('/notification')}}">Notificações</a></li>--}}
+            <li><a href="{{url('/notification')}}">Notificações</a></li>
             <li><a href="{{url('/calendario')}}">Calendário</a></li>
             <li><a href="{{url('/icones')}}">Icones</a></li>
             <li><a href="{{url('/buttons')}}">Botões</a></li>

@@ -50,6 +50,7 @@
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     @section('style')
 
@@ -398,12 +399,13 @@
 <!-- jQuery Mask Plugin -->
 <script src="{{asset('assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
 <script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 @section('scripts')
 
 @show
 
-{{--{!! Toastr::message() !!}--}}
+{!! Toastr::message() !!}
 
 </body>
 
