@@ -73,4 +73,15 @@ class FotosController extends Controller
 
     }
 
+    public function changePhoto($co_seq_foto)
+    {
+        $desativada = $this->fotoService->desativar();
+        if ($desativada == 'true') {
+            return $this->fotoService->ativar($co_seq_foto);
+        } else {
+            return 'erro';
+        }
+
+    }
+
 }

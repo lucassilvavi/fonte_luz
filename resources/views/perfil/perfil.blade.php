@@ -121,10 +121,20 @@
 
                     <div class="form-group">
                         <label>Imagem:</label>
-                        <input type="file" name="image" class="form-control">
+                        <div class="input-group">
+                              <span class="input-group-btn">
+                                <span class="btn btn-primary"
+                                      onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
+                                <input name="image"
+                                       onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
+                                       style="display: none;" type="file">
+                              </span>
+                            <span class="form-control"></span>
+                        </div>
+
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success upload-image" id="btnSalvar" type="button">Upload Image</button>
+                        <button class="btn btn-success upload-image" id="btnSalvar" type="button">Salvar Imagem</button>
                     </div>
                 </form>
                 <div class="row">
@@ -138,6 +148,20 @@
                                         <p>{{$foto->NO_FOTO}}</p>
                                     </div>
                                 </a>
+                                @if($foto->ST_ATIVO == 'S')
+                                    <button type="button" class="btn btn-success" value="{{$foto->CO_SEQ_FOTO}}">
+                                        <span class="fa fa-check-circle"></span> Ativa
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-info ativarFoto"
+                                            value="{{$foto->CO_SEQ_FOTO}}">
+                                        <span class="fa fa-check"></span> Ativar
+                                    </button>
+                                @endif
+                                <button type="button" class="btn btn-danger" value="{{$foto->CO_SEQ_FOTO}}">
+                                    <span class="fa fa-times"></span> Excluir
+                                </button>
+
                             </div>
                         </div>
                     @endforeach
@@ -147,74 +171,6 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript">
-        $("#btnSalvar").click(function () {
-            $.ajax({
-                url: '/savePhoto',
-                data: new FormData($("#salvarImage")[0]),
-                async: false,
-                type: 'post',
-                processData: false,
-                contentType: false,
-                success: function (response) {
-
-                    if (response == 'true') {
-                        sucessoFoto();
-                    }
-                    else if (response == 'image and title') {
-                        faltaAnexar();
-                    }
-                    else if (response == 'image') {
-                        faltaImage();
-
-                    }
-                    else if (response == 'title') {
-                        faltaTitulo();
-                    }
-                },
-            });
-        });
-
-        function sucessoFoto() {
-// Override global options
-            toastr.success('Foto Anexada com Sucesso!', '', {
-                closeButton: false,
-                progressBar: true,
-                timeOut: "2500",
-                positionClass: 'toast-top-center'
-            });
-            setTimeout(function () {
-                location.reload();
-            }, 2500);
-        }
-
-        function faltaAnexar() {
-// Override global options
-            toastr.warning('Por favor Anexe um Imagem e insira um Titulo para ela!', '', {
-                closeButton: false,
-                progressBar: true,
-                positionClass: 'toast-top-center'
-            });
-        }
-
-        function faltaImage() {
-// Override global options
-            toastr.warning('Por favor Anexe um Imagem!', '', {
-                closeButton: false,
-                progressBar: true,
-                positionClass: 'toast-top-center'
-            });
-
-        }
-
-        function faltaTitulo() {
-// Override global options
-            toastr.warning('Por favor Anexe um Titulo para a Imagem!', '', {
-                closeButton: false,
-                progressBar: true,
-                positionClass: 'toast-top-center'
-            });
-        }
-
-    </script>
+    <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
 @endsection

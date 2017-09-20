@@ -19,7 +19,6 @@ Route::get('/testefoto', function () {
     return Layout::foto();
 });
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -32,11 +31,7 @@ Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     // return what you want
 });
-
-Route::get('/testefoto', function () {
-
-   return \App\Http\Controllers\Facade\FotoAtiva::getFoto();
-});
+Route::get('/changePhoto/{co_seq_foto}', 'Perfil\FotosController@changePhoto');
 
 
 Route::get('/cadastro-parlamentar', function () {
