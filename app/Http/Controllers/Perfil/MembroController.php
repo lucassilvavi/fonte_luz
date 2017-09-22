@@ -42,7 +42,7 @@ class MembroController extends Controller
      */
     public function index()
     {
-        $dados['fotos'] = $this->fotoRepository->findBy('co_usuario', auth::user()->id)->get();
+        $dados['fotos'] = $this->fotoRepository->findBy('co_usuario', auth::user()->id)->where('dt_desativacao',null)->get();
         $dados['pessoa'] = $this->usuario->find(auth::user()->id);
         return view('perfil.perfil')->with('dados', $dados);
     }
