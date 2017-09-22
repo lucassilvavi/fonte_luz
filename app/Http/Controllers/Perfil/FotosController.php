@@ -67,9 +67,9 @@ class FotosController extends Controller
             return 'image';
         } elseif ($request->title == null) {
             return 'title';
-        } else {
-            return 'certo';
         }
+            return 'certo';
+
 
     }
 
@@ -78,9 +78,8 @@ class FotosController extends Controller
         $desativada = $this->fotoService->desativar();
         if ($desativada == 'true') {
             return $this->fotoService->ativar($co_seq_foto);
-        } else {
-            return 'erro';
         }
+            return 'erro';
 
     }
 

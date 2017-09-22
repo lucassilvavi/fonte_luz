@@ -33,6 +33,8 @@ Route::get('/clear-cache', function () {
 });
 Route::get('/changePhoto/{co_seq_foto}', 'Perfil\FotosController@changePhoto');
 
+Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
+
 
 Route::get('/cadastro-parlamentar', function () {
     return view('example-view.cadastro-parlamentar');

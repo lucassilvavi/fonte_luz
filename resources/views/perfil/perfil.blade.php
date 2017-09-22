@@ -27,7 +27,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="pessoal">
-                <form>
+                <form action="/action_page.php" method="post" id="formPessoal">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="no_nome" class="col-form-label">Nome</label>
