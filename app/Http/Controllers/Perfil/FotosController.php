@@ -84,4 +84,9 @@ class FotosController extends Controller
 
     }
 
+    public function deletePhoto($co_seq_foto)
+    {
+        return $this->fotoService->delete($co_seq_foto);
+    }
+
 }

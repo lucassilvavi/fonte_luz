@@ -157,10 +157,11 @@
                                             value="{{$foto->CO_SEQ_FOTO}}">
                                         <span class="fa fa-check"></span> Ativar
                                     </button>
+                                    <button type="button" class="btn btn-danger excluirFoto" value="{{$foto->CO_SEQ_FOTO}}">
+                                        <span class="fa fa-times"></span> Excluir
+                                    </button>
                                 @endif
-                                <button type="button" class="btn btn-danger" value="{{$foto->CO_SEQ_FOTO}}">
-                                    <span class="fa fa-times"></span> Excluir
-                                </button>
+
 
                             </div>
                         </div>
@@ -173,4 +174,5 @@
 @section('scripts')
     <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/excluirFotoPerfil.js')}}"></script>
 @endsection
