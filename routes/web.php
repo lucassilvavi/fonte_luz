@@ -15,12 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testefoto', function () {
-    return Layout::foto();
-});
-
 Auth::routes();
 
+Route::get('/getCidade/{co_uf}', 'Perfil\CidadeController@getCidadeWithUf');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/perfil', 'Perfil\MembroController@index');
@@ -36,6 +33,8 @@ Route::get('/changePhoto/{co_seq_foto}', 'Perfil\FotosController@changePhoto');
 Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
 
 Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
+
+Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho');
 
 
 

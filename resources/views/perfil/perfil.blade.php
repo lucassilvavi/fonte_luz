@@ -27,77 +27,149 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="pessoal">
-                <form action="/action_page.php" method="post" id="formPessoal">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="no_nome" class="col-form-label">Nome</label>
-                            <input type="text" class="form-control" name="no_nome" id="no_nome"
-                                   value="{{ $dados['pessoa']->no_nome}}"
-                                   placeholder="Nome">
+                <form action="{{$dados['actionPessoal']}}" method="post" id="formPessoal">
+                    <div class="row">
+                        {{ csrf_field() }}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="no_nome" class="col-form-label">Nome</label>
+                                <input type="text" class="form-control" name="no_nome" id="no_nome"
+                                       value="{{ $dados['pessoa']->no_nome}}"
+                                       placeholder="Nome">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="col-form-label">E-mail</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                       value="{{ $dados['pessoa']->email}}"
+                                       placeholder="E-mail">
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="email" class="col-form-label">E-mail</label>
-                            <input type="email" class="form-control" name="email" id="email"
-                                   value="{{ $dados['pessoa']->email}}"
-                                   placeholder="E-mail">
+                        <div class="form-group col-md-4">
+                            <label for="uf" class="col-form-label">UF</label>
+                            <select id="uf" name="uf" class="form-control">
+                                <option value=""></option>
+                                @foreach( $dados['ufs'] as $uf)
+                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['CO_SEQ_UF'])) selected @endif value="{{$uf['SG_UF']}}">{{$uf['NO_UF']}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="uf" class="col-form-label">UF</label>
-                        <select id="uf" class="form-control">Choose</select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="cidade" class="col-form-label">Cidade</label>
-                        <select id="cidade" class="form-control">Choose</select>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="logradouro" class="col-form-label">Logradouro</label>
-                        <input type="text" class="form-control" id="logradouro"
-                               value="{{ $dados['pessoa']->logradouro}}"
-                               placeholder="Logradouro">
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="bairro" class="col-form-label">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" value="{{ $dados['pessoa']->bairro}}"
-                               placeholder="Bairro">
-                    </div>
+                        <div class="form-group col-md-4">
+                            <label for="cidade" class="col-form-label">Cidade</label>
+                            <select id="cidade" name="cidade" class="form-control">
 
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="nu_cep" class="col-form-label">CEP</label>
-                            <input type="text" class="form-control" id="nu_cep" value="{{ $dados['pessoa']->nu_cep}}"
-                                   placeholder="CEP">
+                                @if(!empty($dados['cidadeUsuario']) && isset($dados['cidadeUsuario']))
+                                    <option value="{{$dados['cidadeUsuario']['SG_UF']}}">{{$dados['cidadeUsuario']['NO_CIDADE']}}</option>
+                                    @endif
+                                <option value=""></option>
+                            </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="naturalidade" class="col-form-label">Naturalidade</label>
-                            <input type="text" class="form-control" id="naturalidade"
-                                   value="{{ $dados['pessoa']->naturalidade}}"
-                                   placeholder="Naturalidade">
+                        <div class="form-group col-md-12">
+                            <label for="logradouro" class="col-form-label">Logradouro</label>
+                            <input type="text" class="form-control" name="logradouro" id="logradouro"
+                                   value="{{ $dados['pessoa']->logradouro}}"
+                                   placeholder="Logradouro">
                         </div>
                         <div class="form-group col-md-5">
-                            <label for="inputState" class="col-form-label">Nacionalidade</label>
-                            <select id="inputState" class="form-control">Choose</select>
+                            <label for="bairro" class="col-form-label">Bairro</label>
+                            <input type="text" class="form-control" name="bairro"
+                                   id="bairro" value="{{ $dados['pessoa']->bairro}}"
+                                   placeholder="Bairro">
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="nu_cpf" class="col-form-label">CPF</label>
-                            <input type="text" class="form-control" id="nu_cpf" value="{{ $dados['pessoa']->nu_cpf}}"
-                                   readonly>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="nu_cep" class="col-form-label">CEP</label>
+                                <input type="text" class="form-control" name="cep" id="nu_cep"
+                                       value="{{ $dados['pessoa']->nu_cep}}"
+                                       placeholder="CEP">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="naturalidade" class="col-form-label">Naturalidade</label>
+                                <select id="inputState" name="naturalidade" class="form-control">
+                                    <option value=""></option>
+                                    @foreach(  $dados['cidades'] as $cidade)
+                                        <option value="{{$cidade['CO_SEQ_CIDADE']}}">{{$cidade['NO_CIDADE']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="inputState" class="col-form-label">Nacionalidade</label>
+                                <select id="inputState" name="nacionalidade" class="form-control">
+                                    <option value=""></option>
+                                    @foreach(  $dados['paises'] as $pais)
+                                        <option value="{{$pais['CO_SEQ_PAIS']}}">{{$pais['NO_PAIS']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="nu_cpf" class="col-form-label">CPF</label>
+                                <input type="text" class="form-control" name="cpf"
+                                       id="nu_cpf" value="{{ $dados['pessoa']->nu_cpf}}"
+                                       readonly>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="valor" class="col-form-label">Valor Contribuição</label>
+                                <input type="text" class="form-control money" id="valor" name="valor"
+                                       value="{{number_format($dados['pessoa']->vl_contribuicao, 2, ',', '.')}}"
+                                       placeholder="00,00">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="perfil" class="col-form-label">Perfil</label>
+                                <input type="text" class="form-control" name="perfil" id="perfil"
+                                       placeholder="Administrador" readonly>
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="valor" class="col-form-label">Valor Contribuição</label>
-                            <input type="text" class="form-control" id="valor"
-                                   value="{{ $dados['pessoa']->vl_contribuicao}}"
-                                   placeholder="00,00">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="perfil" class="col-form-label">Perfil</label>
-                            <input type="text" class="form-control" id="perfil" placeholder="Administrador" readonly>
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-success btn-sm btn-block">Salvar</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="trabalho">
-                <h3>Conteúdo da Aba Profile</h3>
+                <form action="{{$dados['actionTrabalho']}}" method="post" id="formTrabalho">
+                    <div class="row">
+                        {{ csrf_field() }}
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Trabalho Primário</label>
+                            <select id="inputState" name="trabPrimeiro" class="form-control">
+                                <option value=""></option>
+                                @foreach( $dados['profissoes'] as $profissao)
+                                    <option value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Trabalho Segundário</label>
+                            <select id="inputState" name="trabSefundo" class="form-control">
+                                <option value=""></option>
+                                @foreach( $dados['profissoes'] as $profissao)
+                                    <option value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Trabalho Terciário</label>
+                            <select id="inputState" name="trabTerceiro" class="form-control">
+                                <option value=""></option>
+                                @foreach( $dados['profissoes'] as $profissao)
+                                    <option value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Trabalho Quartenário</label>
+                            <select id="inputState" name="trabQuartenario" class="form-control">
+                                <option value=""></option>
+                                @foreach( $dados['profissoes'] as $profissao)
+                                    <option value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-success btn-sm btn-block">Salvar</button>
+                    </div>
+                </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="telefones">
                 <h3>Conteúdo da Aba Messages</h3>
@@ -157,12 +229,11 @@
                                             value="{{$foto->CO_SEQ_FOTO}}">
                                         <span class="fa fa-check"></span> Ativar
                                     </button>
-                                    <button type="button" class="btn btn-danger excluirFoto" value="{{$foto->CO_SEQ_FOTO}}">
+                                    <button type="button" class="btn btn-danger excluirFoto"
+                                            value="{{$foto->CO_SEQ_FOTO}}">
                                         <span class="fa fa-times"></span> Excluir
                                     </button>
                                 @endif
-
-
                             </div>
                         </div>
                     @endforeach
@@ -172,7 +243,12 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{asset('assets/js/perfil/pessoal/getCidadeByUf.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/excluirFotoPerfil.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/submit.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/submitPessoal.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/submitTrabalho.js')}}"></script>
+    <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 @endsection

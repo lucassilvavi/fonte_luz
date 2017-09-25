@@ -31,4 +31,9 @@ class FotoRepository extends Repository
         return $this->model->where('st_ativo', 'S')
             ->where('co_usuario',auth::user()->id)->get();
     }
+    public function getFotos()
+    {
+        return $this->model->where('dt_desativacao', null)
+            ->where('co_usuario',auth::user()->id)->get();
+    }
 }

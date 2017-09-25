@@ -8,11 +8,21 @@
 
 namespace App\Http\Controllers\Perfil;
 
+use App\Http\Requests\PessoalRequest;
+use App\Services\PessoalService;
+
 
 class PessoalController
 {
+    private $pessoalService;
 
-    public function editarPessoal(){
+    public function __construct(PessoalService $pessoalService)
+    {
+        $this->pessoalService= $pessoalService;
+    }
 
+    public function editarPessoal(PessoalRequest $request)
+    {
+        return $this->pessoalService->editar($request->all());
     }
 }
