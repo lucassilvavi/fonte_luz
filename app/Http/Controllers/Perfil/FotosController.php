@@ -31,6 +31,7 @@ class FotosController extends Controller
         $this->usuario = $usuario;
         $this->auth = $auth;
         $this->fotoService = $fotoService;
+        $this->middleware('auth');
     }
 
     /**

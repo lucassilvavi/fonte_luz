@@ -2,23 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: lucas
- * Date: 07/09/2017
- * Time: 16:57
+ * Date: 30/09/2017
+ * Time: 17:34
  */
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
-class Perfil extends Model
+class Permissoes extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'no_perfil',
-        'ds_perfil',
-        'st_ativo'
+        'no_permissao',
+        'ds_permissao',
+        'co_grupo_permissoes'
 
     ];
 
@@ -29,7 +31,7 @@ class Perfil extends Model
      */
     public $timestamps = false;
 
-    protected $table = "tb_perfil";
+    protected $table = "tb_permissoes";
 }
 
 

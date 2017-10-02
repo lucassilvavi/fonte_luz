@@ -43,7 +43,7 @@ class PessoalService
             $dados['vl_contribuicao'] = $this->trataMoeda( $dadosForm['valor'] );
             $this->usuarioRepository->update($dados, auth::user()->id, 'id');
             DB::commit();
-            return 'true';
+            return '{"operacao":true}';
         } catch (\Illuminate\Database\QueryException $e) {
 
             $exception = $e->getMessage() . $e->getTraceAsString();

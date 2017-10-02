@@ -60,6 +60,8 @@
 <!-- Custom Js -->
 <script src="{{asset('assets/js/admin.js')}}"></script>
 <script src="{{asset('assets/js/sign-in.js')}}"></script>
+<script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
+<script src="{{asset('assets/js/perfil/pessoal/getCidadeByUf.js')}}"></script>
 </body>
 <script>
     $('#money').mask('000.000.000.000.000,00', {reverse: true, placeholder: "00,00"});

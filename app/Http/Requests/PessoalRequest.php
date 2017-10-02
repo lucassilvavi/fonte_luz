@@ -26,7 +26,7 @@ class PessoalRequest extends Request
             'no_nome' => 'required',
             'email' => 'required',
             'uf' => 'required',
-            'cidade' => 'required',
+            'cidade' => '',
             'logradouro' => 'required',
             'bairro' => 'required',
             'cep' => 'required',

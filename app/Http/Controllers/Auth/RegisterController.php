@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repositories\UnidadeFederativaRepository;
 
 class RegisterController extends Controller
 {
@@ -34,31 +35,32 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UnidadeFederativaRepository $unidadeFederativaRepository)
     {
         $this->middleware('guest');
+        $this->unidadeFederativaRepository = $unidadeFederativaRepository;
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
 
         return Validator::make($data, [
-//            'nome' => 'required|string|max:255',
-//            'email' => 'required|string|email|max:255|unique:tb_usuario',
-//            'password' => 'required|string|min:6|confirmed',
-//            'cpf' => 'required|string|max:11',
-//            'dt_nascimento' => 'required',
-//            'logradouro' => 'required|string|max:55',
-//            'bairro' => 'required|string|max:55',
-//            'uf' => 'required',
-//            'cidade' => 'required',
-//            'valor' => 'required',
+            'no_nome' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tb_usuario',
+            'password' => 'required|string|min:6|confirmed',
+            'nu_cpf' => 'required|string|max:11',
+            'dt_nascimento' => 'required',
+            'logradouro' => 'required|string|max:55',
+            'bairro' => 'required|string|max:55',
+            'co_uf' => 'required',
+            'co_cidade' => 'required',
+            'vl_contribuicao' => 'required',
         ]);
 
     }
@@ -66,31 +68,38 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
 
-//        $dNnascimento=$this->dateEmMysql( $data['dt_nascimento']);
-
         return Usuario::create([
             'no_nome' => $data['no_nome'],
+            'co_perfil' => 4,
             'nu_cpf' => $data['nu_cpf'],
-            'dt_nascimento' => date('Y-m-d'),
+            'dt_nascimento' => $this->dateEmMysql($data['dt_nascimento']),
             'email' => $data['email'],
             'logradouro' => $data['logradouro'],
             'bairro' => $data['bairro'],
-            'uf' => $data['uf'],
-            'cidade' => $data['cidade'],
-            'vl_contribuicao' => $data['vl_contribuicao'],
+            'co_uf' => $this->unidadeFederativaRepository->getCoUnidade($data['co_uf']),
+            'co_cidade' => $data['co_cidade'],
+            'vl_contribuicao' => $this->trataMoeda($data['vl_contribuicao']),
             'password' => bcrypt($data['password']),
         ]);
     }
-    public function dateEmMysql($dateSql){
-        $ano= substr($dateSql, 6);
-        $mes= substr($dateSql, 3,-5);
-        $dia= substr($dateSql, 0,-8);
-        return $ano."-".$mes."-".$dia;
+
+    public function dateEmMysql($dateSql)
+    {
+        $ano = substr($dateSql, 6);
+        $mes = substr($dateSql, 3, -5);
+        $dia = substr($dateSql, 0, -8);
+        return $ano . "-" . $mes . "-" . $dia;
+    }
+
+    public function trataMoeda($valor)
+    {
+        $dinheiro = str_replace('.', '', $valor); // remove o ponto
+        return str_replace(',', '.', $dinheiro); // troca a vírgula por ponto
     }
 }

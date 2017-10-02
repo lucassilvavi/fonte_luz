@@ -49,18 +49,19 @@
                             <select id="uf" name="uf" class="form-control">
                                 <option value=""></option>
                                 @foreach( $dados['ufs'] as $uf)
-                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['CO_SEQ_UF'])) selected @endif value="{{$uf['SG_UF']}}">{{$uf['NO_UF']}}</option>
+                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['CO_SEQ_UF'])) selected
+                                            @endif
+                                            value="{{$uf['SG_UF']}}">{{$uf['NO_UF']}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cidade" class="col-form-label">Cidade</label>
                             <select id="cidade" name="cidade" class="form-control">
-
                                 @if(!empty($dados['cidadeUsuario']) && isset($dados['cidadeUsuario']))
-                                    <option value="{{$dados['cidadeUsuario']['SG_UF']}}">{{$dados['cidadeUsuario']['NO_CIDADE']}}</option>
-                                    @endif
-                                <option value=""></option>
+                                    <option selected
+                                            value="{{$dados['cidadeUsuario']['CO_SEQ_CIDADE']}}">{{$dados['cidadeUsuario']['NO_CIDADE']}}</option>
+                                @endif
                             </select>
                         </div>
                         <div class="form-group col-md-12">
@@ -88,7 +89,9 @@
                                 <select id="inputState" name="naturalidade" class="form-control">
                                     <option value=""></option>
                                     @foreach(  $dados['cidades'] as $cidade)
-                                        <option value="{{$cidade['CO_SEQ_CIDADE']}}">{{$cidade['NO_CIDADE']}}</option>
+                                        <option value="{{$cidade['CO_SEQ_CIDADE']}}"
+                                                @if(auth::user()->naturalidade === $cidade['CO_SEQ_CIDADE']) SELECTED
+                                                @endif>{{$cidade['NO_CIDADE']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -97,7 +100,9 @@
                                 <select id="inputState" name="nacionalidade" class="form-control">
                                     <option value=""></option>
                                     @foreach(  $dados['paises'] as $pais)
-                                        <option value="{{$pais['CO_SEQ_PAIS']}}">{{$pais['NO_PAIS']}}</option>
+                                        <option value="{{$pais['CO_SEQ_PAIS']}}"
+                                                @if(auth::user()->co_pais == $pais['CO_SEQ_PAIS']) selected
+                                                @endif>{{$pais['NO_PAIS']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -115,12 +120,15 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="perfil" class="col-form-label">Perfil</label>
-                                <input type="text" class="form-control" name="perfil" id="perfil"
+                                <input type="text" class="form-control" value="{{ $dados['pessoa']->perfil->NO_PERFIL}}"
+                                       name="perfil" id="perfil"
                                        placeholder="Administrador" readonly>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-success btn-sm btn-block">Salvar</button>
+                            <button type="submit" class="btn btn-success btn-sm btn-block" id="btnSalvarPessoal">
+                                Salvar
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -199,7 +207,7 @@
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
                                 <input name="image"
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
-                                       style="display: none;" type="file">
+                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg">
                               </span>
                             <span class="form-control"></span>
                         </div>
@@ -247,8 +255,8 @@
     <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/excluirFotoPerfil.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/submit.js')}}"></script>
+    <script src="{{asset('assets/js/submit.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/submitPessoal.js')}}"></script>
-    <script src="{{asset('assets/js/perfil/pessoal/submitTrabalho.js')}}"></script>
+    {{--<script src="{{asset('assets/js/perfil/pessoal/submitTrabalho.js')}}"></script>--}}
     <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 @endsection

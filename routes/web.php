@@ -10,24 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//rotas padrão do laravel
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+//perfil dados Pessoais
+
 Route::get('/getCidade/{co_uf}', 'Perfil\CidadeController@getCidadeWithUf');
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/perfil', 'Perfil\MembroController@index');
 
 Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 
-Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    // return what you want
-});
 Route::get('/changePhoto/{co_seq_foto}', 'Perfil\FotosController@changePhoto');
 
 Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
@@ -36,15 +34,38 @@ Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
 
 Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho');
 
+//rotas do perfil do nivel de acesso
+
+Route::get('/perfilUsuario', 'PerfilUsuario\PerfilController@index');
+
+Route::post('/savePerfil', 'PerfilUsuario\PerfilController@savePerfil');
+
+Route::get('/formPerfil/{action}', 'PerfilUsuario\PerfilController@formPerfil');
+
+Route::get('/modalPerfilPermissao/{co_perfil}', 'PerfilUsuario\PerfilController@modalPerfilPermissao');
+
+Route::post('/savePerfilPermissao', 'PerfilUsuario\PerfilController@savePerfilPermissao');
+
+//rotas do permissões do nivel de acesso
+
+Route::get('/permissoes', 'Permissoes\PermissaoController@index');
+
+Route::get('/formPermissao/{action}', 'Permissoes\PermissaoController@formPerfil');
+
+Route::post('/savePermissao', 'Permissoes\PermissaoController@savePermissao');
+
+Route::get('/modalDetalhePermissao/{co_permissao}', 'Permissoes\PermissaoController@modalDetalhePermissao');
 
 
-Route::get('/cadastro-parlamentar', function () {
-    return view('example-view.cadastro-parlamentar');
+
+
+
+
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
 });
 
-Route::get('/cadastro-partido', function () {
-    return view('example-view.cadastro-partido');
-});
 
 Route::get('/tables', function () {
     return view('example-view.tables');

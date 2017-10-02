@@ -18,6 +18,7 @@ class PessoalController
 
     public function __construct(PessoalService $pessoalService)
     {
+        $this->middleware('auth');
         $this->pessoalService= $pessoalService;
     }
 

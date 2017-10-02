@@ -35,8 +35,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#">Perfils</a></li>
-            <li><a href="#">Permissões</a></li>
+            <li><a href="{{url('/perfilUsuario')}}">Perfis</a></li>
+            <li><a href="{{url('/permissoes')}}">Permissões</a></li>
         </ul>
     </li>
 </ul>

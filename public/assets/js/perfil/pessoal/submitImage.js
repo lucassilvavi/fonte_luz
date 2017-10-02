@@ -8,7 +8,6 @@ $("#btnSalvar").click(function () {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response);
             if (response == 'true') {
                 sucessoFoto();
             }

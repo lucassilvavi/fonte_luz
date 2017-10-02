@@ -29,7 +29,9 @@ class Usuario extends Authenticatable
         'nu_cep',
         'co_uf',
         'co_cidade',
-        'password'
+        'vl_contribuicao',
+        'password',
+        'co_perfil'
     ];
 
     /**
@@ -49,7 +51,7 @@ class Usuario extends Authenticatable
     protected $table = "tb_usuario";
 
     public function perfil(){
-        return $this->belongsToMany(Perfil::class);
+        return $this->hasOne(Perfil::class,'co_seq_perfil','co_perfil');
     }
 
 }

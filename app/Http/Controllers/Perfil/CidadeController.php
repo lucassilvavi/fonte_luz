@@ -15,6 +15,7 @@ class CidadeController extends Controller
 public function __construct(CidadeRepository $cidadeRepository)
 {
     $this->cidadeRepository = $cidadeRepository;
+
 }
 
     public function getCidadeWithUf($sg_uf){

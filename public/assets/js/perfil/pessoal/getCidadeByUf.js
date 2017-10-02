@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    $('#cidade').attr('disabled', true);
     var estado = $("#uf");
+    var selecionado = $('#cidade :selected').text();
+    if(selecionado == ''){
+        $('#cidade').attr('disabled', true);
+    }
     estado.change(function () {
         if(estado.val() == ''){
             $('#cidade').empty();

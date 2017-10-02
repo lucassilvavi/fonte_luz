@@ -104,8 +104,13 @@
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
-                                                     class="img-circle" alt="User Image">
+                                                @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
+                                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                                         class="img-circle" alt="User Image">
+                                                @else
+                                                    <img src=""
+                                                         class="img-circle" alt="User Image">
+                                                @endif
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -191,17 +196,27 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
-                                 class="user-image" alt="User Image">
+                            @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
+                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                     class="user-image" alt="User Image">
+                            @else
+                                <img src=""
+                                     class="img-circle" alt="User Image">
+                            @endif
+
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{Auth::user()->no_nome}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
-                                     class="img-circle" alt="User Image">
-
+                                @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
+                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                         class="img-circle" alt="User Image">
+                                @else
+                                    <img src=""
+                                         class="img-circle" alt="User Image">
+                                @endif
                                 <p>
                                     {{Auth::user()->no_nome}}
                                     <small>Member since Nov. 2012</small>
@@ -240,8 +255,14 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
-                         class="img-circle" alt="User Image">
+                    @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
+                        <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                             class="img-circle" alt="User Image">
+                    @else
+                        <img src=""
+                             class="img-circle" alt="User Image">
+                    @endif
+
                 </div>
                 <div class="pull-left info">
                     <p>{{Auth::user()->no_nome}}</p>

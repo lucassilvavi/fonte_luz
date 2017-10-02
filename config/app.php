@@ -182,6 +182,7 @@ return [
         * Foto...
         */
         \App\Providers\FotoServiceProvider::class,
+        \App\Providers\UFServiceProvider::class,
 
     ],
 
@@ -233,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'FotoAtiva' => \App\Http\Controllers\Facade\FotoAtiva::class,
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
-
+        'UF' => \App\Http\Controllers\Facade\UFAtivo::class,
 
     ],
 
