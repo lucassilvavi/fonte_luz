@@ -31,6 +31,17 @@ class Profissao extends Model
      * @var array
      */
     protected $table = "tb_profissao";
+
+    /**
+     * Campo da chave primaria
+     *
+     * @var string
+     */
+    protected $primaryKey = 'CO_SEQ_PROFISSAO';
+    public function usuario()
+    {
+        return $this->belongsToMany(Usuario::class, 'rl_usuario_profissao',  'CO_SEQ_PROFISSAO','id');
+    }
 }
 
 

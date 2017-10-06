@@ -7,7 +7,9 @@
  */
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
+
 class Perfil extends Model
 {
     /**
@@ -30,6 +32,11 @@ class Perfil extends Model
     public $timestamps = false;
 
     protected $table = "tb_perfil";
+
+    public function permissoes()
+    {
+        return $this->belongsToMany(Permissoes::class, 'rl_perfil_permissoes', 'co_seq_perfil', 'co_seq_permissoes');
+    }
 }
 
 

@@ -11,19 +11,20 @@ namespace App\Http\Controllers\Perfil;
 use App\Http\Requests\PessoalRequest;
 use App\Services\PessoalService;
 
-
-class PessoalController
+use App\Http\Controllers\Controller;
+class PessoalController extends Controller
 {
     private $pessoalService;
 
     public function __construct(PessoalService $pessoalService)
     {
-        $this->middleware('auth');
         $this->pessoalService= $pessoalService;
+        $this->middleware('auth');
     }
 
     public function editarPessoal(PessoalRequest $request)
     {
+
         return $this->pessoalService->editar($request->all());
     }
 }

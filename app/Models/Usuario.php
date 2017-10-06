@@ -54,6 +54,11 @@ class Usuario extends Authenticatable
         return $this->hasOne(Perfil::class,'co_seq_perfil','co_perfil');
     }
 
+    public function profissao()
+    {
+        return $this->belongsToMany(Profissao::class, 'rl_usuario_profissao', 'id', 'co_seq_profissao');
+    }
+
 }
 
 

@@ -7,12 +7,19 @@
  */
 
 namespace App\Http\Controllers\Perfil;
+
 use App\Http\Requests\TrabalhoRequest;
+use App\Services\ProfissoesService;
 
 class TrabalhoController
 {
+    function __construct(ProfissoesService $profissoesService)
+    {
+        $this->profissoesService = $profissoesService;
+    }
+
     public function cadastrarTrabalho(TrabalhoRequest $request)
     {
-dd($request->all());
+        return $this->profissoesService->novo($request->all());
     }
 }

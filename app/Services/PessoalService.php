@@ -13,17 +13,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\UnidadeFederativaRepository;
+use App\Services\ProfissoesService;
 
 class PessoalService
 {
     private $usuarioRepository;
     private $unidadeFederativaRepository;
+    private $profissoesService;
 
     public function __construct(UsuarioRepository $usuarioRepository,
-                                UnidadeFederativaRepository $unidadeFederativaRepository)
+                                UnidadeFederativaRepository $unidadeFederativaRepository,
+                                ProfissoesService $profissoesService)
     {
         $this->usuarioRepository = $usuarioRepository;
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
+        $this->profissoesService = $profissoesService;
     }
 
     public function editar($dadosForm)
@@ -40,7 +44,9 @@ class PessoalService
             $dados['nu_cep'] = $dadosForm['cep'];
             $dados['naturalidade'] = $dadosForm['naturalidade'];
             $dados['co_pais'] = $dadosForm['nacionalidade'];
-            $dados['vl_contribuicao'] = $this->trataMoeda( $dadosForm['valor'] );
+            $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['valor']);
+            $oi=$this->profissoesService->salvarTrabalho($dadosForm['profissao']);
+            dd($oi);
             $this->usuarioRepository->update($dados, auth::user()->id, 'id');
             DB::commit();
             return '{"operacao":true}';
@@ -64,8 +70,11 @@ class PessoalService
             return '{"operacao":false}';
         }
     }
-    public function trataMoeda($valor){
+
+    public function trataMoeda($valor)
+    {
         $dinheiro = str_replace('.', '', $valor); // remove o ponto
         return str_replace(',', '.', $dinheiro); // troca a vírgula por ponto
     }
+
 }

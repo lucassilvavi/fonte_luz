@@ -17,6 +17,7 @@ use App\Repositories\PaisRepository;
 use App\Repositories\CidadeRepository;
 use App\Repositories\UnidadeFederativaRepository;
 use App\Repositories\UsuarioRepository;
+use App\Repositories\RlUsuarioProfissaoRepository;
 
 class MembroController extends Controller
 {
@@ -34,6 +35,7 @@ class MembroController extends Controller
     private $cidadeRepository;
     private $unidadeFederativaRepository;
     private $usuarioRepository;
+    private $rlUsuarioProfissaoRepository;
 
     public function __construct(Auth $auth,
                                 Usuario $usuario,
@@ -42,7 +44,8 @@ class MembroController extends Controller
                                 PaisRepository $paisRepository,
                                 CidadeRepository $cidadeRepository,
                                 UnidadeFederativaRepository $unidadeFederativaRepository,
-                                UsuarioRepository $usuarioRepository)
+                                UsuarioRepository $usuarioRepository,
+                                RlUsuarioProfissaoRepository $rlUsuarioProfissaoRepository)
     {
         $this->middleware('auth');
         $this->auth = $auth;
@@ -53,6 +56,7 @@ class MembroController extends Controller
         $this->cidadeRepository = $cidadeRepository;
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
         $this->usuarioRepository = $usuarioRepository;
+        $this->rlUsuarioProfissaoRepository = $rlUsuarioProfissaoRepository;
     }
 
     /**
@@ -62,6 +66,7 @@ class MembroController extends Controller
      */
     public function index()
     {
+
         $dados['cidadeUsuario']=$this->cidadeRepository->findBy('co_seq_cidade',auth::user()->co_cidade);
         $dados['fotos'] = $this->fotoRepository->getFotos();
         $dados['pessoa'] = $this->usuario->find(auth::user()->id);
@@ -72,6 +77,13 @@ class MembroController extends Controller
         $dados['cidades'] = $this->cidadeRepository->all();
         $dados['ufs'] = $this->unidadeFederativaRepository->all();
         $dados['repositoryUsuario'] = $this->usuarioRepository;
+        $dados['trabalhoPrimeiro'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(1);
+        $dados['trabalhoSegundo'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(2);
+        $dados['trabalhoTerceiro'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(3);
+        $dados['trabalhoQuarto'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(4);
+
+
+
         return view('perfil.perfil')->with('dados', $dados);
     }
 }
