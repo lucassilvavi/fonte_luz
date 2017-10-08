@@ -70,7 +70,7 @@
             <div class="form-line">
                 <select type="co_uf" name="co_uf" id="uf" class="form-control" required>
                     @foreach(\App\Http\Controllers\Facade\UFAtivo::getUf() as $uf)
-                        <option value="{{$uf->SG_UF}}">{{$uf->NO_UF}}<option>
+                        <option value="{{$uf->sg_uf}}">{{$uf->no_uf}}<option>
                     @endforeach
                 </select>
                 {{--<input type="uf" class="form-control" name="uf" value="{{ old('uf') }}"--}}

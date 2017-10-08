@@ -22,7 +22,7 @@ class Foto extends Model
         'dt_cadastro_foto',
         'st_ativo',
         'dt_desativacao',
-        'co_usuario',
+        'id',
         'no_foto'
     ];
 

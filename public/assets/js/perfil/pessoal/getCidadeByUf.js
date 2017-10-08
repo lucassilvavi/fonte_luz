@@ -18,7 +18,7 @@ $(document).ready(function () {
                 success: function (data) {
                     $('#cidade').attr('disabled', false);
                     for (var i = 0, len = data.length; i < len; ++i) {
-                        $('#cidade').append('<option value="' + data[i]['CO_SEQ_CIDADE'] + '">' + data[i]['NO_CIDADE'] + '</option>');
+                        $('#cidade').append('<option value="' + data[i]['co_seq_cidade'] + '">' + data[i]['no_cidade'] + '</option>');
                     }
                 }
             });

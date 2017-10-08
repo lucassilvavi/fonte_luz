@@ -105,7 +105,7 @@
                                             <div class="pull-left">
                                                 <!-- User Image -->
                                                 @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
-                                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                                                          class="img-circle" alt="User Image">
                                                 @else
                                                     <img src=""
@@ -197,7 +197,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
                             @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
-                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                                      class="user-image" alt="User Image">
                             @else
                                 <img src=""
@@ -211,7 +211,7 @@
                             <!-- The user image in the menu -->
                             <li class="user-header">
                                 @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
-                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                                          class="img-circle" alt="User Image">
                                 @else
                                     <img src=""
@@ -256,7 +256,7 @@
             <div class="user-panel">
                 <div class="pull-left image">
                     @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
-                        <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->DS_ENDERECO_FOTO) }}"
+                        <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                              class="img-circle" alt="User Image">
                     @else
                         <img src=""

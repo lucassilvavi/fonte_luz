@@ -34,6 +34,8 @@ class RlUsuarioProfissao extends Model
      */
     public $timestamps = false;
 
+    protected $primaryKey = 'co_seq_usuario_profissao';
+
     protected $table = "rl_usuario_profissao";
 
 }

@@ -35,6 +35,7 @@ class PessoalService
         DB::beginTransaction();
 
         try {
+
             $dados['no_nome'] = $dadosForm['no_nome'];
             $dados['email'] = $dadosForm['email'];
             $dados['co_uf'] = $this->unidadeFederativaRepository->getCoUnidade($dadosForm['uf']);
@@ -45,9 +46,10 @@ class PessoalService
             $dados['naturalidade'] = $dadosForm['naturalidade'];
             $dados['co_pais'] = $dadosForm['nacionalidade'];
             $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['valor']);
-            $oi=$this->profissoesService->salvarTrabalho($dadosForm['profissao']);
-            dd($oi);
+            $this->profissoesService->desativar();
+            $this->profissoesService->salvarTrabalhoPessoal($dadosForm['profissao']);
             $this->usuarioRepository->update($dados, auth::user()->id, 'id');
+
             DB::commit();
             return '{"operacao":true}';
         } catch (\Illuminate\Database\QueryException $e) {

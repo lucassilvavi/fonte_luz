@@ -19,6 +19,6 @@ class Foto
     {
         $idUsuarioLogado = \Illuminate\Support\Facades\Auth::user()->id;
 
-        return DB::select('SELECT DS_ENDERECO_FOTO FROM tb_foto WHERE CO_USUARIO = '.$idUsuarioLogado.' AND ST_ATIVO = "S"');
+        return DB::select('SELECT ds_endereco_foto FROM tb_foto WHERE id = '.$idUsuarioLogado.' AND st_ativo = "S"');
     }
 }

@@ -24,7 +24,7 @@ class PessoalController extends Controller
 
     public function editarPessoal(PessoalRequest $request)
     {
-
         return $this->pessoalService->editar($request->all());
+
     }
 }

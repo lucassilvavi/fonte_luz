@@ -19,6 +19,6 @@ class UnidadeFederativaRepository extends Repository
     }
     public function getCoUnidade($no_uf){
 
-         return $this->model->where('sg_uf',$no_uf)->get()[0]['CO_SEQ_UF'];
+         return $this->model->where('sg_uf',$no_uf)->get()[0]['co_seq_uf'];
     }
 }

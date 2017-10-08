@@ -66,7 +66,7 @@ class FotoService
             $dados['ds_endereco_foto'] = $endereco;
             $dados['dt_cadastro_foto'] = date("Y-m-d");
             $dados['st_ativo'] = 'S';
-            $dados['co_usuario'] = $idPessoa;
+            $dados['id'] = $idPessoa;
             $dados['no_foto'] = $nome;
 
             $this->fotoRepository->create($dados);

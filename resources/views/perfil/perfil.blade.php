@@ -49,9 +49,9 @@
                             <select id="uf" name="uf" class="form-control">
                                 <option value=""></option>
                                 @foreach( $dados['ufs'] as $uf)
-                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['CO_SEQ_UF'])) selected
+                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['co_seq_uf'])) selected
                                             @endif
-                                            value="{{$uf['SG_UF']}}">{{$uf['NO_UF']}}</option>
+                                            value="{{$uf['sg_uf']}}">{{$uf['no_uf']}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -60,7 +60,7 @@
                             <select id="cidade" name="cidade" class="form-control">
                                 @if(!empty($dados['cidadeUsuario']) && isset($dados['cidadeUsuario']))
                                     <option selected
-                                            value="{{$dados['cidadeUsuario']['CO_SEQ_CIDADE']}}">{{$dados['cidadeUsuario']['NO_CIDADE']}}</option>
+                                            value="{{$dados['cidadeUsuario']['co_seq_cidade']}}">{{$dados['cidadeUsuario']['no_cidade']}}</option>
                                 @endif
                             </select>
                         </div>
@@ -89,9 +89,9 @@
                                 <select id="inputState" name="naturalidade" class="form-control">
                                     <option value=""></option>
                                     @foreach(  $dados['cidades'] as $cidade)
-                                        <option value="{{$cidade['CO_SEQ_CIDADE']}}"
-                                                @if(auth::user()->naturalidade === $cidade['CO_SEQ_CIDADE']) SELECTED
-                                                @endif>{{$cidade['NO_CIDADE']}}</option>
+                                        <option value="{{$cidade['co_seq_cidade']}}"
+                                                @if(auth::user()->naturalidade === $cidade['co_seq_cidade']) SELECTED
+                                                @endif>{{$cidade['no_cidade']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -100,9 +100,9 @@
                                 <select id="inputState" name="nacionalidade" class="form-control">
                                     <option value=""></option>
                                     @foreach(  $dados['paises'] as $pais)
-                                        <option value="{{$pais['CO_SEQ_PAIS']}}"
-                                                @if(auth::user()->co_pais == $pais['CO_SEQ_PAIS']) selected
-                                                @endif>{{$pais['NO_PAIS']}}</option>
+                                        <option value="{{$pais['co_seq_pais']}}"
+                                                @if(auth::user()->co_pais == $pais['co_seq_pais']) selected
+                                                @endif>{{$pais['no_pais']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -123,15 +123,15 @@
                                 <select id="inputState" name="profissao" class="form-control">
                                     <option value=""></option>
                                     @foreach( $dados['profissoes'] as $profissao)
-                                        <option @if(count($dados['trabalhoPrimeiro']) >=1 &&  $dados['trabalhoPrimeiro'][0]->CO_SEQ_PROFISSAO == $profissao['CO_SEQ_PROFISSAO'])
+                                        <option @if(count($dados['trabalho']) >=1 &&  $dados['trabalho'][0]->co_seq_profissao == $profissao['co_seq_profissao'])
                                                 selected
-                                                @endif value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
+                                                @endif value="{{$profissao['co_seq_profissao']}}">{{$profissao['no_profissao']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="perfil" class="col-form-label">Perfil</label>
-                                <input type="text" class="form-control" value="{{ $dados['pessoa']->perfil->NO_PERFIL}}"
+                                <input type="text" class="form-control" value="{{ $dados['pessoa']->perfil->no_perfil}}"
                                        name="perfil" id="perfil"
                                        placeholder="Administrador" readonly>
                             </div>
@@ -145,78 +145,127 @@
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="trabalho">
-
-                <form action="{{$dados['actionTrabalho']}}" method="post" id="formTrabalho">
-                    <div class="row" id="adicionarTrabalho">
-                        {{ csrf_field() }}
-                        <div class="form-group col-md-5">
-                            <label for="inputState" class="col-form-label">Habilidades</label>
-                            <select id="inputState" name="trabPrimeiro" class="form-control">
-                                <option value=""></option>
-                                @foreach( $dados['profissoes'] as $profissao)
-                                    <option @if(count($dados['trabalhoPrimeiro']) >=1 &&  $dados['trabalhoPrimeiro'][0]->CO_SEQ_PROFISSAO == $profissao['CO_SEQ_PROFISSAO'])
-                                            selected
-                                            @endif value="{{$profissao['CO_SEQ_PROFISSAO']}}">{{$profissao['NO_PROFISSAO']}}</option>
-                                @endforeach
-                            </select>
+                <div class="row">
+                    <form action="{{$dados['actionTrabalho']}}" method="post" id="formTrabalho">
+                        <div class="row" id="adicionarTrabalho">
+                            {{ csrf_field() }}
+                            <div class="form-group col-md-5">
+                                <label for="inputState" class="col-form-label">Habilidades</label>
+                                <select id="inputState" name="habilidade" class="form-control">
+                                    <option value=""></option>
+                                    @foreach( $dados['profissoes'] as $profissao)
+                                        <option value="{{$profissao['co_seq_profissao']}}">{{$profissao['no_profissao']}}</option>
+                                    @endforeach
+                                </select>
+                                <small class="help-block"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-success btn-sm btn-block">Salvar</button>
-                    </div>
-                    <table id="tb_abilidade" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <div class="form-group col-md-12">
+                            <button type="submit" id="btnSubmitHabilidade" class="btn btn-success btn-sm btn-block">
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <table id="tb_habilidade" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Abilidade</th>
+                            <th>Habilidade</th>
                             <th>Opcão</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                        <tr>
-                            <td>
-                                Macaco Doido
-                            </td>
-                            <td>
-                                Macaco Doido
-                            </td>
-                        </tr>
-
+                        @foreach($dados['habilidades'] as $habilidade)
+                            <tr>
+                                <td>
+                                    {{$habilidade->no_profissao}}
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm btn-block btnExcluirHabilidade"
+                                            value="{{$habilidade->co_seq_usuario_profissao}}">
+                                        Excluir
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                </form>
+                </div>
+
             </div>
             <div role="tabpanel" class="tab-pane" id="telefones">
-                <form action="{{$dados['actionTrabalho']}}" method="post" id="formTrabalho">
+                <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
                     {{ csrf_field() }}
-                    @for ($i = 0; $i <= 2; $i++)
-                        <div class="row">
-                            @if(isset($dados['telefone'][$i]))
-                                <input type="hidden" name="id_telefone[{{$i}}]"
-                                       value="{{$dados['telefone'][$i]->co_telefone}}">
-                            @endif
-                            <div class="form-group col-lg-4">
-                                <label for="nu_telefone">Tipo Telefone:</label>
-                                <select class="form-control" name="tipoTelefone[{{$i}}]">
-                                    <option value="1">Celular</option>
-                                    <option value="2">Residencial</option>
-                                    <option value="3">Recado</option>
-                                    <option value="4">Empresarial</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-lg-8">
-                                <label for="nu_telefone">Número:</label>
-                                <input type="text" value="{{$dados['telefone'][$i]->nu_telefone or ''}}"
-                                       class="form-control phones"
-                                       name="telefone[{{$i}}]">
-                                <small class="help-block"></small>
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="nu_telefone">Tipo Telefone:</label>
+                            <select class="form-control" name="tipoTelefone">
+                                <option value="1">Celular</option>
+                                <option value="2">Residencial</option>
+                                <option value="3">Recado</option>
+                                <option value="4">Empresarial</option>
+                            </select>
                         </div>
-                    @endfor
+                        <div class="form-group col-lg-8">
+                            <label for="nu_telefone">Número:</label>
+                            <input type="text" value=""
+                                   class="form-control phones"
+                                   name="telefone">
+                            <small class="help-block"></small>
+                        </div>
+                    </div>
                     <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-success btn-sm btn-block">Salvar</button>
+                        <button type="submit" class="btn btn-success btn-sm btn-block"
+                                id="submitTelefone">Salvar
+                        </button>
                     </div>
                 </form>
+                <div class="row">
+                    <table id="tb_telefones" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Tipo Telefone</th>
+                            <th>Telefones</th>
+                            <th>Opcão</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach( $dados['telefones'] as $telefone)
+                            <tr>
+                                <td>
+                                    <?php
+                                    switch ($telefone->tp_telefone){
+
+                                        case (1):
+                                            echo 'Celular';
+                                            break;
+                                        case (2):
+                                            echo 'Residencial';
+                                            break;
+                                        case (3):
+                                            echo 'Recado';
+                                            break;
+                                        case (4):
+                                            echo 'Empresarial';
+                                            break;
+                                    }
+                                        ?>
+                                </td>
+                                <td>
+                                    <p class="phones">{{$telefone->nu_telefone}}</p>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm btn-block btnExcluirTelefone"
+                                            value="{{$telefone->co_seq_telefone}}">
+                                        Excluir
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="fotos">
                 <form action="{{URL::to('savePhoto')}}" id="salvarImage" enctype="multipart/form-data" method="POST">
@@ -257,24 +306,24 @@
                     @foreach($dados['fotos'] as $foto)
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a href="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" target="_blank">
-                                    <img src="{{'fotos/'.$foto->DS_ENDERECO_FOTO}}" alt="{{$foto->NO_FOTO}}"
+                                <a href="{{'fotos/'.$foto->ds_endereco_foto}}" target="_blank">
+                                    <img src="{{'fotos/'.$foto->ds_endereco_foto}}" alt="{{$foto->no_foto}}"
                                          style="width:100%">
                                     <div class="caption">
-                                        <p>{{$foto->NO_FOTO}}</p>
+                                        <p>{{$foto->no_foto}}</p>
                                     </div>
                                 </a>
                                 @if($foto->ST_ATIVO == 'S')
-                                    <button type="button" class="btn btn-success" value="{{$foto->CO_SEQ_FOTO}}">
+                                    <button type="button" class="btn btn-success" value="{{$foto->co_seq_foto}}">
                                         <span class="fa fa-check-circle"></span> Ativa
                                     </button>
                                 @else
                                     <button type="button" class="btn btn-info ativarFoto"
-                                            value="{{$foto->CO_SEQ_FOTO}}">
+                                            value="{{$foto->co_seq_foto}}">
                                         <span class="fa fa-check"></span> Ativar
                                     </button>
                                     <button type="button" class="btn btn-danger excluirFoto"
-                                            value="{{$foto->CO_SEQ_FOTO}}">
+                                            value="{{$foto->co_seq_foto}}">
                                         <span class="fa fa-times"></span> Excluir
                                     </button>
                                 @endif
@@ -284,16 +333,33 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title"></h3>
+                    </div>
+                    <div class="modal-body" id="conteudoModal"></div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('scripts')
+    <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
+    <script src="{{asset('assets/js/submit.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/getCidadeByUf.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/excluirFotoPerfil.js')}}"></script>
-    <script src="{{asset('assets/js/submit.js')}}"></script>
-    {{--<script src="{{asset('assets/js/perfil/pessoal/submitPessoal.js')}}"></script>--}}
-    <script src="{{asset('assets/js/perfil/pessoal/submitTrabalho.js')}}"></script>
-    <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/submitPessoal.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/habilidade/dataTableHabilidades.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/habilidade/submitHabilidade.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/habilidade/modalDesableHabilidade.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/telefone/submitTelefone.js')}}"></script>
 @endsection
 

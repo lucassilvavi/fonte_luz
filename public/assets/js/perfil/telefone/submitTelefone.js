@@ -1,19 +1,19 @@
-$('#formPessoal').on("submit", function () {
-    $("#btnSalvarPessoal").prop("disabled", true);
-    submit('#formPessoal', function (validate) {
+$('#formTelefone').on("submit", function () {
+    $("#submitTelefone").prop("disabled", true);
+    submit('#formTelefone', function (validate) {
         $('#btnSalvarPessoal').attr('disabled', true);
         if ($.parseJSON(validate).operacao) {
-            MsgSucessoPessoal();
+            MsgSucessoTelefone();
         } else {
-            $("#btnSalvarPessoal").prop("disabled", true);
+            $("#submitTelefone").prop("disabled", true);
 
         }
     });
 });
 
-function MsgSucessoPessoal() {
+function MsgSucessoTelefone() {
 // Override global options
-    toastr.success('Dados alterados com sucesso!', '', {
+    toastr.success('Telefone inserido com sucesso!', '', {
         closeButton: false,
         progressBar: true,
         timeOut: "2500",

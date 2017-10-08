@@ -1,6 +1,3 @@
-/**
- * Modal de cadastro de membro
- */
 
 function modalCadPerfil() {
     $.ajax({

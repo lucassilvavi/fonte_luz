@@ -2,15 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: lucas
- * Date: 23/09/2017
- * Time: 20:12
+ * Date: 08/10/2017
+ * Time: 12:23
  */
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class Profissao extends Model
+class Telefone extends Model
 {
+
 
     protected $connection = 'mysql';
     /**
@@ -19,9 +20,11 @@ class Profissao extends Model
      * @var array
      */
     protected $fillable = [
-        'no_profissao',
+        'nu_telefone',
+        'tp_telefone',
         'st_ativo',
-        'dt_desativacao'
+        'id',
+        'co_entidade'
     ];
 
     public $timestamps = false;
@@ -30,18 +33,14 @@ class Profissao extends Model
      *
      * @var array
      */
-    protected $table = "tb_profissao";
+    protected $table = "tb_telefone";
 
     /**
      * Campo da chave primaria
      *
      * @var string
      */
-    protected $primaryKey = 'co_seq_profissao';
-    public function usuario()
-    {
-        return $this->belongsToMany(Usuario::class, 'rl_usuario_profissao',  'co_seq_profissao','id');
-    }
+    protected $primaryKey = 'co_seq_telefone';
 }
 
 

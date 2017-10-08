@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: lucas
- * Date: 23/09/2017
- * Time: 15:43
+ * Date: 08/10/2017
+ * Time: 12:39
  */
 
 namespace App\Http\Requests;
 use App\Http\Requests\Request;
 
-class TrabalhoRequest extends Request
+class TelefoneRequest extends Request
 {
 
     public function authorize() {
@@ -23,7 +23,8 @@ class TrabalhoRequest extends Request
 
     public function rules() {
         return [
-            'habilidade' => 'required',
+            'telefone' => 'required',
+            'tipoTelefone' => 'required',
         ];
     }
 

@@ -32,7 +32,13 @@ Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
 
 Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
 
+Route::get('/formDesableHabilidade/{co_seq_usuario_profissao}', 'Perfil\TrabalhoController@formDesableHabilidade');
+
+Route::post('/desableHabilidade', 'Perfil\TrabalhoController@desableHabilidade');
+
 Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho');
+
+Route::post('/cadastrarTelefone', 'Perfil\TelefoneController@cadastrarTelefone');
 
 //rotas do perfil do nivel de acesso
 

@@ -21,9 +21,18 @@ class RlUsuarioProfissaoRepository extends Repository
         $this->model = $rlUsuarioProfissao;
     }
 
-    public function getTrabalhoAtivo()
+    public function getTrabalhoAtivo($id)
     {
-        return $this->model->where('st_profissao_principal', 'S')->where('dt_desativacao', null)->get();
+        return $this->model->where('st_profissao_principal', 'S')->where('dt_desativacao', null)
+            ->where('id',$id)->get();
+    }
+    public function getHabilidadesAtivo($id)
+    {
+        return $this->model
+            ->join('tb_profissao','tb_profissao.co_seq_profissao','=','rl_usuario_profissao.co_seq_profissao')
+            ->where('rl_usuario_profissao.st_profissao_principal', 'N')
+            ->where('rl_usuario_profissao.dt_desativacao', null)
+            ->where('rl_usuario_profissao.id',$id)->get();
     }
 
     public function getId()

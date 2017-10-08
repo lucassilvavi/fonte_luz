@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/tables';
 
     /**
      * Create a new controller instance.
@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'no_nome' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:tb_usuario',
             'password' => 'required|string|min:6|confirmed',
-            'nu_cpf' => 'required|string|max:11',
+            'nu_cpf' => 'required|string|max:11|unique:tb_usuario',
             'dt_nascimento' => 'required',
             'logradouro' => 'required|string|max:55',
             'bairro' => 'required|string|max:55',
@@ -73,10 +73,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         return Usuario::create([
             'no_nome' => $data['no_nome'],
-            'co_perfil' => 4,
+            'co_perfil' => 2,
             'nu_cpf' => $data['nu_cpf'],
             'dt_nascimento' => $this->dateEmMysql($data['dt_nascimento']),
             'email' => $data['email'],

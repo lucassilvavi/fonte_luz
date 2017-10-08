@@ -20,7 +20,7 @@ class CidadeRepository extends Repository
         $this->auth = $auth;
     }
     public function getCidadeWithUF($sg_uf){
-        return $this->model->where('SG_UF',$sg_uf)->get();
+        return $this->model->where('sg_uf',$sg_uf)->get();
     }
 
 }

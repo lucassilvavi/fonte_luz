@@ -18,6 +18,7 @@ use App\Repositories\CidadeRepository;
 use App\Repositories\UnidadeFederativaRepository;
 use App\Repositories\UsuarioRepository;
 use App\Repositories\RlUsuarioProfissaoRepository;
+use App\Repositories\TelefoneRepository;
 
 class MembroController extends Controller
 {
@@ -36,6 +37,7 @@ class MembroController extends Controller
     private $unidadeFederativaRepository;
     private $usuarioRepository;
     private $rlUsuarioProfissaoRepository;
+    private $telefoneRepository;
 
     public function __construct(Auth $auth,
                                 Usuario $usuario,
@@ -45,7 +47,8 @@ class MembroController extends Controller
                                 CidadeRepository $cidadeRepository,
                                 UnidadeFederativaRepository $unidadeFederativaRepository,
                                 UsuarioRepository $usuarioRepository,
-                                RlUsuarioProfissaoRepository $rlUsuarioProfissaoRepository)
+                                RlUsuarioProfissaoRepository $rlUsuarioProfissaoRepository,
+                                TelefoneRepository $telefoneRepository)
     {
         $this->middleware('auth');
         $this->auth = $auth;
@@ -57,6 +60,7 @@ class MembroController extends Controller
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
         $this->usuarioRepository = $usuarioRepository;
         $this->rlUsuarioProfissaoRepository = $rlUsuarioProfissaoRepository;
+        $this->telefoneRepository = $telefoneRepository;
     }
 
     /**
@@ -72,18 +76,15 @@ class MembroController extends Controller
         $dados['pessoa'] = $this->usuario->find(auth::user()->id);
         $dados['actionPessoal'] = '/editarPessoal';
         $dados['actionTrabalho'] = '/cadastrarTrabalho';
+        $dados['actionTelefone'] = '/cadastrarTelefone';
         $dados['profissoes'] = $this->profissaoRepository->getAtiva();
         $dados['paises'] = $this->paisRepository->all();
         $dados['cidades'] = $this->cidadeRepository->all();
         $dados['ufs'] = $this->unidadeFederativaRepository->all();
         $dados['repositoryUsuario'] = $this->usuarioRepository;
-        $dados['trabalhoPrimeiro'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(1);
-        $dados['trabalhoSegundo'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(2);
-        $dados['trabalhoTerceiro'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(3);
-        $dados['trabalhoQuarto'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(4);
-
-
-
+        $dados['habilidades'] = $this->rlUsuarioProfissaoRepository->getHabilidadesAtivo(auth::user()->id);
+        $dados['trabalho'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(auth::user()->id);
+        $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos(auth::user()->id);
         return view('perfil.perfil')->with('dados', $dados);
     }
 }
