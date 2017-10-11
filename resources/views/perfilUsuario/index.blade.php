@@ -17,11 +17,11 @@
         <tbody>
         @foreach($dados['perfil'] as $perfil)
             <tr>
-                <td>{{$perfil['NO_PERFIL']}}</td>
-                <td>{{$perfil['DS_PERFIL']}}</td>
-                <td>{{($perfil['ST_ATIVO'] == 'S') ? 'Sim': 'Não'}}</td>
+                <td>{{$perfil['no_perfil']}}</td>
+                <td>{{$perfil['ds_perfil']}}</td>
+                <td>{{($perfil['st_ativo'] == 'S') ? 'Sim': 'Não'}}</td>
                 <td>
-                    <button type="button" class="btn btn-block btn-info btn-xs detalhes" value="{{$perfil['CO_SEQ_PERFIL']}}">Detalhes</button>
+                    <button type="button" class="btn btn-block btn-info btn-xs detalhes" value="{{$perfil['co_seq_perfil']}}">Detalhes</button>
                 </td>
             </tr>
         @endforeach

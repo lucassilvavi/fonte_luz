@@ -1,38 +1,36 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: lucas
- * Date: 08/10/2017
- * Time: 12:28
+ * User: lucas.vieira
+ * Date: 09/10/2017
+ * Time: 19:51
  */
 
 namespace App\Services;
 
+use App\Repositories\GrupoPermissaoRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Repositories\TelefoneRepository;
-use Illuminate\Support\Facades\Auth;
 
-class TelefoneService
+class GrupoPermissaoService
 {
-    private $telefoneRepository;
 
-    public function __construct(TelefoneRepository $telefoneRepository)
+    private $grupoPermissaoRepository;
+
+    public function __construct(GrupoPermissaoRepository $grupoPermissaoRepository)
     {
-        $this->telefoneRepository = $telefoneRepository;
+        $this->grupoPermissaoRepository = $grupoPermissaoRepository;
     }
 
-    public function save($numero, $tipo_telefone)
+    function create($dadosForm)
     {
         DB::beginTransaction();
 
         try {
-            $dados['nu_telefone'] = $numero;
-            $dados['tp_telefone'] = $tipo_telefone;
+            $dados['no_grupo'] = $dadosForm['nome'];
+            $dados['ds_grupo'] = $dadosForm['descricao_grupo'];
             $dados['st_ativo'] = 'S';
-            $dados['id'] = auth::user()->id;
-            $this->telefoneRepository->create($dados);
-
+            $this->grupoPermissaoRepository->create($dados);
             DB::commit();
             return '{"operacao":true}';
         } catch (\Illuminate\Database\QueryException $e) {
@@ -54,15 +52,14 @@ class TelefoneService
             //Retorna as informacoes do erro.
             return '{"operacao":false}';
         }
-
     }
-    function desable($co_seq_telefone){
-
+    function desable($co_seq_grupo_permissoes)
+    {
         DB::beginTransaction();
 
         try {
             $dados['st_ativo'] = 'N';
-            $this->telefoneRepository->update($dados,$co_seq_telefone,'co_seq_telefone');
+            $this->grupoPermissaoRepository->update($dados, $co_seq_grupo_permissoes, 'co_seq_grupo_permissoes');
             DB::commit();
             return '{"operacao":true}';
         } catch (\Illuminate\Database\QueryException $e) {

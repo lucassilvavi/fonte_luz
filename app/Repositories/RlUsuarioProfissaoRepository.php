@@ -32,7 +32,8 @@ class RlUsuarioProfissaoRepository extends Repository
             ->join('tb_profissao','tb_profissao.co_seq_profissao','=','rl_usuario_profissao.co_seq_profissao')
             ->where('rl_usuario_profissao.st_profissao_principal', 'N')
             ->where('rl_usuario_profissao.dt_desativacao', null)
-            ->where('rl_usuario_profissao.id',$id)->get();
+            ->where('rl_usuario_profissao.id',$id)
+            ->get();
     }
 
     public function getId()

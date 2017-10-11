@@ -5,7 +5,7 @@ $('#formPessoal').on("submit", function () {
         if ($.parseJSON(validate).operacao) {
             MsgSucessoPessoal();
         } else {
-            $("#btnSalvarPessoal").prop("disabled", true);
+            $("#btnSalvarPessoal").prop("disabled", false);
 
         }
     });

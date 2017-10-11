@@ -34,6 +34,7 @@ class PessoalRequest extends Request
             'nacionalidade' => 'required',
             'cpf' => 'required',
             'valor' => 'required',
+            'profissao' => 'required',
         ];
     }
 

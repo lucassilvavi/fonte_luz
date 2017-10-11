@@ -36,13 +36,29 @@
                                 <input type="text" class="form-control" name="no_nome" id="no_nome"
                                        value="{{ $dados['pessoa']->no_nome}}"
                                        placeholder="Nome">
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="email" class="col-form-label">E-mail</label>
                                 <input type="email" class="form-control" name="email" id="email"
                                        value="{{ $dados['pessoa']->email}}"
                                        placeholder="E-mail">
+                                <small class="help-block"></small>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-5">
+                            <label for="inputState" class="col-form-label">Nacionalidade</label>
+                            <select id="inputState" name="nacionalidade" class="form-control">
+                                <option value=""></option>
+                                @foreach(  $dados['paises'] as $pais)
+                                    <option value="{{$pais['co_seq_pais']}}"
+                                            @if(auth::user()->co_pais == $pais['co_seq_pais']) selected
+                                            @endif>{{$pais['no_pais']}}</option>
+                                @endforeach
+                            </select>
+                            <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="uf" class="col-form-label">UF</label>
@@ -54,6 +70,7 @@
                                             value="{{$uf['sg_uf']}}">{{$uf['no_uf']}}</option>
                                 @endforeach
                             </select>
+                            <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cidade" class="col-form-label">Cidade</label>
@@ -63,18 +80,21 @@
                                             value="{{$dados['cidadeUsuario']['co_seq_cidade']}}">{{$dados['cidadeUsuario']['no_cidade']}}</option>
                                 @endif
                             </select>
+                            <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="logradouro" class="col-form-label">Logradouro</label>
                             <input type="text" class="form-control" name="logradouro" id="logradouro"
                                    value="{{ $dados['pessoa']->logradouro}}"
                                    placeholder="Logradouro">
+                            <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="bairro" class="col-form-label">Bairro</label>
                             <input type="text" class="form-control" name="bairro"
                                    id="bairro" value="{{ $dados['pessoa']->bairro}}"
                                    placeholder="Bairro">
+                            <small class="help-block"></small>
                         </div>
 
                         <div class="form-row">
@@ -83,6 +103,7 @@
                                 <input type="text" class="form-control" name="cep" id="nu_cep"
                                        value="{{ $dados['pessoa']->nu_cep}}"
                                        placeholder="CEP">
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naturalidade" class="col-form-label">Naturalidade</label>
@@ -94,29 +115,22 @@
                                                 @endif>{{$cidade['no_cidade']}}</option>
                                     @endforeach
                                 </select>
+                                <small class="help-block"></small>
                             </div>
-                            <div class="form-group col-md-5">
-                                <label for="inputState" class="col-form-label">Nacionalidade</label>
-                                <select id="inputState" name="nacionalidade" class="form-control">
-                                    <option value=""></option>
-                                    @foreach(  $dados['paises'] as $pais)
-                                        <option value="{{$pais['co_seq_pais']}}"
-                                                @if(auth::user()->co_pais == $pais['co_seq_pais']) selected
-                                                @endif>{{$pais['no_pais']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="nu_cpf" class="col-form-label">CPF</label>
                                 <input type="text" class="form-control" name="cpf"
                                        id="nu_cpf" value="{{ $dados['pessoa']->nu_cpf}}"
                                        readonly>
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="valor" class="col-form-label">Valor Contribuição</label>
                                 <input type="text" class="form-control money" id="valor" name="valor"
                                        value="{{number_format($dados['pessoa']->vl_contribuicao, 2, ',', '.')}}"
                                        placeholder="00,00">
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="inputState" class="col-form-label">Profissão</label>
@@ -128,12 +142,14 @@
                                                 @endif value="{{$profissao['co_seq_profissao']}}">{{$profissao['no_profissao']}}</option>
                                     @endforeach
                                 </select>
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="perfil" class="col-form-label">Perfil</label>
                                 <input type="text" class="form-control" value="{{ $dados['pessoa']->perfil->no_perfil}}"
                                        name="perfil" id="perfil"
                                        placeholder="Administrador" readonly>
+                                <small class="help-block"></small>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
@@ -195,32 +211,34 @@
 
             </div>
             <div role="tabpanel" class="tab-pane" id="telefones">
-                <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="form-group col-lg-4">
-                            <label for="nu_telefone">Tipo Telefone:</label>
-                            <select class="form-control" name="tipoTelefone">
-                                <option value="1">Celular</option>
-                                <option value="2">Residencial</option>
-                                <option value="3">Recado</option>
-                                <option value="4">Empresarial</option>
-                            </select>
+                <div class="row">
+                    <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label for="nu_telefone">Tipo Telefone:</label>
+                                <select class="form-control" name="tipoTelefone">
+                                    <option value="1">Celular</option>
+                                    <option value="2">Residencial</option>
+                                    <option value="3">Recado</option>
+                                    <option value="4">Empresarial</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label for="nu_telefone">Número:</label>
+                                <input type="text" value=""
+                                       class="form-control phones"
+                                       name="telefone">
+                                <small class="help-block"></small>
+                            </div>
                         </div>
-                        <div class="form-group col-lg-8">
-                            <label for="nu_telefone">Número:</label>
-                            <input type="text" value=""
-                                   class="form-control phones"
-                                   name="telefone">
-                            <small class="help-block"></small>
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-success btn-sm btn-block"
+                                    id="submitTelefone">Salvar
+                            </button>
                         </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-success btn-sm btn-block"
-                                id="submitTelefone">Salvar
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <div class="row">
                     <table id="tb_telefones" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
@@ -235,8 +253,7 @@
                             <tr>
                                 <td>
                                     <?php
-                                    switch ($telefone->tp_telefone){
-
+                                    switch ($telefone->tp_telefone) {
                                         case (1):
                                             echo 'Celular';
                                             break;
@@ -250,7 +267,7 @@
                                             echo 'Empresarial';
                                             break;
                                     }
-                                        ?>
+                                    ?>
                                 </td>
                                 <td>
                                     <p class="phones">{{$telefone->nu_telefone}}</p>
@@ -361,5 +378,7 @@
     <script src="{{asset('assets/js/perfil/habilidade/submitHabilidade.js')}}"></script>
     <script src="{{asset('assets/js/perfil/habilidade/modalDesableHabilidade.js')}}"></script>
     <script src="{{asset('assets/js/perfil/telefone/submitTelefone.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/telefone/dataTableTelefone.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/telefone/modalDesableTelefone.js')}}"></script>
 @endsection
 

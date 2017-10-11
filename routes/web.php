@@ -40,6 +40,10 @@ Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho')
 
 Route::post('/cadastrarTelefone', 'Perfil\TelefoneController@cadastrarTelefone');
 
+Route::get('/formDesableTelefone/{co_seq_telefone}', 'Perfil\TelefoneController@formDesableTelefone');
+
+Route::post('/desableTelefone', 'Perfil\TelefoneController@desableTelefone');
+
 //rotas do perfil do nivel de acesso
 
 Route::get('/perfilUsuario', 'PerfilUsuario\PerfilController@index');
@@ -62,9 +66,19 @@ Route::post('/savePermissao', 'Permissoes\PermissaoController@savePermissao');
 
 Route::get('/modalDetalhePermissao/{co_permissao}', 'Permissoes\PermissaoController@modalDetalhePermissao');
 
+//rotas do grupo do nivel de acesso
 
+Route::get('/grupoPermissao', 'GrupoPermissao\GrupoPermissaoController@index');
 
+Route::get('/formGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@formGrupoPermissao');
 
+Route::post('/saveGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@saveGrupoPermissao');
+
+Route::get('/modalGrupoPermissao/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@modalGrupoPermissao');
+
+Route::get('/formDesableGrupo/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@formDesableGrupo');
+
+Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDesableGrupo');
 
 
 Route::get('/clear-cache', function () {

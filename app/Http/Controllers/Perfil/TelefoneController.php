@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Services\TelefoneService;
 use App\Http\Requests\TelefoneRequest;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\GenericaRequest;
 class TelefoneController extends Controller
 {
     private $telefoneService;
@@ -26,7 +26,21 @@ class TelefoneController extends Controller
     function cadastrarTelefone(TelefoneRequest $request)
     {
         $onlyNumbers = preg_replace('/\D/', '', $request->get('telefone'));
-       return $this->telefoneService->save($onlyNumbers,$request->get('tipoTelefone'));
+        return $this->telefoneService->save($onlyNumbers, $request->get('tipoTelefone'));
+
+    }
+
+    function formDesableTelefone($co_seq_telefone)
+    {
+
+        $dados['co_seq_telefone'] = $co_seq_telefone;
+        $dados['action'] = 'Perfil\TelefoneController@desableTelefone';
+        return view('perfil.modalDesableTelefone')->with('dados', $dados);
+    }
+
+    function desableTelefone(GenericaRequest $request)
+    {
+       return $this->telefoneService->desable($request->get('co_seq_telefone'));
 
     }
 }

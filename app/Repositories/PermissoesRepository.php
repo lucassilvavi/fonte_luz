@@ -17,4 +17,9 @@ class PermissoesRepository extends Repository
     {
         $this->model = $permissoes;
     }
+
+    function getPermissoesAtivasProGrupo($co_grupo_permissoes)
+    {
+        return $this->model->where('co_grupo_permissoes', $co_grupo_permissoes)->get();
+    }
 }
