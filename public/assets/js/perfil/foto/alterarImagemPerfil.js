@@ -17,6 +17,7 @@ $(".ativarFoto").click(function () {
 });
 function sucessoAuterar() {
 // Override global options
+
     toastr.success('Foto Alterada com Sucesso!', '', {
         closeButton: false,
         progressBar: true,
@@ -26,6 +27,8 @@ function sucessoAuterar() {
     setTimeout(function () {
         location.reload();
     }, 2500);
+
+
 }
 function erroAuterar() {
 // Override global options
