@@ -26,7 +26,7 @@ class TelefoneController extends Controller
     function cadastrarTelefone(TelefoneRequest $request)
     {
         $onlyNumbers = preg_replace('/\D/', '', $request->get('telefone'));
-        return $this->telefoneService->save($onlyNumbers, $request->get('tipoTelefone'));
+        return $this->telefoneService->save($onlyNumbers, $request->get('tipoTelefone'),$request->get('usuario'));
 
     }
 

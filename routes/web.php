@@ -22,11 +22,11 @@ Auth::routes();
 
 Route::get('/getCidade/{co_uf}', 'Perfil\CidadeController@getCidadeWithUf');
 
-Route::get('/perfil', 'Perfil\MembroController@index');
+Route::get('/perfil/{id?}', 'Perfil\MembroController@index');
 
 Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 
-Route::get('/changePhoto/{co_seq_foto}', 'Perfil\FotosController@changePhoto');
+Route::get('/changePhoto/{co_seq_foto}/{usuario}', 'Perfil\FotosController@changePhoto');
 
 Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
 
@@ -80,6 +80,9 @@ Route::get('/formDesableGrupo/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoP
 
 Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDesableGrupo');
 
+//rotas do grupo do nivel de acesso
+
+Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecionarUsuario');
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');

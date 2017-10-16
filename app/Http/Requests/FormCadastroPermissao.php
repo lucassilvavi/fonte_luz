@@ -26,6 +26,7 @@ class FormCadastroPermissao extends Request
         return [
             'nome' => 'required',
             'descricao' => 'required',
+            'grupo' => 'required',
         ];
     }
 

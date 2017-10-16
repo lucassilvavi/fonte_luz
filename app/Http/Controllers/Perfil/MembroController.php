@@ -68,10 +68,12 @@ class MembroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_usuarioByAdm = null)
     {
-
-        $dados['cidadeUsuario']=$this->cidadeRepository->findBy('co_seq_cidade',auth::user()->co_cidade);
+        if (isset($id_usuarioByAdm)) {
+            return self::indexAdministrador($id_usuarioByAdm);
+        }
+        $dados['cidadeUsuario'] = $this->cidadeRepository->findBy('co_seq_cidade', auth::user()->co_cidade);
         $dados['fotos'] = $this->fotoRepository->getFotos();
         $dados['pessoa'] = $this->usuario->find(auth::user()->id);
         $dados['actionPessoal'] = '/editarPessoal';
@@ -85,6 +87,28 @@ class MembroController extends Controller
         $dados['habilidades'] = $this->rlUsuarioProfissaoRepository->getHabilidadesAtivo(auth::user()->id);
         $dados['trabalho'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(auth::user()->id);
         $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos(auth::user()->id);
+        $dados['usuario'] = $this->usuario->find(auth::user()->id);
+        return view('perfil.perfil')->with('dados', $dados);
+    }
+
+    function indexAdministrador($id_usuarioByAdm)
+    {
+        $dados['cidadeUsuario'] = $this->cidadeRepository->findBy('co_seq_cidade', $id_usuarioByAdm);
+        $dados['fotos'] = $this->fotoRepository->getExistentes($id_usuarioByAdm);
+        $dados['pessoa'] = $this->usuario->find($id_usuarioByAdm);
+        $dados['actionPessoal'] = '/editarPessoal';
+        $dados['actionTrabalho'] = '/cadastrarTrabalho';
+        $dados['actionTelefone'] = '/cadastrarTelefone';
+        $dados['profissoes'] = $this->profissaoRepository->getAtiva();
+        $dados['paises'] = $this->paisRepository->all();
+        $dados['cidades'] = $this->cidadeRepository->all();
+        $dados['ufs'] = $this->unidadeFederativaRepository->all();
+        $dados['repositoryUsuario'] = $this->usuarioRepository;
+        $dados['habilidades'] = $this->rlUsuarioProfissaoRepository->getHabilidadesAtivo($id_usuarioByAdm);
+        $dados['trabalho'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo($id_usuarioByAdm);
+        $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos($id_usuarioByAdm);
+        $dados['usuario'] = $this->usuario->find($id_usuarioByAdm);
+
         return view('perfil.perfil')->with('dados', $dados);
     }
 }

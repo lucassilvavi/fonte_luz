@@ -21,16 +21,16 @@ class FotoService
         $this->fotoRepository = $fotoRepository;
     }
 
-    public function desativar()
+    public function desativar($usuario)
     {
         DB::beginTransaction();
 
         try {
-            $foto = $this->fotoRepository->getAtiva();
-            if (isset($foto[0]->CO_SEQ_FOTO)) {
+            $foto = $this->fotoRepository->getAtiva($usuario);
+            if (isset($foto[0]->co_seq_foto)) {
                 $dados['st_ativo'] = 'N';
                 $dados['dt_desativacao'] = null;
-                $this->fotoRepository->update($dados, $foto[0]->CO_SEQ_FOTO, 'CO_SEQ_FOTO');
+                $this->fotoRepository->update($dados, $foto[0]->co_seq_foto, 'co_seq_foto');
             }
 
             DB::commit();
@@ -62,7 +62,7 @@ class FotoService
         DB::beginTransaction();
 
         try {
-            $this->desativar();
+            self::desativar($idPessoa);
             $dados['ds_endereco_foto'] = $endereco;
             $dados['dt_cadastro_foto'] = date("Y-m-d");
             $dados['st_ativo'] = 'S';
@@ -101,7 +101,7 @@ class FotoService
         try {
             $dados['st_ativo'] = 'S';
             $dados['dt_desativacao'] = null;
-            $this->fotoRepository->update($dados, $co_seq_foto, 'CO_SEQ_FOTO');
+            $this->fotoRepository->update($dados, $co_seq_foto, 'co_seq_foto');
 
             DB::commit();
             return 'true';
@@ -132,7 +132,7 @@ class FotoService
         try {
             $dados['st_ativo'] = 'N';
             $dados['dt_desativacao'] = date("Y-m-d");
-            $this->fotoRepository->update($dados, $co_seq_foto, 'CO_SEQ_FOTO');
+            $this->fotoRepository->update($dados, $co_seq_foto, 'co_seq_foto');
 
             DB::commit();
             return 'true';

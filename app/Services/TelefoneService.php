@@ -22,7 +22,7 @@ class TelefoneService
         $this->telefoneRepository = $telefoneRepository;
     }
 
-    public function save($numero, $tipo_telefone)
+    public function save($numero, $tipo_telefone,$id)
     {
         DB::beginTransaction();
 
@@ -30,7 +30,7 @@ class TelefoneService
             $dados['nu_telefone'] = $numero;
             $dados['tp_telefone'] = $tipo_telefone;
             $dados['st_ativo'] = 'S';
-            $dados['id'] = auth::user()->id;
+            $dados['id'] = $id;
             $this->telefoneRepository->create($dados);
 
             DB::commit();

@@ -38,13 +38,22 @@ class PessoalService
 
             $dados['no_nome'] = $dadosForm['no_nome'];
             $dados['email'] = $dadosForm['email'];
-            $dados['co_uf'] = $this->unidadeFederativaRepository->getCoUnidade($dadosForm['uf']);
-            $dados['co_cidade'] = $dadosForm['cidade'];
+
+            if (isset($dadosForm['uf'])) {
+                $dados['co_uf'] = $this->unidadeFederativaRepository->getCoUnidade($dadosForm['uf']);
+                $dados['co_cidade'] = $dadosForm['cidade'];
+                $dados['no_cidade_pais'] = null;
+            } else {
+                $dados['no_cidade_pais'] = $dadosForm['endereco_naturalidade'];
+                $dados['co_uf'] = null;
+                $dados['co_cidade'] = null;
+            }
             $dados['logradouro'] = $dadosForm['logradouro'];
             $dados['bairro'] = $dadosForm['bairro'];
             $dados['nu_cep'] = $dadosForm['cep'];
             $dados['naturalidade'] = $dadosForm['naturalidade'];
             $dados['co_pais'] = $dadosForm['nacionalidade'];
+            $dados['dt_ultima_alteracao'] = date("Y-m-d");
             $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['valor']);
             $this->profissoesService->desativar();
             $this->profissoesService->salvarTrabalhoPessoal($dadosForm['profissao']);

@@ -1,12 +1,12 @@
 @extends('layouts.principal')
 
-@section('title','Exemplo de Abas')
-@section('title-form','Abas')
+@section('title','Dados Pessoais')
+@section('title-form','Dados Pessoais')
 
 @section('breadcrumb')
     <li><a href="index.html">Home</a></li>
     <li><a>Forms</a></li>
-    <li class="active"><strong>Abas</strong></li>
+    <li class="active"><strong></strong></li>
 @endsection
 
 @section('content')
@@ -50,14 +50,22 @@
                     <div class="row">
                         <div class="form-group col-md-5">
                             <label for="inputState" class="col-form-label">Nacionalidade</label>
-                            <select id="inputState" name="nacionalidade" class="form-control">
+                            <select id="nacionalidade" name="nacionalidade" class="form-control">
                                 <option value=""></option>
                                 @foreach(  $dados['paises'] as $pais)
                                     <option value="{{$pais['co_seq_pais']}}"
-                                            @if(auth::user()->co_pais == $pais['co_seq_pais']) selected
+                                            @if($dados['usuario']->co_pais == $pais['co_seq_pais']) selected
                                             @endif>{{$pais['no_pais']}}</option>
                                 @endforeach
                             </select>
+                            <small class="help-block"></small>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="logradouro" class="col-form-label">Endereço da Naturalidade</label>
+                            <input type="text" class="form-control" name="endereco_naturalidade"
+                                   id="endereco_naturalidade"
+                                   value="@if(!empty($dados['usuario']->no_cidade_pais)) {{$dados['usuario']->no_cidade_pais}} @endif"
+                                   placeholder="Endereco da naturalidade">
                             <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-4">
@@ -111,7 +119,7 @@
                                     <option value=""></option>
                                     @foreach(  $dados['cidades'] as $cidade)
                                         <option value="{{$cidade['co_seq_cidade']}}"
-                                                @if(auth::user()->naturalidade === $cidade['co_seq_cidade']) SELECTED
+                                                @if($dados['usuario']->naturalidade === $cidade['co_seq_cidade']) SELECTED
                                                 @endif>{{$cidade['no_cidade']}}</option>
                                     @endforeach
                                 </select>
@@ -214,6 +222,7 @@
                 <div class="row">
                     <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
                         {{ csrf_field() }}
+                        <input type="hidden" name="usuario" value="{{$dados['usuario']->id}}">
                         <div class="row">
                             <div class="form-group col-lg-4">
                                 <label for="nu_telefone">Tipo Telefone:</label>
@@ -286,21 +295,13 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="fotos">
                 <form action="{{URL::to('savePhoto')}}" id="salvarImage" enctype="multipart/form-data" method="POST">
-                    <div class="alert alert-danger print-error-msg" style="display:none">
-                        <ul></ul>
-                    </div>
-                    <div class="alert alert-success alert-dismissable" hidden>
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong> Foto inserida com sucesso!</strong>
-                    </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                    <input type="hidden" name="usuario" id="usuario" value="{{$dados['usuario']->id}}">
                     <div class="form-group">
                         <label>Nome:</label>
                         <input type="text" name="title" class="form-control"
                                placeholder="Escreva um nome para a imagem">
                     </div>
-
                     <div class="form-group">
                         <label>Imagem:</label>
                         <div class="input-group">
@@ -323,16 +324,21 @@
                     @foreach($dados['fotos'] as $foto)
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a href="{{'fotos/'.$foto->ds_endereco_foto}}" target="_blank">
-                                    <img src="{{'fotos/'.$foto->ds_endereco_foto}}" alt="{{$foto->no_foto}}"
+                                <a href="{{'/fotos/'.$foto->ds_endereco_foto}}" target="_blank">
+                                    <img src="{{'/fotos/'.$foto->ds_endereco_foto}}" alt="{{$foto->no_foto}}"
                                          style="width:100%">
                                     <div class="caption">
                                         <p>{{$foto->no_foto}}</p>
                                     </div>
                                 </a>
-                                @if($foto->ST_ATIVO == 'S')
+                                @if($foto->st_ativo == 'S')
                                     <button type="button" class="btn btn-success" value="{{$foto->co_seq_foto}}">
-                                        <span class="fa fa-check-circle"></span> Ativa
+                                        <span class="fa fa-check-circle"></span> Perfil
+                                    </button>
+                                    @elseif(!empty($foto->dt_desativacao))
+                                    <button type="button" class="btn btn-danger fotoExcluida"
+                                            value="{{$foto->co_seq_foto}}">
+                                        <span class="fa fa-check-circle"></span> Foto Excluida
                                     </button>
                                 @else
                                     <button type="button" class="btn btn-info ativarFoto"
@@ -370,9 +376,11 @@
     <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
     <script src="{{asset('assets/js/submit.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/getCidadeByUf.js')}}"></script>
-    <script src="{{asset('assets/js/perfil/pessoal/submitImage.js')}}"></script>
-    <script src="{{asset('assets/js/perfil/pessoal/alterarImagemPerfil.js')}}"></script>
-    <script src="{{asset('assets/js/perfil/pessoal/excluirFotoPerfil.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/usuarioDeOutroPais.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/foto/submitImage.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/foto/alterarImagemPerfil.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/foto/excluirFotoPerfil.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/foto/ativarFotoExcluida.js')}}"></script>
     <script src="{{asset('assets/js/perfil/pessoal/submitPessoal.js')}}"></script>
     <script src="{{asset('assets/js/perfil/habilidade/dataTableHabilidades.js')}}"></script>
     <script src="{{asset('assets/js/perfil/habilidade/submitHabilidade.js')}}"></script>

@@ -1,8 +1,9 @@
 $(".ativarFoto").click(function () {
     var co_seq_foto = $(this).val();
+    var usuario = $('#usuario').val();
     $.ajax({
         type: "get",
-        url: "/changePhoto/"+co_seq_foto,
+        url: "/changePhoto/"+co_seq_foto+'/'+usuario,
         beforeSend: function () {
         },
         success: function (data) {

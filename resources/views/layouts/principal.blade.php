@@ -11,32 +11,26 @@
 
     <title>@yield('title')</title>
 
-
-{{--<!-- Ionicons -->--}}
-{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--}}
 <!-- Bootstrap -->
 
-    <link href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<!-- Font Awesome -->--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     {{--<!-- Data Tables -->--}}
-    <link href="{{asset('assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
+    <link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
           rel="stylesheet">
 
-    {{--<!-- Toastr - Notificações -->--}}
-    {{--<link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet">--}}
     {{--<!-- Metis Menu -->--}}
-    <link href="{{asset('assets/vendor/metisMenu/dist/metisMenu.min.js')}}" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/metisMenu/dist/metisMenu.min.js')}}" rel="stylesheet">
     {{--<!-- Animate CSS -->--}}
-    <link href="{{asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
     {{--<!-- Bootstrap Datepicker -->--}}
-    <link href="{{asset('assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}"
+    <link href="{{asset('/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}"
           rel="stylesheet">
 
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
-    {{--<link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">--}}
 <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
     <!-- Font Awesome -->
@@ -396,29 +390,29 @@
 <!-- /#wrapper -->
 
 <!-- scripts -->
-<script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 {{--<!-- Toastr - Notificações -->--}}
 {{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
 <!-- Data Tables -->
-<script src="{{asset('assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/dataTableDefaults.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
-<script src="{{asset('assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/vendor/jszip/dist/jszip.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
+<script src="{{asset('/assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{asset('/assets/vendor/jszip/dist/jszip.min.js')}}"></script>
 <!-- Bootstrap Datepicker -->
-<script src="{{asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{asset('assets/js/datepickerDefaults.js')}}"></script>
+<script src="{{asset('/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('/assets/js/datepickerDefaults.js')}}"></script>
 <!-- jQuery Mask Plugin -->
-<script src="{{asset('assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
 <script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 

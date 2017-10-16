@@ -28,6 +28,8 @@
             </li>
         </ul>
     </li>
+
+    @can('po')
     <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Perfils</span>
             <span class="pull-right-container">
@@ -38,6 +40,8 @@
             <li><a href="{{url('/perfilUsuario')}}">Perfis</a></li>
             <li><a href="{{url('/permissoes')}}">Permissões</a></li>
             <li><a href="{{url('/grupoPermissao')}}">Grupos</a></li>
+            <li><a href="{{url('/selecionarUsuario')}}">Usuários</a></li>
         </ul>
     </li>
+        @endcan
 </ul>

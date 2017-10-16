@@ -34,9 +34,14 @@ class Permissoes extends Model
 
     protected $table = "tb_permissoes";
 
+    protected $primaryKey = 'co_seq_permissoes';
+
     public function perfil()
     {
         return $this->belongsToMany(Perfil::class, 'rl_perfil_permissoes',  'co_seq_permissoes','co_seq_perfil');
+    }
+    public function grupoPermissao(){
+        return $this->hasOne(GrupoPermissao::class,'co_seq_grupo_permissoes','co_grupo_permissoes');
     }
 }
 

@@ -8,8 +8,20 @@
 
 namespace App\Http\Controllers\Administrador;
 
+use App\Repositories\UsuarioRepository;
 
 class DadosPessoaisController
 {
+    private $usuarioRepository;
 
+    function __construct(UsuarioRepository $usuarioRepository)
+    {
+        $this->usuarioRepository = $usuarioRepository;
+    }
+
+    function selecionarUsuario()
+    {
+        $dados['usuarios'] = $this->usuarioRepository->all();
+        return view('administrador.dadosPessoais')->with('dados', $dados);
+    }
 }

@@ -27,7 +27,7 @@ class PermissaoService
 
             $dados['no_permissao'] = $dadosForm['nome'];
             $dados['ds_permissao'] = $dadosForm['descricao'];
-            $dados['co_grupo_permissoes'] = 1;
+            $dados['co_grupo_permissoes'] = $dadosForm['grupo'];
             $this->permissoesRepository->create($dados);
             DB::commit();
             return '{"operacao":true}';

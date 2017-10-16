@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Permissoes;
 class GrupoPermissao extends Model
 {
     protected $connection = 'mysql';
@@ -38,6 +39,10 @@ class GrupoPermissao extends Model
      * @var string
      */
     protected $primaryKey = 'co_seq_grupo_permissoes';
+
+    public function permissoes(){
+        return $this->hasOne(Permissoes::class,'co_seq_grupo_permissoes','co_grupo_permissoes');
+    }
 }
 
 

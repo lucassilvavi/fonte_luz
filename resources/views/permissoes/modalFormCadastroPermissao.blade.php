@@ -10,6 +10,16 @@
         <textarea type="text" class="form-control" name="descricao" value=""></textarea>
         <small class="help-block"></small>
     </div>
+    <div class="form-group">
+        <label for="inputState" class="col-form-label">Grupo de Permissão</label>
+        <select id="inputState" name="grupo" class="form-control">
+            <option value=""></option>
+            @foreach( $dados['grupos'] as $grupo)
+                <option value="{{$grupo['co_seq_grupo_permissoes']}}">{{$grupo['no_grupo']}}</option>
+            @endforeach
+        </select>
+        <small class="help-block"></small>
+    </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-0 form-group">
             <button type="button" class="btn btn-block btn-danger" id="sair">Sair</button>

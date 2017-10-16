@@ -45,7 +45,7 @@ class FotosController extends Controller
         if ($valida != 'certo') {
             return $valida;
         } else {
-            $destinationPath = 'fotos/' . $this->usuario->find(auth::user()->id)->id;
+            $destinationPath = 'fotos/' . $request->get('usuario');
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
@@ -53,10 +53,9 @@ class FotosController extends Controller
             $rename = time() . '.' . $request->image->getClientOriginalExtension();
             $file->move($destinationPath, $rename);
             $input = $request->all();
-            $endArquivoProg = $this->usuario->find(auth::user()->id)->id . '/' . $rename;
-            return $this->fotoService->nova($endArquivoProg, $this->usuario->find(auth::user()->id)->id, $input['title']);
+            $endArquivoProg = $request->get('usuario') . '/' . $rename;
+            return $this->fotoService->nova($endArquivoProg, $request->get('usuario'), $input['title']);
         }
-
 
     }
 
@@ -69,18 +68,18 @@ class FotosController extends Controller
         } elseif ($request->title == null) {
             return 'title';
         }
-            return 'certo';
+        return 'certo';
 
 
     }
 
-    public function changePhoto($co_seq_foto)
+    public function changePhoto($co_seq_foto, $usuario)
     {
-        $desativada = $this->fotoService->desativar();
+        $desativada = $this->fotoService->desativar($usuario);
         if ($desativada == 'true') {
             return $this->fotoService->ativar($co_seq_foto);
         }
-            return 'erro';
+        return 'erro';
 
     }
 

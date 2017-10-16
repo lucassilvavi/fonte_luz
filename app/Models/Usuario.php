@@ -9,6 +9,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Perfil;
 
 class Usuario extends Authenticatable
 {
@@ -31,7 +32,8 @@ class Usuario extends Authenticatable
         'co_cidade',
         'vl_contribuicao',
         'password',
-        'co_perfil'
+        'co_perfil',
+        'dt_ultima_alteracao'
     ];
 
     /**
@@ -57,6 +59,29 @@ class Usuario extends Authenticatable
     public function profissao()
     {
         return $this->belongsToMany(Profissao::class, 'rl_usuario_profissao', 'id', 'co_seq_profissao');
+    }
+    public function hasPermission(Permissoes $permission)
+    {
+        return $this->hasAnyRoles($permission->perfil);
+    }
+
+    public function hasAnyRoles($perfil)
+    {
+
+        if (is_array($perfil) || is_object($perfil)) {
+dd($perfil);
+            return !! $perfil->intersect($this->perfil)->count();
+//            foreach ($roles as $role) {
+//                if ($this->hasAnyRoles($role)) {
+//
+//                    return true;
+//
+//                }
+//
+//            }
+        }
+
+        return $this->co_perfil->contains('co_perfil', $perfil);
     }
 
 }

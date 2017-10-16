@@ -10,17 +10,19 @@
         <tr>
             <th>Nome</th>
             <th>Descrição</th>
+            <th>Grupo</th>
             <th>Opcões</th>
         </tr>
         </thead>
         <tbody>
         @foreach( $dados['permissoes'] as $permissao)
             <tr>
-                <td>{{$permissao['NO_PERMISSAO']}}</td>
-                <td>{{$permissao['DS_PERMISSAO']}}</td>
+                <td>{{$permissao['no_permissao']}}</td>
+                <td>{{$permissao['ds_permissao']}}</td>
+                <td>{{$permissao->grupoPermissao->no_grupo}}</td>
                 <td>
                     <button type="button" class="btn btn-block btn-info btn-xs detalhes"
-                            value="{{$permissao['CO_SEQ_PERMISSOES']}}">Detalhes</button>
+                            value="{{$permissao['co_seq_permissoes']}}">Detalhes</button>
                 </td>
             </tr>
         @endforeach
