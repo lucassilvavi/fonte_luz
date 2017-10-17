@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use App\Repositories\RlPerfilPermissoesRepository;
 use Illuminate\Contracts\Auth\Access\Gate as Gates;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,10 +30,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
-        $permissions = Perfil::with('permissoesAtivas')->get();
+        $permissions = Perfil::with('permissoes')->get();
         foreach ($permissions as $permission) {
             foreach ($permission['permissoes'] as $permissoe){
                 $gates->define($permissoe->no_permissao, function (Usuario $user) use ($permissoe) {
+
                     return $user->hasPermission($permissoe);
                 });
             }

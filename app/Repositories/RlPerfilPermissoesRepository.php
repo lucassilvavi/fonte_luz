@@ -42,6 +42,12 @@ class RlPerfilPermissoesRepository extends Repository
             ->where('dt_exclusao',null)
             ->get();
     }
+    function getPermissoesAtivasParaPermissao($co_perfil){
+        return $this->model
+            ->where('co_seq_perfil',$co_perfil)
+            ->where('dt_exclusao',null)
+            ->get();
+    }
     public function getId()
     {
         $valorid = DB::select("SELECT max(co_seq_perfil_permissoes + 1) as id from rl_perfil_permissoes")[0]->id;

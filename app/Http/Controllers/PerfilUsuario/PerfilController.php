@@ -59,6 +59,7 @@ class PerfilController extends Controller
     }
     public function savePerfilPermissao(GenericaRequest $request)
     {
+
         return $this->perfilService->vincularPermissaoAPerfil($request->all());
     }
 }

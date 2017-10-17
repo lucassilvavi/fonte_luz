@@ -38,12 +38,6 @@ class Perfil extends Model
     {
         return $this->belongsToMany(Permissoes::class, 'rl_perfil_permissoes', 'co_seq_perfil', 'co_seq_permissoes');
     }
-    public function permissoesAtivas()
-    {
-        return $this->belongsToMany(Permissoes::class, 'rl_perfil_permissoes', 'co_seq_perfil', 'co_seq_permissoes')
-            ->where('dt_exclusao',null)
-            ->where('co_seq_perfil',auth::user());
-    }
 }
 
 

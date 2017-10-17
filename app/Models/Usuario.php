@@ -5,11 +5,14 @@
  * Date: 04/09/2017
  * Time: 14:52
  */
+
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Perfil;
+use Illuminate\Support\Facades\Auth;
+
 
 class Usuario extends Authenticatable
 {
@@ -52,36 +55,33 @@ class Usuario extends Authenticatable
      */
     protected $table = "tb_usuario";
 
-    public function perfil(){
-        return $this->hasOne(Perfil::class,'co_seq_perfil','co_perfil');
+    public function perfil()
+    {
+        return $this->hasOne(Perfil::class, 'co_seq_perfil', 'co_perfil');
     }
 
     public function profissao()
     {
         return $this->belongsToMany(Profissao::class, 'rl_usuario_profissao', 'id', 'co_seq_profissao');
     }
+
     public function hasPermission(Permissoes $permission)
     {
-        return $this->hasAnyRoles($permission->perfil);
+        return $this->hasAnyRoles($permission);
     }
 
-    public function hasAnyRoles($perfil)
+    public function hasAnyRoles($permission)
     {
 
-        if (is_array($perfil) || is_object($perfil)) {
-dd($perfil);
-            return !! $perfil->intersect($this->perfil)->count();
-//            foreach ($roles as $role) {
-//                if ($this->hasAnyRoles($role)) {
-//
-//                    return true;
-//
-//                }
-//
-//            }
+        if (is_array($permission) || is_object($permission)) {
+            foreach (auth::user()->perfil->permissoes as $permissoes) {
+                if($permissoes->co_seq_permissoes == $permission->co_seq_permissoes){
+                    return true;
+                }
+            }
+            return false;
         }
-
-        return $this->co_perfil->contains('co_perfil', $perfil);
+        return false;
     }
 
 }

@@ -70,16 +70,21 @@ class PerfilService
         DB::beginTransaction();
         try {
 
-            foreach ($dadosForm['permissoes'] as $permissao) {
+            if (empty($dadosForm['permissoes'])) {
 
-                $vinculado = $this->rlPerfilPermissoesRepository->getPerfilVinculadoAPermissao($permissao, $dadosForm['perfil']);
+                self::desativarTodasAsPermissoes($dadosForm['perfil']);
+            }else{
+                foreach ($dadosForm['permissoes'] as $permissao) {
 
-                if (count($vinculado) == 0) {
-                    $dadosPermissao = $this->permissoesRepository->findBy('co_seq_permissoes',$permissao);
-                    $dadosPermissao->perfil()->attach($dadosForm['perfil'],['dt_cadastro' => date("Y-m-d H:i:s"),'co_seq_perfil_permissoes' => $this->rlPerfilPermissoesRepository->getId()]);
+                    $vinculado = $this->rlPerfilPermissoesRepository->getPerfilVinculadoAPermissao($permissao, $dadosForm['perfil']);
+
+                    if (count($vinculado) == 0) {
+                        $dadosPermissao = $this->permissoesRepository->findBy('co_seq_permissoes', $permissao);
+                        $dadosPermissao->perfil()->attach($dadosForm['perfil'], ['dt_cadastro' => date("Y-m-d H:i:s"), 'co_seq_perfil_permissoes' => $this->rlPerfilPermissoesRepository->getId()]);
+                    }
                 }
+                self::desativarPermissao($dadosForm['permissoes'], $dadosForm['perfil']);
             }
-            self::desativarPermissao($dadosForm['permissoes'], $dadosForm['perfil']);
 
             DB::commit();
             return '{"operacao":true}';
@@ -109,10 +114,47 @@ class PerfilService
     {
         DB::beginTransaction();
         try {
-            $ativosParaDesativar = $this->rlPerfilPermissoesRepository
-                ->getPermissoesParaDesativar($permissoesSelecionadas, $co_perfil);
-            if (count($ativosParaDesativar) >= 1 ){
-                foreach ($ativosParaDesativar as $desativar){
+
+            $ativosParaDesativar = $this->rlPerfilPermissoesRepository->getPermissoesParaDesativar($permissoesSelecionadas, $co_perfil);
+
+            if (count($ativosParaDesativar) >= 1) {
+                foreach ($ativosParaDesativar as $desativar) {
+                    $dados['dt_exclusao'] = date("Y-m-d");
+                    $this->rlPerfilPermissoesRepository->update($dados, $desativar->co_seq_perfil_permissoes, 'co_seq_perfil_permissoes');
+                }
+            }
+
+            DB::commit();
+            return '{"operacao":true}';
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+
+            DB::rollback();
+            //Retorna as informacoes do erro.
+
+            return '{"operacao":false}';
+        } catch (\Yajra\Pdo\Oci8\Exceptions\Oci8Exception $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+
+            DB::rollback();
+
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+
+    }
+    public function desativarTodasAsPermissoes( $co_perfil)
+    {
+        DB::beginTransaction();
+        try {
+
+            $ativosParaDesativar = $this->rlPerfilPermissoesRepository->getPermissoesAtivasParaPermissao( $co_perfil);
+            if (count($ativosParaDesativar) >= 1) {
+                foreach ($ativosParaDesativar as $desativar) {
                     $dados['dt_exclusao'] = date("Y-m-d");
                     $this->rlPerfilPermissoesRepository->update($dados, $desativar->co_seq_perfil_permissoes, 'co_seq_perfil_permissoes');
                 }
