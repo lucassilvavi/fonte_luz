@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Usuario extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -74,8 +75,10 @@ class Usuario extends Authenticatable
     {
 
         if (is_array($permission) || is_object($permission)) {
-            foreach (auth::user()->perfil->permissoes as $permissoes) {
-                if($permissoes->co_seq_permissoes == $permission->co_seq_permissoes){
+
+
+            foreach (\App\Http\Controllers\Facade\PermissoesAtivas::getPermissoesAtivas(auth::user()->co_perfil) as $permissoes) {
+                if ($permissoes->co_seq_permissoes == $permission->co_seq_permissoes) {
                     return true;
                 }
             }
@@ -83,7 +86,6 @@ class Usuario extends Authenticatable
         }
         return false;
     }
-
 }
 
 
