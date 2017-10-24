@@ -1,7 +1,5 @@
 
 <ul class="sidebar-menu">
-    <li class="header">HEADER</li>
-    <!-- Optionally, you can add icons to the links -->
     <li>
         <a href="#"><i class="fa fa-th-large"></i> <span>Forms</span>
             <span class="pull-right-container">
@@ -31,7 +29,7 @@
 
     @can('po')
     <li class="treeview">
-        <a href="#"><i class="fa fa-link"></i> <span>Perfils</span>
+        <a href="#"><i class="fa fa-link"></i> <span>Administração</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -40,8 +38,17 @@
             <li><a href="{{url('/perfilUsuario')}}">Perfis</a></li>
             <li><a href="{{url('/permissoes')}}">Permissões</a></li>
             <li><a href="{{url('/grupoPermissao')}}">Grupos</a></li>
-            <li><a href="{{url('/selecionarUsuario')}}">Usuários</a></li>
         </ul>
     </li>
+        <li class="treeview">
+            <a href="#"><i class="fa fa-link"></i> <span>Dados dos Usuário</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{url('/selecionarUsuario')}}">Usuários</a></li>
+            </ul>
+        </li>
         @endcan
 </ul>

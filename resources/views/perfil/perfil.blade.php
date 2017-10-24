@@ -152,13 +152,28 @@
                                 </select>
                                 <small class="help-block"></small>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="perfil" class="col-form-label">Perfil</label>
-                                <input type="text" class="form-control" value="{{ $dados['pessoa']->perfil->no_perfil}}"
-                                       name="perfil" id="perfil"
-                                       placeholder="Administrador" readonly>
-                                <small class="help-block"></small>
-                            </div>
+                            @can('Editar Perfil')
+                                <div class="form-group col-md-5">
+                                    <label for="inputState" class="col-form-label">Perfil</label>
+                                    <select id="inputState" name="perfil" class="form-control">
+                                        @foreach( $dados['perfis'] as $perfis)
+                                        <option value="{{$perfis->co_seq_perfil}}"
+                                            @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) "selected" @endif>{{$perfis->no_perfil}}</option>
+                                            @endforeach
+
+                                    </select>
+                                    <small class="help-block"></small>
+                                </div>
+                            @else
+                                <div class="form-group col-md-3">
+                                    <label for="perfil" class="col-form-label">Perfil</label>
+                                    <input type="text" class="form-control"
+                                           value="{{ $dados['pessoa']->perfil->no_perfil}}"
+                                           name="perfil" id="perfil"
+                                           placeholder="Administrador" readonly>
+                                    <small class="help-block"></small>
+                                </div>
+                            @endcan
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success btn-sm btn-block" id="btnSalvarPessoal">
@@ -335,7 +350,7 @@
                                     <button type="button" class="btn btn-success" value="{{$foto->co_seq_foto}}">
                                         <span class="fa fa-check-circle"></span> Perfil
                                     </button>
-                                    @elseif(!empty($foto->dt_desativacao))
+                                @elseif(!empty($foto->dt_desativacao))
                                     <button type="button" class="btn btn-danger fotoExcluida"
                                             value="{{$foto->co_seq_foto}}">
                                         <span class="fa fa-check-circle"></span> Foto Excluida

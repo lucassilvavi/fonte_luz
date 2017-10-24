@@ -19,6 +19,7 @@ use App\Repositories\UnidadeFederativaRepository;
 use App\Repositories\UsuarioRepository;
 use App\Repositories\RlUsuarioProfissaoRepository;
 use App\Repositories\TelefoneRepository;
+use App\Repositories\PerfilRepository;
 
 class MembroController extends Controller
 {
@@ -38,6 +39,7 @@ class MembroController extends Controller
     private $usuarioRepository;
     private $rlUsuarioProfissaoRepository;
     private $telefoneRepository;
+    private $perfilRepository;
 
     public function __construct(Auth $auth,
                                 Usuario $usuario,
@@ -48,7 +50,8 @@ class MembroController extends Controller
                                 UnidadeFederativaRepository $unidadeFederativaRepository,
                                 UsuarioRepository $usuarioRepository,
                                 RlUsuarioProfissaoRepository $rlUsuarioProfissaoRepository,
-                                TelefoneRepository $telefoneRepository)
+                                TelefoneRepository $telefoneRepository,
+                                PerfilRepository $perfilRepository)
     {
         $this->middleware('auth');
         $this->auth = $auth;
@@ -61,6 +64,7 @@ class MembroController extends Controller
         $this->usuarioRepository = $usuarioRepository;
         $this->rlUsuarioProfissaoRepository = $rlUsuarioProfissaoRepository;
         $this->telefoneRepository = $telefoneRepository;
+        $this->perfilRepository = $perfilRepository;
     }
 
     /**
@@ -88,6 +92,8 @@ class MembroController extends Controller
         $dados['trabalho'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo(auth::user()->id);
         $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos(auth::user()->id);
         $dados['usuario'] = $this->usuario->find(auth::user()->id);
+        $dados['perfis'] = $this->perfilRepository->getAtivos();
+
         return view('perfil.perfil')->with('dados', $dados);
     }
 
@@ -108,6 +114,8 @@ class MembroController extends Controller
         $dados['trabalho'] = $this->rlUsuarioProfissaoRepository->getTrabalhoAtivo($id_usuarioByAdm);
         $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos($id_usuarioByAdm);
         $dados['usuario'] = $this->usuario->find($id_usuarioByAdm);
+        $dados['perfis'] = $this->perfilRepository->getAtivos();
+
 
         return view('perfil.perfil')->with('dados', $dados);
     }

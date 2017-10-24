@@ -12,9 +12,15 @@ use App\Models\Perfil;
 
 class PerfilRepository extends Repository
 {
+    private $perfil;
+
     public function __construct(Perfil $perfil)
     {
         $this->model = $perfil;
+    }
+    public function getAtivos(){
+
+        return $this->model->where('st_ativo','S')->get();
     }
 
 }
