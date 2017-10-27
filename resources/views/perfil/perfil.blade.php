@@ -1,3 +1,8 @@
+<style>
+    .colorBody {
+        background-color: #fffff6;
+    }
+</style>
 @extends('layouts.principal')
 
 @section('title','Dados Pessoais')
@@ -10,8 +15,7 @@
 @endsection
 
 @section('content')
-    <div>
-
+    <div class="row colorBody">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#pessoal" aria-controls="home" role="tab" data-toggle="tab">Pessoal</a>
@@ -157,9 +161,10 @@
                                     <label for="inputState" class="col-form-label">Perfil</label>
                                     <select id="inputState" name="perfil" class="form-control">
                                         @foreach( $dados['perfis'] as $perfis)
-                                        <option value="{{$perfis->co_seq_perfil}}"
-                                            @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) "selected" @endif>{{$perfis->no_perfil}}</option>
-                                            @endforeach
+                                            <option value="{{$perfis->co_seq_perfil}}"
+                                            @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) "selected" @endif
+                                            >{{$perfis->no_perfil}}</option>
+                                        @endforeach
 
                                     </select>
                                     <small class="help-block"></small>
@@ -239,7 +244,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="usuario" value="{{$dados['usuario']->id}}">
                         <div class="row">
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-md-4">
                                 <label for="nu_telefone">Tipo Telefone:</label>
                                 <select class="form-control" name="tipoTelefone">
                                     <option value="1">Celular</option>
@@ -248,7 +253,7 @@
                                     <option value="4">Empresarial</option>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-8">
+                            <div class="form-group col-md-8">
                                 <label for="nu_telefone">Número:</label>
                                 <input type="text" value=""
                                        class="form-control phones"
