@@ -26,6 +26,7 @@
               </span>
             <div class="form-line">
                 <input type="text" class="form-control" name="nu_cpf" value="{{ old('nu_cpf') }}" placeholder="CPF"
+                       maxlength="11" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                        required autofocus>
                 @if ($errors->has('nu_cpf'))
                     <span class="help-block">

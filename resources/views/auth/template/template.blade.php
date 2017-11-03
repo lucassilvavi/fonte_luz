@@ -30,7 +30,7 @@
 <body class="login-page">
 <div class="login-box">
     <div class="logo">
-        <a href="javascript:void(0);"><b>Igreja Fonte de Luz</b></a>
+        <a href="javascript:void(0);"><b>Fonte de Luz</b></a>
 
     </div>
     <div class="card">
