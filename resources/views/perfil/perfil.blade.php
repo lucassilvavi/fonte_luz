@@ -165,7 +165,6 @@
                                             @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) selected
                                             @endif>{{$perfis->no_perfil}}</option>
                                             @endforeach
-
                                     </select>
                                     <small class="help-block"></small>
                                 </div>
