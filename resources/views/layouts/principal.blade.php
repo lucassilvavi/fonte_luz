@@ -214,7 +214,6 @@
                                 @endif
                                 <p>
                                     {{Auth::user()->no_nome}}
-                                    <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
 
@@ -236,7 +235,6 @@
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </nav>

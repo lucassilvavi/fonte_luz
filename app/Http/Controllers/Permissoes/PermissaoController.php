@@ -14,7 +14,7 @@ use App\Http\Requests\FormCadastroPermissao;
 use App\Services\PermissaoService;
 use App\Repositories\GrupoPermissaoRepository;
 use App\Repositories\RlPerfilPermissoesRepository;
-
+use Gate;
 class PermissaoController extends Controller
 {
     public function __construct(PermissoesRepository $permissoesRepository,
@@ -31,6 +31,9 @@ class PermissaoController extends Controller
 
     public function index()
     {
+        if (Gate::denies('visualizar administração')) {
+            return redirect()->back();
+        }
         $dados['permissoes'] = $this->permissoesRepository->all();
         return view('permissoes.index')->with('dados', $dados);
     }

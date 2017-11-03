@@ -1,19 +1,5 @@
-<style>
-    .colorBody {
-        background-color: #fffff6;
-    }
-</style>
 @extends('layouts.principal')
-
 @section('title','Dados Pessoais')
-@section('title-form','Dados Pessoais')
-
-@section('breadcrumb')
-    <li><a href="index.html">Home</a></li>
-    <li><a>Forms</a></li>
-    <li class="active"><strong></strong></li>
-@endsection
-
 @section('content')
     <div class="row colorBody">
         <!-- Nav tabs -->
@@ -188,7 +174,6 @@
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="trabalho">
-                <div class="row">
                     <form action="{{$dados['actionTrabalho']}}" method="post" id="formTrabalho">
                         <div class="row" id="adicionarTrabalho">
                             {{ csrf_field() }}
@@ -209,8 +194,6 @@
                             </button>
                         </div>
                     </form>
-                </div>
-                <div class="row">
                     <table id="tb_habilidade" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -234,15 +217,12 @@
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-
             </div>
             <div role="tabpanel" class="tab-pane" id="telefones">
                 <div class="row">
                     <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
                         {{ csrf_field() }}
                         <input type="hidden" name="usuario" value="{{$dados['usuario']->id}}">
-                        <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="nu_telefone">Tipo Telefone:</label>
                                 <select class="form-control" name="tipoTelefone">
@@ -259,7 +239,6 @@
                                        name="telefone">
                                 <small class="help-block"></small>
                             </div>
-                        </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success btn-sm btn-block"
                                     id="submitTelefone">Salvar
@@ -267,7 +246,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="row">
+
                     <table id="tb_telefones" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -310,7 +289,6 @@
                         @endforeach
                         </tbody>
                     </table>
-                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="fotos">
                 <form action="{{URL::to('savePhoto')}}" id="salvarImage" enctype="multipart/form-data" method="POST">

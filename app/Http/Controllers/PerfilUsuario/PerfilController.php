@@ -15,6 +15,7 @@ use App\Services\PerfilService;
 use App\Repositories\PermissoesRepository;
 use App\Http\Requests\GenericaRequest;
 use App\Repositories\RlPerfilPermissoesRepository;
+use Gate;
 
 class PerfilController extends Controller
 {
@@ -29,10 +30,14 @@ class PerfilController extends Controller
         $this->perfilService = $perfilService;
         $this->permissoesRepository = $permissoesRepository;
         $this->rlPerfilPermissoesRepository = $rlPerfilPermissoesRepository;
+
     }
 
     public function index()
     {
+        if (Gate::denies('visualizar administração')) {
+            return redirect()->back();
+        }
         $dados['perfil'] = $this->perfilRepository->all();
         return view('perfilUsuario.index')->with('dados', $dados);
     }

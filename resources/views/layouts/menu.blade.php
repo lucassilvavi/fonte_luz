@@ -1,4 +1,3 @@
-
 <ul class="sidebar-menu">
     <li>
         <a href="#"><i class="fa fa-th-large"></i> <span>Forms</span>
@@ -59,9 +58,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
         </ul>
     </li>
-
     <li class="treeview">
-        
         <a href="#">
             <i class="fa fa-edit"></i> <span>Forms</span>
             <span class="pull-right-container">
@@ -74,29 +71,38 @@
             <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
         </ul>
     </li>
-
     @can('visualizar administração')
     <li class="treeview">
-        <a href="#"><i class="fa fa-link"></i> <span>Administração</span>
+        <a href="#">
+            <i class="fa fa-share"></i> <span>Administração</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="{{url('/perfilUsuario')}}">Perfis</a></li>
-            <li><a href="{{url('/permissoes')}}">Permissões</a></li>
-            <li><a href="{{url('/grupoPermissao')}}">Grupos</a></li>
+            <li>
+                <a href="#"><i class="fa fa-circle-o"></i> Dados dos Usuários
+                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/selecionarUsuario')}}"><i class="fa fa-circle-o"></i> Usuários</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-circle-o"></i> Autenticação
+                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/perfilUsuario')}}"><i class="fa fa-circle-o"></i>Perfis</a></li>
+                    <li><a href="{{url('/permissoes')}}"><i class="fa fa-circle-o"></i>Permissões</a></li>
+                    <li><a href="{{url('/grupoPermissao')}}"><i class="fa fa-circle-o"></i>Grupos</a></li>
+                </ul>
+            </li>
         </ul>
     </li>
-        <li class="treeview">
-            <a href="#"><i class="fa fa-link"></i> <span>Dados dos Usuário</span>
-                <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{url('/selecionarUsuario')}}">Usuários</a></li>
-            </ul>
-        </li>
         @endcan
 </ul>

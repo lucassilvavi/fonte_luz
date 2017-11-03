@@ -14,7 +14,7 @@ use App\Services\GrupoPermissaoService;
 use App\Http\Requests\FormCadastroGrupoPermissao;
 use App\Repositories\PermissoesRepository;
 use App\Http\Requests\GenericaRequest;
-
+use Gate;
 class GrupoPermissaoController extends Controller
 {
     private $permissoesRepository,
@@ -34,6 +34,9 @@ class GrupoPermissaoController extends Controller
 
     function index()
     {
+        if (Gate::denies('visualizar administração')) {
+            return redirect()->back();
+        }
         $dados['grupoPermissoes'] = $this->grupoPermissaoRepository->grupoAtivos();
 
         return view('grupoPermissao.index')->with('dados', $dados);
