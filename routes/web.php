@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,10 +11,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//rotas padrão do laravel
+Auth::routes();
+
+//rotas do inicio do sistema
 Route::get('/', 'Home\HomeController@index');
 
-Auth::routes();
+Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
+
+
 
 //perfil dados Pessoais
 

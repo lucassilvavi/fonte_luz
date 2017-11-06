@@ -21,7 +21,8 @@
                 <td>{{$perfil['ds_perfil']}}</td>
                 <td>{{($perfil['st_ativo'] == 'S') ? 'Sim': 'Não'}}</td>
                 <td>
-                    <button type="button" class="btn btn-block btn-info btn-xs detalhes" value="{{$perfil['co_seq_perfil']}}">Detalhes</button>
+                    <button type="button" class="btn btn-block btn-info btn-xs detalhes"
+                            value="{{$perfil['co_seq_perfil']}}">Detalhes</button>
                 </td>
             </tr>
         @endforeach

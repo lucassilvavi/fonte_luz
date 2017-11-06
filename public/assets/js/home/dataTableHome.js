@@ -48,7 +48,14 @@ $(document).ready(function() {
                     exportOptions: {
                         columns: [0,1,2,3,4,5]
                     }
+                },
+                {
+                    text: '<li class="fa fa-2x cadContribuicao">Incluir Contribuição Mensal</li>',
+                    action: function() {
+                        $('.cadContribuicao').click(modalCadContribuicao());
+                    }
                 }
+
             ]
         }
     );
