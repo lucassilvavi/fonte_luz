@@ -18,6 +18,8 @@ Route::get('/', 'Home\HomeController@index');
 
 Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
+Route::post('/adicionarComprovante', 'Home\AnexarComprovanteController@adicionarComprovante');
+
 
 
 //perfil dados Pessoais

@@ -8,7 +8,7 @@ function modalCadContribuicao() {
         },
         success: function(dados)
         {
-            $(".modal-title").html('Cadastrar Perfil');
+            $(".modal-title").html('Cadastrar Pagamento');
             $("#myModal").modal('show');
             $("#conteudoModal").html(dados);
         }
