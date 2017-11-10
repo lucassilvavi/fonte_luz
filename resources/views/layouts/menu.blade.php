@@ -71,6 +71,7 @@
             <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
         </ul>
     </li>
+    
     @can('visualizar administração')
     <li class="treeview">
         <a href="#">
