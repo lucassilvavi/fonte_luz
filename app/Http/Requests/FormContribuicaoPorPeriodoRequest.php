@@ -7,9 +7,27 @@
  */
 
 namespace App\Http\Requests;
+use App\Http\Requests\Request;
 
-
-class formContribuicaoPorPeriodoRequest
+class FormContribuicaoPorPeriodoRequest extends Request
 {
+    public function authorize() {
+        return true;
+    }
 
+    public function all() {
+        $data = parent::all();
+        return $data;
+    }
+
+    public function rules() {
+        return [
+            'demesperiodo' => 'required',
+            'deanoperiodo' => 'required',
+            'atemesperiodo' => 'required',
+            'ateanoperiodo' => 'required',
+            'dtdepositoperiodo' => 'required',
+            'vlcontribuicaoperiodo' => 'required',
+        ];
+    }
 }

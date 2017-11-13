@@ -20,7 +20,7 @@ class Comprovante  extends Model
      * @var array
      */
     protected $fillable = [
-        'no_anexo',
+        'co_seq_comprovante',
         'ds_endereco_comprovante',
         'dt_anexo',
         'dt_exclusao_anexo',
@@ -36,7 +36,6 @@ class Comprovante  extends Model
      */
     protected $table = "tb_comprovante";
 
-    protected $primaryKey = 'co_seq_comprovante';
 
     public function controleFinanceiro()
     {
