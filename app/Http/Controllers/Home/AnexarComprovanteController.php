@@ -34,7 +34,7 @@ class AnexarComprovanteController extends Controller
         $destinationPath = 'comprovantes';
 
         $rename = rename($photo_object->name,"wdew.png");
-        dd(  $photo_object->name);
+
 
         $photo->move($destinationPath, $photo_object->name);
         $photos[] = $photo_object;

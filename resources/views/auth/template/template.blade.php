@@ -16,7 +16,6 @@
     <link href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-
     <link href="{{asset('assets/vendor/node-waves/waves.css')}}" rel="stylesheet">
 
     {{--<!-- Animate CSS -->--}}
@@ -42,9 +41,6 @@
 
 <!-- Jquery Core Js -->
 <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-
-<!-- Bootstrap Core Js -->
-<script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
 <!-- Waves Effect Plugin Js -->
 <script src="{{asset('assets/vendor/node-waves/waves.js')}}"></script>

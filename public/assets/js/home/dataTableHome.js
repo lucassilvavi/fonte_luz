@@ -1,10 +1,6 @@
-/**
- * configuracao do DataTeble para a tebela de membros
- */
 $(document).ready(function() {
     $('#tb_home').DataTable({
             dom: 'Bfrtip',
-            responsive: true,
             columnDefs: [
                 {
 
@@ -14,6 +10,7 @@ $(document).ready(function() {
                     targets: 6
                 }
             ],
+            responsive: true,
             buttons: [
                 {
                     extend: 'copyHtml5',

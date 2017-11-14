@@ -48,7 +48,13 @@
         </div>
     </div>
 @endsection
+
 @section('scripts')
+    @push('scripts')
+
+    @endpush
+
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
     <script src="{{asset('assets/js/home/modalCadastroContribuicao.js')}}"></script>
 @endsection
+
