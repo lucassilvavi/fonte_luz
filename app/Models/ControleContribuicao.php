@@ -21,7 +21,6 @@ class ControleContribuicao extends Model
      * @var array
      */
     protected $fillable = [
-        'co_seq_controle_contribuicao',
         'id',
         'vl_contribuicao_mes',
         'nu_ano',

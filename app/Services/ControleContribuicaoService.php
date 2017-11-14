@@ -8,8 +8,83 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\ControleContribuicaoRepository;
+use App\Repositories\ComprovanteRepository;
 
 class ControleContribuicaoService
 {
+    private $controleContribuicaoRepository;
+    private $comprovanteRepository;
 
+    function __construct(ControleContribuicaoRepository $controleContribuicaoRepository,
+                         ComprovanteRepository $comprovanteRepository)
+    {
+        $this->controleContribuicaoRepository = $controleContribuicaoRepository;
+        $this->comprovanteRepository = $comprovanteRepository;
+    }
+
+    public function novo($dadosForm)
+    {
+        DB::beginTransaction();
+
+        try {
+            $deAno = $dadosForm['deanoperiodo'];
+            $de = $dadosForm['demesperiodo'];
+            $ate = $dadosForm['atemesperiodo'];
+            $ateAno = $dadosForm['ateanoperiodo'];
+
+            if ($de == $ate && $deAno == $ateAno) {
+                $dados['id'] = auth::user()->id;
+                $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaoperiodo']);;
+                $dados['nu_ano'] = $deAno;
+                $dados['nu_mes'] = $de;
+                $dados['dt_contribuicao'] =  date('Y-m-d', strtotime($dadosForm['dtdepositoperiodo']));
+                $dados['dt_cadastro_registro'] = date("Y-m-d");
+                $controle = $this->controleContribuicaoRepository->create($dados);
+                foreach ($dadosForm['comprovante'] as $comprovante){
+                    $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
+                }
+            } elseif ($de != $ate && $deAno == $ateAno) {
+                echo("mais de 1 mês, mais o ano é o mesmo ");
+            } elseif ($deAno != $ateAno) {
+                echo("mais de 1 mês, e o ano é diferente ");
+            }
+//            for ($i = $de; $i >= $ate; $i++) {
+//                echo $i;
+//            }
+//            if ($quantidadeMes == 1){
+//                dd('soh tem 1 mes selecionado');
+//            };
+
+
+//            $dados['id'] = date("Y-m-d");
+//            $dados['vl_contribuicao_mes'] = 'S';
+//            $dados['nu_ano'] = $idPessoa;
+//            $dados['nu_mes'] = $nome;
+//            $dados['dt_contribuicao'] = date("Y-m-d");
+//            $dados['dt_cadastro_registro'] = date("Y-m-d");
+//            $dados['dt_exclusao_registro'] = $nome;
+//
+//            $this->fotoRepository->create($dados);
+
+            DB::commit();
+            return '{"operacao":true}';
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
+    public function trataMoeda($valor)
+    {
+        $dinheiro = str_replace('.', '', $valor); // remove o ponto
+        return str_replace(',', '.', $dinheiro); // troca a vírgula por ponto
+    }
 }

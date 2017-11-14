@@ -3,56 +3,72 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+
                 Pagamento Por Período</a></li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por
                 Mês</a>
         </li>
+
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
-            <form method="POST" id="formUploadComprovante">
+            <form method="POST" action="{{action($dados['actionPorPeriodo'])}}" id="formComprovantePeriodo">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="row">
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* De Mês Contribuição: </label>
-                        <select id="inputState" name="habilidade" class="form-control">
-                            <option value="">1</option>
+                        <label for="demesperiodo" class="control-label">* De Mês Contribuição: </label>
+                        <select name="demesperiodo" class="form-control">
+                            <option value=""></option>
+                            @foreach($dados['meses'] as $k=> $mes)
+                                <option value="{{($k)}}">{{$mes}}</option>
+                            @endforeach
                         </select>
                         <small class="help-block"></small>
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* De Ano Contribuição: </label>
-                        <select id="inputState" name="habilidade" class="form-control">
-                            <option value="">1</option>
+                        <label for="deanoperiodo" class="control-label">* De Ano Contribuição: </label>
+                        <select name="deanoperiodo" class="form-control">
+                            @foreach(  $dados['anos'] as $anos)
+                                <option value="{{$anos}}">{{$anos}}</option>
+                            @endforeach
+
                         </select>
                         <small class="help-block"></small>
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* Até Mês Contribuição: </label>
-                        <select id="inputState" name="habilidade" class="form-control">
-                            <option value="">1</option>
+                        <label for="atemesperiodo" class="control-label">* Até Mês Contribuição: </label>
+                        <select name="atemesperiodo" class="form-control">
+                            <option value=""></option>
+                            @foreach($dados['meses'] as $k=> $mes)
+                                <option value="{{($k)}}">{{$mes}}</option>
+                            @endforeach
+
                         </select>
                         <small class="help-block"></small>
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* Até Ano Contribuição: </label>
-                        <select id="inputState" name="habilidade" class="form-control">
-                            <option value="">1</option>
+                        <label for="ateanoperiodo" class="control-label">* Até Ano Contribuição: </label>
+                        <select name="ateanoperiodo" class="form-control">
+
+                            @foreach(  $dados['anos'] as $anos)
+                                <option value="{{$anos}}">{{$anos}}</option>
+                            @endforeach
                         </select>
                         <small class="help-block"></small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* Data do Depósito: </label>
-                        <input type="text" class="form-control" name="nome" value="">
+                        <label for="dtdepositoperiodo" class="control-label">* Data do Depósito: </label>
+                        <input type="text" class="form-control date" name="dtdepositoperiodo" value="">
                         <small class="help-block"></small>
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="nome" class="control-label">* Valor da Contribuição: </label>
-                        <input type="text" class="form-control" name="nome" value="">
+                        <label for="vlcontribuicaoperiodo" class="control-label">* Valor da Contribuição
+                            Mensal: </label>
+                        <input type="text" class="form-control money" name="vlcontribuicaoperiodo" value="">
                         <small class="help-block"></small>
                     </div>
                 </div>
@@ -63,7 +79,7 @@
                               <span class="input-group-btn">
                                 <span class="btn btn-primary"
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
-                                <input name="image"
+                                <input name="image" id="selecionarArquivo"
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg">
                               </span>
@@ -75,7 +91,6 @@
                     <div class="form-group col-md-4">
                         <button class="btn btn-success" id="btnSalvarDocumento1" type="button">Salvar Documento</button>
                     </div>
-
                 </div>
                 <table class="table table-bordered">
                     <thead>
@@ -84,9 +99,7 @@
                         <th>Excluir</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                    </tr>
+                    <tbody class="fotosGravadas">
                     </tbody>
                 </table>
                 <div class="row">
@@ -94,110 +107,61 @@
                         <button type="button" class="btn btn-block btn-danger sair">Sair</button>
                     </div>
                     <div class="col-md-6 col-md-offset-0 form-group">
-                        <button type="submit" class="btn btn-block btn-success" id="salvar">Salvar</button>
+                        <button type="submit" class="btn btn-block btn-success" id="salvarPorPeriodo">Salvar</button>
                     </div>
                 </div>
             </form>
         </div>
-        <div role="tabpanel" class="tab-pane" id="profile">
-
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <label for="nome" class="control-label">* Mês Contribuição: </label>
-                    <select id="inputState" name="habilidade" class="form-control">
-                        <option value="">1</option>
-                    </select>
-                    <small class="help-block"></small>
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="nome" class="control-label">* Ano Contribuição: </label>
-                    <select id="inputState" name="habilidade" class="form-control">
-                        <option value="">1</option>
-                    </select>
-                    <small class="help-block"></small>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <label for="nome" class="control-label">* Data do Depósito: </label>
-                    <input type="text" class="form-control" name="nome" value="">
-                    <small class="help-block"></small>
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="nome" class="control-label">*Valor da Contribuição: </label>
-                    <input type="text" class="form-control" name="nome" value="">
-                    <small class="help-block"></small>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Anexar Comprovante:</label>
-                    <div class="input-group">
-                              <span class="input-group-btn">
-                                <span class="btn btn-primary"
-                                      onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
-                                <input name="image"
-                                       onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
-                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg">
-                              </span>
-                        <span class="form-control"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <button class="btn btn-success" id="btnSalvarDocumento" type="button">Salvar Documento</button>
-                </div>
-
-            </div>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Arquivos</th>
-                    <th>Excluir</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-0 form-group">
-                    <button type="button" class="btn btn-block btn-danger sair" id="sair">Sair</button>
-                </div>
-                <div class="col-md-6 col-md-offset-0 form-group">
-                    <button type="submit" class="btn btn-block btn-success" id="salvar">Salvar</button>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>
 <script>
+
     $('.sair').on('click', function () {
         $('.modal').modal('hide');
     });
     $('.close').remove();
 </script>
+<script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
+<script src="{{asset('assets/js/submit.js')}}"></script>
 <script>
-    $("#btnSalvarDocumento1").click(function () {
-        alert('sdfs');
-        $.ajax({
-            url: '/adicionarComprovante',
-            data: new FormData($("#formUploadComprovante")[0]),
-            async: false,
-            type: 'post',
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                console.log(response[0]);
-                $(".fotosGravadas").append("<p>" + response[0]['name'] + "</p>");
-                $(".fotosGravadas").append("<input type='hidden' class='fotosAdd' name='idFotos[]' value=" + response[0]['fileID'] + "></input>");
-            },
+    $("#formComprovantePeriodo").on("submit", function () {
+        $("#salvarPorPeriodo").prop("disabled", true);
+        $(".sair").prop("disabled", true);
+        submit('#formComprovantePeriodo', function (validate) {
+            if (validate == false) {
+                MsgFaltaComprovante();
+                $("#salvarPorPeriodo").prop("disabled", false);
+                $(".sair").prop("disabled", false);
+            } else if (($.parseJSON(validate).operacao)) {
+                MsgSucessoPorPeriodo();
+            }
         });
     });
 
+    function MsgFaltaComprovante() {
+        //// Override global options
+        toastr.warning('Por favor Anexo um comprovante!', '', {
+            closeButton: false,
+            progressBar: true,
+            timeOut: "3500",
+            positionClass: 'toast-top-center'
+        });
+    }
+
+    function MsgSucessoPorPeriodo() {
+// Override global options
+        toastr.success('Pagamento inserido com sucesso!', '', {
+            closeButton: false,
+            progressBar: true,
+            timeOut: "2500",
+            positionClass: 'toast-top-center'
+        });
+        setTimeout(function () {
+            location.reload();
+        }, 2500);
+    }
 </script>
-<script type="text/javascript" src="{{asset('assets/js/submit.js')}}"></script>
-<script src="{{asset('assets/js/perfilUsuario/submitFormCadastroPerfil.js')}}"></script>
+
+<script src="{{asset('assets/js/home/cadastrarImagemPorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
+

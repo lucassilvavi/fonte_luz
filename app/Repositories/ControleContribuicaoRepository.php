@@ -7,11 +7,13 @@
  */
 
 namespace App\Repositories;
+
 use App\Repositories\Repository;
 use App\Models\ControleContribuicao;
 
 class ControleContribuicaoRepository extends Repository
 {
+    private $controleContribuicao;
 
     public function __construct(ControleContribuicao $controleContribuicao)
     {

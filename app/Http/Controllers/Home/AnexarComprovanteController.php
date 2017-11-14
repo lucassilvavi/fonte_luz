@@ -10,33 +10,46 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Faker\Provider\File;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ComprovanteService;
 
 
 class AnexarComprovanteController extends Controller
 {
+    private $comprovanteService;
+
+    function __construct(ComprovanteService $comprovanteService)
+    {
+        $this->comprovanteService = $comprovanteService;
+    }
 
     function adicionarComprovante(Request $request)
     {
         $photos = [];
         $photo = $request->image;
-
-//        $filename = $photo->store('comprovantes');
+        //a stdClass é uma classe pra criar objetos
         $photo_object = new \stdClass();
         $photo_object->name = str_replace('photos/', '', $photo->getClientOriginalName());
-        //aqui vamos vincular a foto anexada ao usuario
-//        $product_photo = ProductPhoto::create([
-//            'filename' => $photo_object->name
-//        ]);
-//        $photo_object->size = round(Storage::size($filename) / 1024, 2);
-//        $photo_object->fileID = $product_photo->id;
-        $destinationPath = 'comprovantes';
 
-        $rename = rename($photo_object->name,"wdew.png");
-
-
-        $photo->move($destinationPath, $photo_object->name);
+        $destinationPath = 'comprovantes/' . \Auth::user()->id;
+        //aqui vamos criar o diretorio para salvar a imagem
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
+        $ext = strrchr($photo_object->name, '.');
+        $imagem = time() . uniqid(md5($photo_object->name)) . $ext;
+        $salvarFoto = $photo->move($destinationPath, $imagem);
+        $endereco = $destinationPath."/".$imagem;
+        if ($salvarFoto) {
+           $comprovante =  $this->comprovanteService->novo($endereco);
+           if($comprovante != false){
+                return array( 'comprovante'=> $comprovante['id'], 'nome'=>$photo_object->name);
+           }
+//vamos salvar na base a imagem
+            //tenho que passar o endereco dela
+            //e o usuario logado
+        } else {
+//acontecenu algum erro ao salvar o comprovanre tenho que devolver pra view o erro
+        }
         $photos[] = $photo_object;
 
         return $photos;

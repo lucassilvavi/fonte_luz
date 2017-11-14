@@ -20,6 +20,10 @@ Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
 Route::post('/adicionarComprovante', 'Home\AnexarComprovanteController@adicionarComprovante');
 
+Route::get('/excluirComprovante/{co_comprovante}', 'Home\ExcluirComprovanteController@excluirComprovante');
+
+Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoPorPeriodoController@pagamento');
+
 
 
 //perfil dados Pessoais
