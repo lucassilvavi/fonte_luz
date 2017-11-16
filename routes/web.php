@@ -18,9 +18,9 @@ Route::get('/', 'Home\HomeController@index');
 
 Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
-Route::post('/adicionarComprovante', 'Home\AnexarComprovanteController@adicionarComprovante');
+Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarComprovante');
 
-Route::get('/excluirComprovante/{co_comprovante}', 'Home\ExcluirComprovanteController@excluirComprovante');
+Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');
 
 Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoPorPeriodoController@pagamento');
 

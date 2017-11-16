@@ -11,15 +11,19 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ComprovanteService;
+use App\Repositories\ComprovanteRepository;
 
 
-class AnexarComprovanteController extends Controller
+class ComprovanteController extends Controller
 {
     private $comprovanteService;
+    private $comprovanteRepository;
 
-    function __construct(ComprovanteService $comprovanteService)
+    function __construct(ComprovanteService $comprovanteService,
+                         ComprovanteRepository $comprovanteRepository)
     {
         $this->comprovanteService = $comprovanteService;
+        $this->comprovanteRepository = $comprovanteRepository;
     }
 
     function adicionarComprovante(Request $request)
@@ -52,6 +56,14 @@ class AnexarComprovanteController extends Controller
         $photos[] = $photo_object;
 
         return $photos;
+    }
+    function excluirComprovante($co_comprovante)
+    {
+        $endereco = $this->comprovanteRepository->findBy('co_seq_comprovante',$co_comprovante)->ds_endereco_comprovante;
+        if(\File::delete($endereco)){
+            return $this->comprovanteRepository->apagarComprovante($co_comprovante);
+        }
+        return false;
     }
 
 }

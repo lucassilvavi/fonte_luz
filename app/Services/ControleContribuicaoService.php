@@ -37,6 +37,7 @@ class ControleContribuicaoService
             $ateAno = $dadosForm['ateanoperiodo'];
 
             if ($de == $ate && $deAno == $ateAno) {
+
                 $dados['id'] = auth::user()->id;
                 $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaoperiodo']);;
                 $dados['nu_ano'] = $deAno;
@@ -48,27 +49,22 @@ class ControleContribuicaoService
                     $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
                 }
             } elseif ($de != $ate && $deAno == $ateAno) {
-                echo("mais de 1 mês, mais o ano é o mesmo ");
+                for($i = $de; $i <= $ate; $i++) {
+                    $dados['id'] = auth::user()->id;
+                    $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaoperiodo']);;
+                    $dados['nu_ano'] = $deAno;
+                    $dados['nu_mes'] = $i;
+                    $dados['dt_contribuicao'] =  date('Y-m-d', strtotime($dadosForm['dtdepositoperiodo']));
+                    $dados['dt_cadastro_registro'] = date("Y-m-d");
+                    $controle = $this->controleContribuicaoRepository->create($dados);
+                    foreach ($dadosForm['comprovante'] as $comprovante){
+                        $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
+                    }
+                }
             } elseif ($deAno != $ateAno) {
                 echo("mais de 1 mês, e o ano é diferente ");
             }
-//            for ($i = $de; $i >= $ate; $i++) {
-//                echo $i;
-//            }
-//            if ($quantidadeMes == 1){
-//                dd('soh tem 1 mes selecionado');
-//            };
 
-
-//            $dados['id'] = date("Y-m-d");
-//            $dados['vl_contribuicao_mes'] = 'S';
-//            $dados['nu_ano'] = $idPessoa;
-//            $dados['nu_mes'] = $nome;
-//            $dados['dt_contribuicao'] = date("Y-m-d");
-//            $dados['dt_cadastro_registro'] = date("Y-m-d");
-//            $dados['dt_exclusao_registro'] = $nome;
-//
-//            $this->fotoRepository->create($dados);
 
             DB::commit();
             return '{"operacao":true}';

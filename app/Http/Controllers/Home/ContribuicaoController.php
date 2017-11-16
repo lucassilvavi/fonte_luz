@@ -9,16 +9,21 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Data;
 
 class ContribuicaoController extends Controller
 {
+    private $data;
+    function __construct(Data $data)
+    {
+        $this->data = $data;
+    }
+
     function formContribuicao()
     {
-        $ano = date('Y');
-        $dados['anos'] = array($ano => $ano,$ano - 1 => $ano - 1, $ano + 1 => $ano + 1);
-        $dados['meses'] = array(1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho",
-            7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
 
+        $dados['anos'] = $this->data->ano();
+        $dados['meses'] = $this->data->mes();
         $dados['actionPorPeriodo'] = "Home\PagamentoPorPeriodoController@pagamento";
         return view('home.modalCadastroContribuicao')->with('dados', $dados);
     }
