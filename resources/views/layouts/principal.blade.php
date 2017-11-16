@@ -16,11 +16,11 @@
 
     {{--<!-- Data Tables -->--}}
     {{--<link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">--}}
-    <link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
-          rel="stylesheet">
+    {{--<link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"--}}
+          {{--rel="stylesheet">--}}
     {{--<!-- Animate CSS -->--}}
     {{--<link href="{{asset('/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">--}}
-    {{--<link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">--}}
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 
     @section('style')
@@ -360,14 +360,17 @@
 {{--<!-- Toastr - Notificações -->--}}
 {{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
 <!-- Data Tables -->
-<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
-{{--<script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>--}}
+{{--<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>--}}
+{{--<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>--}}
+<script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
+<script src="{{asset('/assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{asset('/assets/vendor/jszip/dist/jszip.min.js')}}"></script>
 <!-- Bootstrap Datepicker -->
 <script src="{{asset('/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('/assets/js/datepickerDefaults.js')}}"></script>

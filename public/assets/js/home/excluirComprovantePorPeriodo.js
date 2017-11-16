@@ -11,7 +11,7 @@ function excluir(co_comprovante) {
                     var td = input.parentNode;
                     td.parentNode.innerHTML = "";
                 }
-            })
+            });
         }
     });
 }

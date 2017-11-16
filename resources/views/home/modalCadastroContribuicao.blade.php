@@ -5,9 +5,9 @@
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
 
                 Pagamento Por Período</a></li>
-        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por
-                Mês</a>
-        </li>
+        {{--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por--}}
+                {{--Mês</a>--}}
+        {{--</li>--}}
 
     </ul>
 
@@ -123,44 +123,44 @@
 </script>
 <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 <script src="{{asset('assets/js/submit.js')}}"></script>
-<script>
-    $("#formComprovantePeriodo").on("submit", function () {
-        $("#salvarPorPeriodo").prop("disabled", true);
-        $(".sair").prop("disabled", true);
-        submit('#formComprovantePeriodo', function (validate) {
-            if (validate == false) {
-                MsgFaltaComprovante();
-                $("#salvarPorPeriodo").prop("disabled", false);
-                $(".sair").prop("disabled", false);
-            } else if (($.parseJSON(validate).operacao)) {
-                MsgSucessoPorPeriodo();
-            }
-        });
-    });
+{{--<script>--}}
+    {{--$("#formComprovantePeriodo").on("submit", function () {--}}
+        {{--$("#salvarPorPeriodo").prop("disabled", true);--}}
+        {{--$(".sair").prop("disabled", true);--}}
+        {{--submit('#formComprovantePeriodo', function (validate) {--}}
+            {{--if (validate == false) {--}}
+                {{--MsgFaltaComprovante();--}}
+                {{--$("#salvarPorPeriodo").prop("disabled", false);--}}
+                {{--$(".sair").prop("disabled", false);--}}
+            {{--} else if (($.parseJSON(validate).operacao)) {--}}
+                {{--MsgSucessoPorPeriodo();--}}
+            {{--}--}}
+        {{--});--}}
+    {{--});--}}
 
-    function MsgFaltaComprovante() {
-        //// Override global options
-        toastr.warning('Por favor Anexo um comprovante!', '', {
-            closeButton: false,
-            progressBar: true,
-            timeOut: "3500",
-            positionClass: 'toast-top-center'
-        });
-    }
+    {{--function MsgFaltaComprovante() {--}}
+        {{--//// Override global options--}}
+        {{--toastr.warning('Por favor Anexo um comprovante!', '', {--}}
+            {{--closeButton: false,--}}
+            {{--progressBar: true,--}}
+            {{--timeOut: "3500",--}}
+            {{--positionClass: 'toast-top-center'--}}
+        {{--});--}}
+    {{--}--}}
 
-    function MsgSucessoPorPeriodo() {
-// Override global options
-        toastr.success('Pagamento inserido com sucesso!', '', {
-            closeButton: false,
-            progressBar: true,
-            timeOut: "2500",
-            positionClass: 'toast-top-center'
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 2500);
-    }
-</script>
+    {{--function MsgSucessoPorPeriodo() {--}}
+{{--// Override global options--}}
+        {{--toastr.success('Pagamento inserido com sucesso!', '', {--}}
+            {{--closeButton: false,--}}
+            {{--progressBar: true,--}}
+            {{--timeOut: "2500",--}}
+            {{--positionClass: 'toast-top-center'--}}
+        {{--});--}}
+        {{--setTimeout(function () {--}}
+            {{--location.reload();--}}
+        {{--}, 2500);--}}
+    {{--}--}}
+{{--</script>--}}
 
 <script src="{{asset('assets/js/home/cadastrarImagemPorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
