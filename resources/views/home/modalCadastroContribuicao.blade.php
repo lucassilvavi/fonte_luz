@@ -3,9 +3,12 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-                Pagamento por Período</a></li>
-        {{--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por Mês</a>--}}
+
+                Pagamento Por Período</a></li>
+        {{--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por--}}
+                {{--Mês</a>--}}
         {{--</li>--}}
+
     </ul>
 
     <!-- Tab panes -->
@@ -122,6 +125,3 @@
 <script src="{{asset('assets/js/home/submitPagamentoPorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/home/cadastrarImagemPorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
-
-
-

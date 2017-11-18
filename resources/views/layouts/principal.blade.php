@@ -11,40 +11,17 @@
 
     <title>@yield('title')</title>
 
-<!-- Bootstrap -->
+    <link rel="stylesheet" href="master/app.css">
+    <link rel="stylesheet" href="master/dataTables.css">
 
-    <link href="{{asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    {{--<!-- Font Awesome -->--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     {{--<!-- Data Tables -->--}}
-    <link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
-          rel="stylesheet">
-
-    {{--<!-- Metis Menu -->--}}
-    <link href="{{asset('/assets/vendor/metisMenu/dist/metisMenu.min.js')}}" rel="stylesheet">
+    {{--<link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">--}}
+    {{--<link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"--}}
+          {{--rel="stylesheet">--}}
     {{--<!-- Animate CSS -->--}}
-    <link href="{{asset('/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
-    {{--<!-- Bootstrap Datepicker -->--}}
-    <link href="{{asset('/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}"
-          rel="stylesheet">
-
+    {{--<link href="{{asset('/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">--}}
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
-<!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
-    <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     @section('style')
 
@@ -197,9 +174,9 @@
                             @else
                                 <img src=""
                                      class="img-circle" alt="User Image">
-                            @endif
+                        @endif
 
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{Auth::user()->no_nome}}</span>
                         </a>
                         <ul class="dropdown-menu">
@@ -262,7 +239,7 @@
                     <!-- Status -->
                 </div>
             </div>
-          <hr>
+            <hr>
             <!-- Sidebar Menu -->
         @include('layouts.menu')
         <!-- /.sidebar-menu -->
@@ -377,15 +354,14 @@
 <!-- /#wrapper -->
 
 <!-- scripts -->
-<script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('/assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('/assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
+<script src="master/js/app.js"></script>
+<script src="master/js/datables.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 {{--<!-- Toastr - Notificações -->--}}
 {{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
 <!-- Data Tables -->
-<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
+{{--<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>--}}
+{{--<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>--}}
 <script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
@@ -406,7 +382,7 @@
 @section('scripts')
 
 @show
-
+@stack('scripts')
 {!! Toastr::message() !!}
 
 </body>

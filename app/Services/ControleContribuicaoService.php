@@ -31,6 +31,7 @@ class ControleContribuicaoService
         DB::beginTransaction();
 
         try {
+
             $deAno = $dadosForm['deanoperiodo'];
             $de = $dadosForm['demesperiodo'];
             $ate = $dadosForm['atemesperiodo'];
@@ -41,6 +42,7 @@ class ControleContribuicaoService
                 for ($i = $de; $i <= $ate; $i++) {
                     $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
                 }
+
             } elseif ($deAno != $ateAno) {
                 if ($deAno > $ateAno) {
                     return '{"erroAno":true}';
@@ -52,6 +54,7 @@ class ControleContribuicaoService
                     $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
                 }
             }
+
             DB::commit();
             return '{"operacao":true}';
         } catch
