@@ -35,40 +35,55 @@ class ControleContribuicaoService
             $de = $dadosForm['demesperiodo'];
             $ate = $dadosForm['atemesperiodo'];
             $ateAno = $dadosForm['ateanoperiodo'];
-
             if ($de == $ate && $deAno == $ateAno) {
-
-                $dados['id'] = auth::user()->id;
-                $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaoperiodo']);;
-                $dados['nu_ano'] = $deAno;
-                $dados['nu_mes'] = $de;
-                $dados['dt_contribuicao'] =  date('Y-m-d', strtotime($dadosForm['dtdepositoperiodo']));
-                $dados['dt_cadastro_registro'] = date("Y-m-d");
-                $controle = $this->controleContribuicaoRepository->create($dados);
-                foreach ($dadosForm['comprovante'] as $comprovante){
-                    $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
-                }
+                $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
             } elseif ($de != $ate && $deAno == $ateAno) {
-                for($i = $de; $i <= $ate; $i++) {
-                    $dados['id'] = auth::user()->id;
-                    $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaoperiodo']);;
-                    $dados['nu_ano'] = $deAno;
-                    $dados['nu_mes'] = $i;
-                    $dados['dt_contribuicao'] =  date('Y-m-d', strtotime($dadosForm['dtdepositoperiodo']));
-                    $dados['dt_cadastro_registro'] = date("Y-m-d");
-                    $controle = $this->controleContribuicaoRepository->create($dados);
-                    foreach ($dadosForm['comprovante'] as $comprovante){
-                        $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
-                    }
+                for ($i = $de; $i <= $ate; $i++) {
+                    $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
                 }
             } elseif ($deAno != $ateAno) {
-                echo("mais de 1 mês, e o ano é diferente ");
+                if ($deAno > $ateAno) {
+                    return '{"erroAno":true}';
+                }
+                for ($i = $de; $i <= 12; $i++) {
+                    $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                }
+                for ($s = 1; $s <= $ate; $s++) {
+                    $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                }
             }
-
-
             DB::commit();
             return '{"operacao":true}';
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch
+        (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
+    function pagamento($ano, $mes, $valorContribuicaoPeriodo, $dtdepositoperiodo, $comprovantes)
+    {
+        DB::beginTransaction();
+
+        try {
+            $dados['id'] = auth::user()->id;
+            $dados['vl_contribuicao_mes'] = $this->trataMoeda($valorContribuicaoPeriodo);;
+            $dados['nu_ano'] = $ano;
+            $dados['nu_mes'] = $mes;
+            $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dtdepositoperiodo));
+            $dados['dt_cadastro_registro'] = date("Y-m-d");
+            $controle = $this->controleContribuicaoRepository->create($dados);
+            foreach ($comprovantes as $comprovante) {
+                $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
+            }
+            DB::commit();
+            return '{"operacao":true}';
+        } catch
+        (\Illuminate\Database\QueryException $e) {
 
             $exception = $e->getMessage() . $e->getTraceAsString();
             Log::error($exception);
