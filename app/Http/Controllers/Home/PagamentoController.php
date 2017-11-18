@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FormContribuicaoPorPeriodoRequest;
 use App\Services\ControleContribuicaoService;
 
-class PagamentoPorPeriodoController extends Controller
+class PagamentoController extends Controller
 {
     private $controleContribuicaoService;
 
@@ -21,7 +21,7 @@ class PagamentoPorPeriodoController extends Controller
         $this->controleContribuicaoService = $controleContribuicaoService;
     }
 
-    function pagamento(FormContribuicaoPorPeriodoRequest $request)
+    function pagamentoPeriodo(FormContribuicaoPorPeriodoRequest $request)
     {
         if (!$request->get('comprovante')) {
             return '{"operacao":false}';

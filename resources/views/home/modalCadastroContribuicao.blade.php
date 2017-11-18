@@ -5,9 +5,9 @@
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
 
                 Pagamento Por Período</a></li>
-        {{--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por--}}
-                {{--Mês</a>--}}
-        {{--</li>--}}
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pagamento Por
+                Mês</a>
+        </li>
 
     </ul>
 
@@ -99,7 +99,7 @@
                         <th>Excluir</th>
                     </tr>
                     </thead>
-                    <tbody class="fotosGravadas">
+                    <tbody class="fotosGravadasMes">
                     </tbody>
                 </table>
                 <div class="row">
@@ -112,7 +112,88 @@
                 </div>
             </form>
         </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <form method="POST"  id="formComprovantePorMes">
+
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="demes" class="control-label">* Mês Contribuição: </label>
+                    <select name="demes" class="form-control">
+                        <option value=""></option>
+                        @foreach($dados['meses'] as $k=> $mes)
+                            <option value="{{($k)}}">{{$mes}}</option>
+                        @endforeach
+                    </select>
+                    <small class="help-block"></small>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="anoMes" class="control-label">* Ano Contribuição: </label>
+                    <select name="anoMes" class="form-control">
+                        @foreach(  $dados['anos'] as $anos)
+                            <option value="{{$anos}}">{{$anos}}</option>
+                        @endforeach
+                    </select>
+                    <small class="help-block"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="dtdepositomes" class="control-label">* Data do Depósito: </label>
+                    <input type="text" class="form-control date" name="dtdepositomes" value="">
+                    <small class="help-block"></small>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="vlcontribuicaomes" class="control-label">* Valor da Contribuição
+                        Mensal: </label>
+                    <input type="text" class="form-control money" name="vlcontribuicaomes" value="">
+                    <small class="help-block"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Anexar Comprovante:</label>
+                    <div class="input-group">
+                               <span class="input-group-btn">
+                                 <span class="btn btn-primary"
+                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
+                                 <input name="imagem"
+                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
+                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg">
+                               </span>
+                        <span class="form-control"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <button class="btn btn-success" id="btnSalvarDocumentoMes" type="button">Salvar Documento</button>
+                </div>
+
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Arquivos</th>
+                    <th>Excluir</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-0 form-group">
+                    <button type="button" class="btn btn-block btn-danger sair" id="sair">Sair</button>
+                </div>
+                <div class="col-md-6 col-md-offset-0 form-group">
+                    <button type="submit" class="btn btn-block btn-success" id="salvarMes">Salvar</button>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+
 </div>
 <script>
     $('.sair').on('click', function () {

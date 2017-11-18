@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="master/dataTables.css">
 
     {{--<!-- Data Tables -->--}}
-    {{--<link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">--}}
-    {{--<link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"--}}
+    <link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
           {{--rel="stylesheet">--}}
     {{--<!-- Animate CSS -->--}}
     {{--<link href="{{asset('/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">--}}
@@ -360,8 +360,8 @@
 {{--<!-- Toastr - Notificações -->--}}
 {{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
 <!-- Data Tables -->
-{{--<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>--}}
-{{--<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>--}}
+<script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>

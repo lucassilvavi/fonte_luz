@@ -24,6 +24,7 @@ class ContribuicaoController extends Controller
 
         $dados['anos'] = $this->data->ano();
         $dados['meses'] = $this->data->mes();
+        $dados['actionPorPeriodo'] = "Home\PagamentoPorPeriodoController@pagamentoPeriodo";
         $dados['actionPorPeriodo'] = "Home\PagamentoPorPeriodoController@pagamento";
         return view('home.modalCadastroContribuicao')->with('dados', $dados);
     }
