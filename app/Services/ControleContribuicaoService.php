@@ -26,12 +26,11 @@ class ControleContribuicaoService
         $this->comprovanteRepository = $comprovanteRepository;
     }
 
-    public function novo($dadosForm)
+    public function novoPorPeriodo($dadosForm)
     {
         DB::beginTransaction();
 
         try {
-
             $deAno = $dadosForm['deanoperiodo'];
             $de = $dadosForm['demesperiodo'];
             $ate = $dadosForm['atemesperiodo'];
@@ -55,6 +54,27 @@ class ControleContribuicaoService
                 }
             }
 
+            DB::commit();
+            return '{"operacao":true}';
+        } catch
+        (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
+    function novoPorMes($dadosForm)
+    {
+        DB::beginTransaction();
+
+        try {
+            $deAno = $dadosForm['anoMes'];
+            $de = $dadosForm['demes'];
+            $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaomes'], $dadosForm['dtdepositomes'], $dadosForm['comprovante']);
             DB::commit();
             return '{"operacao":true}';
         } catch

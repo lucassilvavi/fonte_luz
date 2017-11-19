@@ -24,6 +24,8 @@ Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@e
 
 Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoController@pagamentoPeriodo');
 
+Route::post('/cadastroMensalidadePorMes', 'Home\PagamentoController@pagamentoMes');
+
 
 
 //perfil dados Pessoais

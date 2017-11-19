@@ -42,26 +42,24 @@ class ComprovanteController extends Controller
         $ext = strrchr($photo_object->name, '.');
         $imagem = time() . uniqid(md5($photo_object->name)) . $ext;
         $salvarFoto = $photo->move($destinationPath, $imagem);
-        $endereco = $destinationPath."/".$imagem;
+        $endereco = $destinationPath . "/" . $imagem;
         if ($salvarFoto) {
-           $comprovante =  $this->comprovanteService->novo($endereco);
-           if($comprovante != false){
-                return array( 'comprovante'=> $comprovante['id'], 'nome'=>$photo_object->name);
-           }
-//vamos salvar na base a imagem
-            //tenho que passar o endereco dela
-            //e o usuario logado
+            $comprovante = $this->comprovanteService->novo($endereco);
+            if ($comprovante != false) {
+                return array('comprovante' => $comprovante['id'], 'nome' => $photo_object->name);
+            }
         } else {
-//acontecenu algum erro ao salvar o comprovanre tenho que devolver pra view o erro
+            return false;
         }
         $photos[] = $photo_object;
 
         return $photos;
     }
+
     function excluirComprovante($co_comprovante)
     {
-        $endereco = $this->comprovanteRepository->findBy('co_seq_comprovante',$co_comprovante)->ds_endereco_comprovante;
-        if(\File::delete($endereco)){
+        $endereco = $this->comprovanteRepository->findBy('co_seq_comprovante', $co_comprovante)->ds_endereco_comprovante;
+        if (\File::delete($endereco)) {
             return $this->comprovanteRepository->apagarComprovante($co_comprovante);
         }
         return false;

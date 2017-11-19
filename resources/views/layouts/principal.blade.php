@@ -358,8 +358,9 @@
 <script src="master/js/datables.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 {{--<!-- Toastr - Notificações -->--}}
-{{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
+<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>
 <!-- Data Tables -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{asset('/assets/js/dataTableDefaults.js')}}"></script>
@@ -368,16 +369,12 @@
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('/assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
-<script src="{{asset('/assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
-<script src="{{asset('/assets/vendor/jszip/dist/jszip.min.js')}}"></script>
++<script src="{{asset('/assets/vendor/pdfmake/build/pdfmake.js')}}"></script>
++<script src="{{asset('/assets/vendor/pdfmake/build/vfs_fonts.js')}}"></script>
++<script src="{{asset('/assets/vendor/jszip/dist/jszip.min.js')}}"></script>
 <!-- Bootstrap Datepicker -->
 <script src="{{asset('/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('/assets/js/datepickerDefaults.js')}}"></script>
-<!-- jQuery Mask Plugin -->
-<script src="{{asset('/assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
-<script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 @section('scripts')
 

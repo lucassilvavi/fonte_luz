@@ -14,15 +14,17 @@
         </tr>
         </thead>
         <tbody>
+        @foreach( $dados['contribuicoes']  as $contribuicoe)
             <tr>
-                <td>07</td>
-                <td>2017</td>
-                <td>R$ 100,00</td>
-                <td>25/10/2017</td>
-                <td>Ativa</td>
+                <td>{{$contribuicoe->nu_mes}}</td>
+                <td>{{$contribuicoe->nu_ano}}</td>
+                <td>{{$contribuicoe->vl_contribuicao_mes}}</td>
+                <td>{{$contribuicoe->dt_contribuicao}}</td>
+                <td>{{empty($contribuicoe->dt_confirmacao_financeiro)  ? "Enviado Pra Administração":"Pago"}}</td>
                 <td style="text-align: center;">
                     <button type="button" class="btn btn-link"><i class="fa fa-file-text fa-lg" aria-hidden="true">
-                        </i></button></td>
+                        </i></button>
+                </td>
                 <td style="text-align: center;">
                     <button type="button" class="btn btn-warning btn-xs detalhes">Editar</button>
                     <button type="button" class="btn  btn-info btn-xs detalhes">Incluir Comprovante</button>
@@ -31,6 +33,7 @@
 
                 </td>
             </tr>
+        @endforeach
         </tbody>
     </table>
     <!-- Modal -->
@@ -51,9 +54,7 @@
 
 @section('scripts')
     @push('scripts')
-
     @endpush
-
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
     <script src="{{asset('assets/js/home/modalCadastroContribuicao.js')}}"></script>
 @endsection

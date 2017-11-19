@@ -10,7 +10,9 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FormContribuicaoPorPeriodoRequest;
+use App\Http\Requests\FormContribuicaoPorMes;
 use App\Services\ControleContribuicaoService;
+
 
 class PagamentoController extends Controller
 {
@@ -26,6 +28,13 @@ class PagamentoController extends Controller
         if (!$request->get('comprovante')) {
             return '{"operacao":false}';
         }
-        return $this->controleContribuicaoService->novo($request->all());
+        return $this->controleContribuicaoService->novoPorPeriodo($request->all());
+    }
+    function pagamentoMes(FormContribuicaoPorMes $request)
+    {
+        if (!$request->get('comprovante')) {
+            return '{"operacao":false}';
+        }
+        return $this->controleContribuicaoService->novoPorMes($request->all());
     }
 }
