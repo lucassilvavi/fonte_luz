@@ -1,3 +1,13 @@
+<style>
+    .confirmaPagamento {
+    background-color: #F08080 !important;
+    }
+    .confirmadoPagamento {
+        background-color: #90EE90 !important;
+    }
+</style>
+
+
 @extends('layouts.principal')
 @section('title','Home')
 @section('content')
@@ -21,7 +31,7 @@
                 <td>{{$contribuicoe->nu_ano}}</td>
                 <td>{{JansenFelipe\Utils\Utils::moeda($contribuicoe->vl_contribuicao_mes)}}</td>
                 <td>{{date("d/m/Y", strtotime($contribuicoe->dt_contribuicao))}}</td>
-                <td>{{empty($contribuicoe->dt_confirmacao_financeiro)  ? "Enviado Pra Administração":"Pago"}}</td>
+                <td class="confirmacao">{{empty($contribuicoe->dt_confirmacao_financeiro)  ? "Enviado Pra Administração":"Pago"}}</td>
                 <td style="text-align: center;">
                     <button type="button"  class="btn btn-info btn-xs editarContribuicao" value="{{$contribuicoe->co_seq_controle_contribuicao}}">Editar</button>
                     <button type="button"  class="btn btn-warning btn-xs incluir">Comprovantes</button>
@@ -51,6 +61,18 @@
     @push('scripts')
     @endpush
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
+    <script>
+        var confirmacao = document.querySelectorAll(".confirmacao");
+        confirmacao.forEach(function (confirm) {
+            var tr = confirm.parentNode;
+            if(confirm.textContent == "Enviado Pra Administração"){
+
+                tr.classList.add("confirmaPagamento");
+            }else{
+                tr.classList.add("confirmadoPagamento");
+            }
+        });
+    </script>
     <script src="{{asset('assets/js/home/modalCadastroContribuicao.js')}}"></script>
     <script>
         $(".editarContribuicao").click(function () {
@@ -69,8 +91,6 @@
                     $("#conteudoModal").html(dados);
                 }
             });
-
-
         });
     </script>
 @endsection

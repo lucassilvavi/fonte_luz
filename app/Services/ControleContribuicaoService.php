@@ -94,7 +94,7 @@ class ControleContribuicaoService
 
         try {
             $dados['id'] = auth::user()->id;
-            $dados['vl_contribuicao_mes'] = $this->trataMoeda($valorContribuicaoPeriodo);;
+            $dados['vl_contribuicao_mes'] = $this->trataMoeda($valorContribuicaoPeriodo);
             $dados['nu_ano'] = $ano;
             $dados['nu_mes'] = $mes;
             $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dtdepositoperiodo));
@@ -103,6 +103,32 @@ class ControleContribuicaoService
             foreach ($comprovantes as $comprovante) {
                 $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
             }
+            DB::commit();
+            return '{"operacao":true}';
+        } catch
+        (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
+    public function editar($dadosForm)
+    {
+
+        DB::beginTransaction();
+
+        try {
+
+            $dados['nu_ano'] = $dadosForm['anoMes'];
+            $dados['nu_mes'] = $dadosForm['demes'];
+            $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dadosForm['dtdepositomes']));
+            $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaomes']);
+            $this->controleContribuicaoRepository->update($dados, $dadosForm['co_seq_controle_contribuicao'], 'co_seq_controle_contribuicao');
+
             DB::commit();
             return '{"operacao":true}';
         } catch

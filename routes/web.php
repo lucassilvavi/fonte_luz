@@ -28,6 +28,8 @@ Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoController@pagament
 
 Route::post('/cadastroMensalidadePorMes', 'Home\PagamentoController@pagamentoMes');
 
+Route::post('/editarMensalidade', 'Home\PagamentoController@editarMensalidade');
+
 
 
 //perfil dados Pessoais

@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FormContribuicaoPorPeriodoRequest;
 use App\Http\Requests\FormContribuicaoPorMes;
 use App\Services\ControleContribuicaoService;
+use App\Http\Requests\FormEditarContribuicaoRequest;
 
 
 class PagamentoController extends Controller
@@ -36,5 +37,8 @@ class PagamentoController extends Controller
             return '{"operacao":false}';
         }
         return $this->controleContribuicaoService->novoPorMes($request->all());
+    }
+    function editarMensalidade(FormEditarContribuicaoRequest $request){
+      return $this->controleContribuicaoService->editar($request->all());
     }
 }

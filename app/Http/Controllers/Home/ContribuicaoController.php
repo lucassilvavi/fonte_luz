@@ -38,6 +38,7 @@
             $dados['contribuicao'] = $this->controleContribuicaoRepository->findBy('co_seq_controle_contribuicao', $co_seq_controle_contribuicao);
             $dados['anos'] = $this->data->ano();
             $dados['meses'] = $this->data->mes();
+            $dados['action'] = "Home\PagamentoController@editarMensalidade";
 
             return view('home.modalEditarContribuicao')->with('dados', $dados);
         }
