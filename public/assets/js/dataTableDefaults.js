@@ -1,6 +1,6 @@
 $.extend( true, $.fn.dataTable.defaults, {
     "language": {
-        "sUrl": "public/assets/datatables/Portuguese-Brasil.json"
+        "sUrl": "/assets/datatables/Portuguese-Brasil.json"
     }
 } );
 

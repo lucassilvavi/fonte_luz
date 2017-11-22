@@ -7,7 +7,7 @@ $(document).ready(function() {
                     className: "dt-center",
                     orderable: false,
                     searchable: false,
-                    targets: 6
+                    targets: 5
                 }
             ],
             responsive: true,
@@ -17,7 +17,7 @@ $(document).ready(function() {
                     text: '<i class="fa fa-files-o fa-2x text-info"></i>',
                     titleAttr: 'Copy',
                     exportOptions: {
-                        columns: [0,1,2,3,4,5]
+                        columns: [0,1,2,3,4]
                     }
                 },
                 {
@@ -25,7 +25,7 @@ $(document).ready(function() {
                     text: '<i class="fa fa-file-excel-o fa-2x text-success"></i>',
                     titleAttr: 'Excel',
                     exportOptions: {
-                        columns: [0,1,2,3,4,5]
+                        columns: [0,1,2,3,4]
                     }
 
                 },
@@ -35,7 +35,7 @@ $(document).ready(function() {
                     fieldSeparator: ';',
                     titleAttr: 'CSV',
                     exportOptions: {
-                        columns: [0,1,2,3,4,5]
+                        columns: [0,1,2,3,4]
                     }
                 },
                 {
@@ -43,7 +43,7 @@ $(document).ready(function() {
                     text: '<i class="fa fa-file-pdf-o fa-2x text-danger"></i>',
                     titleAttr: 'PDF',
                     exportOptions: {
-                        columns: [0,1,2,3,4,5]
+                        columns: [0,1,2,3,4]
                     }
                 },
                 {

@@ -18,6 +18,8 @@ Route::get('/', 'Home\HomeController@index');
 
 Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
+Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@formEditarContribuicao');
+
 Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarComprovante');
 
 Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');

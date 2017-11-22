@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Repositories\ControleContribuicaoRepository;
 use App\Http\Controllers\Controller;
+use JansenFelipe\Utils\Utils;
 
 class HomeController extends Controller
 {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cbb1f899b3fe39845a7bffb36bc587b",
+    "content-hash": "bd474702976ee57e137f7227b80d7438",
     "packages": [
         {
             "name": "brian2694/laravel-toastr",
@@ -282,6 +282,54 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jansenfelipe/utils",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jansenfelipe/utils.git",
+                "reference": "351e4c5fe5afa1e1300372bb4e99cb686caf7628"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jansenfelipe/utils/zipball/351e4c5fe5afa1e1300372bb4e99cb686caf7628",
+                "reference": "351e4c5fe5afa1e1300372bb4e99cb686caf7628",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JansenFelipe\\Utils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jansen Felipe",
+                    "email": "jansen.felipe@gmail.com"
+                }
+            ],
+            "description": "Uma simples classe utilitária com métodos que podem salvar sua vida (ou não)",
+            "keywords": [
+                "php",
+                "util"
+            ],
+            "time": "2016-08-23T20:59:52+00:00"
         },
         {
             "name": "laravel/framework",

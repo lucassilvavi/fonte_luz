@@ -9,28 +9,23 @@
             <th>Valor Contribuição</th>
             <th>Data de Pagamento</th>
             <th>Status</th>
-            <th>Comprovantes</th>
+
             <th>Opcões</th>
         </tr>
         </thead>
         <tbody>
+
         @foreach( $dados['contribuicoes']  as $contribuicoe)
             <tr>
                 <td>{{$contribuicoe->nu_mes}}</td>
                 <td>{{$contribuicoe->nu_ano}}</td>
-                <td>{{$contribuicoe->vl_contribuicao_mes}}</td>
-                <td>{{$contribuicoe->dt_contribuicao}}</td>
+                <td>{{JansenFelipe\Utils\Utils::moeda($contribuicoe->vl_contribuicao_mes)}}</td>
+                <td>{{date("d/m/Y", strtotime($contribuicoe->dt_contribuicao))}}</td>
                 <td>{{empty($contribuicoe->dt_confirmacao_financeiro)  ? "Enviado Pra Administração":"Pago"}}</td>
                 <td style="text-align: center;">
-                    <button type="button" class="btn btn-link"><i class="fa fa-file-text fa-lg" aria-hidden="true">
-                        </i></button>
-                </td>
-                <td style="text-align: center;">
-                    <button type="button" class="btn btn-warning btn-xs detalhes">Editar</button>
-                    <button type="button" class="btn  btn-info btn-xs detalhes">Incluir Comprovante</button>
-                    <button type="button" class="btn  btn-danger btn-xs detalhes">Excluir Comprovante</button>
-                    <button type="button" class="btn  btn-danger btn-xs detalhes">Excluir Contribuição</button>
-
+                    <button type="button"  class="btn btn-info btn-xs editarContribuicao" value="{{$contribuicoe->co_seq_controle_contribuicao}}">Editar</button>
+                    <button type="button"  class="btn btn-warning btn-xs incluir">Comprovantes</button>
+                    <button type="button"  class="btn btn-danger btn-xs incluir">Excluir Contribuição</button>
                 </td>
             </tr>
         @endforeach
@@ -57,5 +52,26 @@
     @endpush
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
     <script src="{{asset('assets/js/home/modalCadastroContribuicao.js')}}"></script>
+    <script>
+        $(".editarContribuicao").click(function () {
+            var co_seq_controle_contribuicao = $(this).val();
+            $.ajax({
+                type: "get",
+                url: "/formEditarContribuicao/"+co_seq_controle_contribuicao,
+                beforeSend: function() {
+                    $('#myModal').modal('show');
+                    $('#conteudoModal').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="color:blue;"></i>').show();
+                },
+                success: function(dados)
+                {
+                    $(".modal-title").html('Editar Contribuição');
+                    $("#myModal").modal('show');
+                    $("#conteudoModal").html(dados);
+                }
+            });
+
+
+        });
+    </script>
 @endsection
 
