@@ -23,9 +23,7 @@ class Comprovante  extends Model
         'co_seq_comprovante',
         'ds_endereco_comprovante',
         'dt_anexo',
-        'dt_exclusao_anexo',
-        'dt_confirmacao_financeiro',
-        'ds_observacao_financeiro'
+        'dt_exclusao_anexo'
     ];
 
     public $timestamps = false;

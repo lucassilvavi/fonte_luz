@@ -31,6 +31,7 @@ class HomeController extends Controller
     {
         $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicaoAtiva(\auth::user()->id);
 
+
         return view('home.home')->with('dados', $dados);
     }
 }

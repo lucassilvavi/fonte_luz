@@ -1,18 +1,19 @@
 <style>
     .confirmaPagamento {
-    background-color: #F08080 !important;
+    background-color: #DCDCDC !important;
     }
     .confirmadoPagamento {
         background-color: #90EE90 !important;
     }
+    .bordaTable{
+        border: 3px solid grey !important;
+    }
 </style>
-
-
 @extends('layouts.principal')
 @section('title','Home')
 @section('content')
-    <table id="tb_home" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
+    <table id="tb_home" class="table table-bordered " cellspacing="0" width="100%">
+        <thead  class="bordaTable">
         <tr>
             <th>Mês de Referência</th>
             <th>Ano de Referência</th>
@@ -23,7 +24,7 @@
             <th>Opcões</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="bordaTable">
 
         @foreach( $dados['contribuicoes']  as $contribuicoe)
             <tr>
@@ -63,10 +64,10 @@
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
     <script>
         var confirmacao = document.querySelectorAll(".confirmacao");
+
         confirmacao.forEach(function (confirm) {
             var tr = confirm.parentNode;
             if(confirm.textContent == "Enviado Pra Administração"){
-
                 tr.classList.add("confirmaPagamento");
             }else{
                 tr.classList.add("confirmadoPagamento");

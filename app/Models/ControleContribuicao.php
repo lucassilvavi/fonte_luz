@@ -27,7 +27,9 @@ class ControleContribuicao extends Model
         'nu_mes',
         'dt_contribuicao',
         'dt_cadastro_registro',
-        'dt_exclusao_registro'
+        'dt_exclusao_registro',
+        'dt_confirmacao_financeiro',
+        'ds_observacao_financeiro'
 
     ];
 
