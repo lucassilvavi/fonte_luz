@@ -26,6 +26,8 @@ Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarCompro
 
 Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');
 
+Route::get('/desativarComprovante/{co_comprovante}', 'Home\ComprovanteController@desativarComprovante');
+
 Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoController@pagamentoPeriodo');
 
 Route::post('/cadastroMensalidadePorMes', 'Home\PagamentoController@pagamentoMes');

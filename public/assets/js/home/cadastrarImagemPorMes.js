@@ -21,3 +21,12 @@ $("#btnSalvarDocumentoMes").click(function (event) {
         });
     }
 });
+function MsgFaltaComprovante() {
+    //// Override global options
+    toastr.warning('Por favor Anexo um comprovante!', '', {
+        closeButton: false,
+        progressBar: true,
+        timeOut: "3500",
+        positionClass: 'toast-top-center'
+    });
+}

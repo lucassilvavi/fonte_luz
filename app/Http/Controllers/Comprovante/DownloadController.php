@@ -1,52 +1,58 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lucas
- * Date: 23/11/2017
- * Time: 22:13
- */
+    /**
+     * Created by PhpStorm.
+     * User: lucas
+     * Date: 23/11/2017
+     * Time: 22:13
+     */
 
-namespace App\Http\Controllers\Comprovante;
+    namespace App\Http\Controllers\Comprovante;
 
 
-use App\Http\Controllers\Controller;
+    use App\Http\Controllers\Controller;
 
-use App\Repositories\ComprovanteRepository;
-class DownloadController extends Controller
-{
-private $comprovanteRepository;
-function __construct(ComprovanteRepository $comprovanteRepository)
-{
-    $this->comprovanteRepository = $comprovanteRepository;
-}
+    use App\Repositories\ComprovanteRepository;
 
-    function comprovantes($co_seq_comprovante){
-        $documento = $this->comprovanteRepository->findBy('co_seq_comprovante', $co_seq_comprovante);
-        // Define o tempo máximo de execução em 0 para as conexões lentas
-        set_time_limit(0);
-        // Arqui você faz as validações e/ou pega os dados do banco de dados
-        $partes = explode("/", $documento->ds_endereco_comprovante);
-        $aquivoNome = $partes[2]; // nome do arquivo que será enviado p/ download
+    class DownloadController extends Controller
+    {
+        private $comprovanteRepository;
 
-        $arquivoLocal = $documento->ds_endereco_comprovante; // caminho absoluto do arquivo
-        // Verifica se o arquivo não existe
-        if (!file_exists($arquivoLocal)) {
-            // Exiba uma mensagem de erro caso ele não exista
-            exit;
+        function __construct(ComprovanteRepository $comprovanteRepository)
+        {
+            $this->comprovanteRepository = $comprovanteRepository;
         }
-        // Aqui você pode aumentar o contador de downloads
-        // Definimos o novo nome do arquivo
-        $novoNome = 'efef';
-        // Configuramos os headers que serão enviados para o browser
-        header('Content-Description: File Transfer');
-        header('Content-Disposition: attachment; filename="'.$novoNome.'"');
-        header('Content-Type: application/octet-stream');
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . filesize($aquivoNome));
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        header('Expires: 0');
-        // Envia o arquivo para o cliente
-        readfile($aquivoNome);
+
+        function comprovantes($co_seq_comprovante)
+        {
+            $anexo = $this->comprovanteRepository->findBy('co_seq_comprovante', $co_seq_comprovante)->ds_endereco_comprovante;
+            $this->download($anexo);
+        }
+
+        public function download($file)
+        {
+            $arquivo = $file;
+
+            if (isset($arquivo) && file_exists($arquivo)) {
+                switch (strtolower(substr(strrchr(basename($arquivo), "."), 1))) {
+                    case "png":
+                        $tipo = "image/png";
+                        break;
+                    case "jpe":
+                        $tipo = "image/jpeg";
+                        break;
+                    case "jpeg":
+                        $tipo = "image/jpeg";
+                        break;
+                    case "jpg":
+                        $tipo = "image/jpeg";
+                        break;
+                }
+
+                header("Content-Type: " . $tipo); // informa o tipo do arquivo ao navegador
+                header("Content-Length: " . filesize($arquivo)); // informa o tamanho do arquivo ao navegador
+                header("Content-Disposition: attachment; filename=" . basename($arquivo)); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
+                readfile($arquivo); // lê o arquivo
+                exit; // aborta pós-ações
+            }
+        }
     }
-}
