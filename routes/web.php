@@ -20,6 +20,8 @@ Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
 Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@formEditarContribuicao');
 
+Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}','Home\ComprovanteController@formEditaComprovante');
+
 Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarComprovante');
 
 Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');
@@ -29,6 +31,8 @@ Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoController@pagament
 Route::post('/cadastroMensalidadePorMes', 'Home\PagamentoController@pagamentoMes');
 
 Route::post('/editarMensalidade', 'Home\PagamentoController@editarMensalidade');
+
+Route::get('/comprovantes/{co_seq_comprovante}', 'Comprovante\DownloadController@comprovantes');
 
 
 

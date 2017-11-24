@@ -24,6 +24,6 @@ class ControleContribuicaoRepository extends Repository
     function getContribuicaoAtiva($id)
     {
         return $this->model->where('id',$id)->get();
-
     }
+
 }

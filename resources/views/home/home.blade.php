@@ -35,7 +35,7 @@
                 <td class="confirmacao">{{empty($contribuicoe->dt_confirmacao_financeiro)  ? "Enviado Pra Administração":"Pago"}}</td>
                 <td style="text-align: center;">
                     <button type="button"  class="btn btn-info btn-xs editarContribuicao" value="{{$contribuicoe->co_seq_controle_contribuicao}}">Editar</button>
-                    <button type="button"  class="btn btn-warning btn-xs incluir">Comprovantes</button>
+                    <button type="button"  class="btn btn-warning btn-xs edtComprovantes" value="{{$contribuicoe->co_seq_controle_contribuicao}}">Comprovantes</button>
                     <button type="button"  class="btn btn-danger btn-xs incluir">Excluir Contribuição</button>
                 </td>
             </tr>
@@ -62,32 +62,22 @@
     @push('scripts')
     @endpush
     <script src="{{asset('assets/js/home/dataTableHome.js')}}"></script>
-    <script>
-        var confirmacao = document.querySelectorAll(".confirmacao");
-
-        confirmacao.forEach(function (confirm) {
-            var tr = confirm.parentNode;
-            if(confirm.textContent == "Enviado Pra Administração"){
-                tr.classList.add("confirmaPagamento");
-            }else{
-                tr.classList.add("confirmadoPagamento");
-            }
-        });
-    </script>
+    <script src="{{asset('assets/js/home/layoutDataTable.js')}}"></script>
     <script src="{{asset('assets/js/home/modalCadastroContribuicao.js')}}"></script>
+    <script src="{{asset('assets/js/home/editarContribuicao.js')}}"></script>
     <script>
-        $(".editarContribuicao").click(function () {
+        $(".edtComprovantes").click(function () {
             var co_seq_controle_contribuicao = $(this).val();
             $.ajax({
                 type: "get",
-                url: "/formEditarContribuicao/"+co_seq_controle_contribuicao,
+                url: "/formEditaComprovante/"+co_seq_controle_contribuicao,
                 beforeSend: function() {
                     $('#myModal').modal('show');
                     $('#conteudoModal').html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="color:blue;"></i>').show();
                 },
                 success: function(dados)
                 {
-                    $(".modal-title").html('Editar Contribuição');
+                    $(".modal-title").html('Comprovantes');
                     $("#myModal").modal('show');
                     $("#conteudoModal").html(dados);
                 }

@@ -12,18 +12,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ComprovanteService;
 use App\Repositories\ComprovanteRepository;
+use App\Repositories\ControleContribuicaoRepository;
 
 
 class ComprovanteController extends Controller
 {
     private $comprovanteService;
     private $comprovanteRepository;
+    private $controleContribuicaoRepository;
 
     function __construct(ComprovanteService $comprovanteService,
-                         ComprovanteRepository $comprovanteRepository)
+                         ComprovanteRepository $comprovanteRepository,
+                         ControleContribuicaoRepository $controleContribuicaoRepository)
     {
         $this->comprovanteService = $comprovanteService;
         $this->comprovanteRepository = $comprovanteRepository;
+        $this->controleContribuicaoRepository = $controleContribuicaoRepository;
     }
 
     function adicionarComprovante(Request $request)
@@ -63,6 +67,11 @@ class ComprovanteController extends Controller
             return $this->comprovanteRepository->apagarComprovante($co_comprovante);
         }
         return false;
+    }
+    function formEditaComprovante($co_seq_controle_contribuicao){
+        $dados['comprovantes'] = $this->comprovanteRepository->getComprovantes($co_seq_controle_contribuicao);
+        $dados['baixar'] = "/comprovantes/";
+        return view('home.modalEditarComprovante')->with('dados',$dados);
     }
 
 }
