@@ -24,7 +24,15 @@ Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}','Home\Comprova
 
 Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarComprovante');
 
+Route::get('/formExcluirContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@formExcluirContribuicao');
+
+Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@excluirContribuicao');
+
+
+
 Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');
+
+Route::post('/editarComprovante/', 'Home\ComprovanteController@editarComprovante');
 
 Route::get('/desativarComprovante/{co_comprovante}', 'Home\ComprovanteController@desativarComprovante');
 

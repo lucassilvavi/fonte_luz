@@ -23,7 +23,8 @@ class ControleContribuicaoRepository extends Repository
 
     function getContribuicaoAtiva($id)
     {
-        return $this->model->where('id',$id)->get();
+        return $this->model->where('id', $id)
+            ->where('dt_exclusao_registro', "=", null)->get();
     }
 
 }

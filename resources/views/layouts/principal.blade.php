@@ -588,12 +588,11 @@
                                     <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                                          class="img-circle" alt="User Image">
                                 @else
-                                    <img src=""
-                                         class="img-circle" alt="User Image">
+                                    <img  src="/fotos/newPerson.jpg"
+                                          class="img-circle" alt="User Image">
                                 @endif
                                 <p>
                                     {{Auth::user()->no_nome}}
-                                    <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
 
@@ -633,8 +632,8 @@
                         <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
                              class="img-circle" alt="User Image">
                     @else
-                        <img src=""
-                             class="img-circle" alt="User Image">
+                        <img  src="/fotos/newPerson.jpg"
+                              class="img-circle" alt="User Image">
                     @endif
 
                 </div>
@@ -672,10 +671,9 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong> <a href=""></strong>
     </footer>
 
     <!-- Control Sidebar -->

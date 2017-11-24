@@ -142,6 +142,27 @@ class ControleContribuicaoService
         }
     }
 
+    public function desativar($co_seq_controle_contribuicao)
+    {
+        DB::beginTransaction();
+
+        try {
+            $dados['dt_exclusao_registro'] = date("Y-m-d");
+            $this->controleContribuicaoRepository->update($dados, $co_seq_controle_contribuicao, 'co_seq_controle_contribuicao');
+
+            DB::commit();
+            return '{"operacao":true}';
+        } catch
+        (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
     public function trataMoeda($valor)
     {
         $dinheiro = str_replace('.', '', $valor); // remove o ponto

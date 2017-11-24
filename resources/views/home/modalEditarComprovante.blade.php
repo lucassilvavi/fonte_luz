@@ -22,8 +22,9 @@
     </tbody>
 </table>
 <hr>
-<form method="POST" action="" id="formComprovantePorMes">
+<form method="POST" action="{{action($dados['action'])}}" id="formComprovantePorMes">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="co_seq_controle_contribuicao" value="{{ $dados['co_seq_controle_contribuicao']}}">
     <div class="row">
         <div class="form-group col-md-4">
             <label>Anexar Comprovante:</label>
@@ -59,7 +60,7 @@
             <button type="button" class="btn btn-block btn-danger sair">Sair</button>
         </div>
         <div class="col-md-6 col-md-offset-0 form-group">
-            <button type="submit" class="btn btn-block btn-success" id="salvarPorPeriodo">Salvar</button>
+            <button type="submit" class="btn btn-block btn-success" id="salvarMes">Salvar</button>
         </div>
     </div>
 </form>
@@ -71,3 +72,46 @@
 <script src="{{asset('assets/js/home/excluirEditarComprovante.js')}}"></script>
 <script src="{{asset('assets/js/home/cadastrarImagemPorMes.js')}}"></script>
 <script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/submit.js')}}"></script>
+<script>
+    $("#formComprovantePorMes").on("submit", function () {
+        $("#salvarMes").prop("disabled", true);
+        $(".sair").prop("disabled", true);
+        $(".excluir").prop("disabled", true);
+        $(".exluirComprovante").prop("disabled", true);
+        submit('#formComprovantePorMes', function (validate) {
+            if (validate == false) {
+                MsgFaltaComprovante();
+                $("#salvarMes").prop("disabled", false);
+                $(".sair").prop("disabled", false);
+                $(".excluir").prop("disabled", false);
+                $(".exluirComprovante").prop("disabled", false);
+            } else if (($.parseJSON(validate).operacao)) {
+                MsgSucessoComprovante();
+            }
+        });
+    });
+
+    function MsgFaltaComprovante() {
+        //// Override global options
+        toastr.warning('Por favor Anexo um comprovante!', '', {
+            closeButton: false,
+            progressBar: true,
+            timeOut: "3500",
+            positionClass: 'toast-top-center'
+        });
+    }
+
+    function MsgSucessoComprovante() {
+// Override global options
+        toastr.success('Comprovante inserido com sucesso!', '', {
+            closeButton: false,
+            progressBar: true,
+            timeOut: "2000",
+            positionClass: 'toast-top-center'
+        });
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
+    }
+</script>

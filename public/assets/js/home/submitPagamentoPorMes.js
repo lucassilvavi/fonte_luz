@@ -1,11 +1,13 @@
 $("#formComprovantePorMes").on("submit", function () {
     $("#salvarMes").prop("disabled", true);
     $(".sair").prop("disabled", true);
+    $(".excluir").prop("disabled", true);
     submit('#formComprovantePorMes', function (validate) {
         if (validate == false) {
             MsgFaltaComprovante();
             $("#salvarMes").prop("disabled", false);
             $(".sair").prop("disabled", false);
+            $(".excluir").prop("disabled", false);
         } else if (($.parseJSON(validate).operacao)) {
             MsgSucessoPorPeriodo();
         }else{
