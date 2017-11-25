@@ -2,33 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: lucas
- * Date: 30/09/2017
- * Time: 19:23
+ * Date: 25/11/2017
+ * Time: 12:42
  */
 
 namespace App\Services;
-use App\Repositories\PermissoesRepository;
+
+use App\Repositories\UsuarioRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PermissaoService
+class UsuarioService
 {
-    private $permissoesRepository;
+    private $usuarioRepository;
 
-    public function __construct(PermissoesRepository $permissoesRepository)
+    function __construct(UsuarioRepository $usuarioRepository)
     {
-        $this->permissoesRepository = $permissoesRepository;
+        $this->usuarioRepository = $usuarioRepository;
     }
-    public function nova($dadosForm)
+    public function editarPerfil($perfil, $usuario)
     {
         DB::beginTransaction();
-
         try {
+            $dados['co_perfil'] = $perfil;
+            $this->usuarioRepository->update($dados, $usuario, "id");
 
-            $dados['no_permissao'] = $dadosForm['nome'];
-            $dados['ds_permissao'] = $dadosForm['descricao'];
-            $dados['co_grupo_permissoes'] = $dadosForm['grupo'];
-            $this->permissoesRepository->create($dados);
             DB::commit();
             return '{"operacao":true}';
         } catch (\Illuminate\Database\QueryException $e) {
@@ -38,9 +36,7 @@ class PermissaoService
 
             DB::rollback();
             //Retorna as informacoes do erro.
-
             return '{"operacao":false}';
         }
-
     }
 }

@@ -12,8 +12,8 @@
                     <form id="forgot_password" class="form-horizontal" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
                         <div class="msg">
-                            Enter your email address that you used to register. We'll send you an email with your username and a
-                            link to reset your password.
+                            Digite seu endereço de e-mail que você usou para se registrar.
+                            Nós lhe enviaremos um e-mail com seu nome de usuário e um link para redefinir sua senha.
                         </div>
                         <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
                         <span class="input-group-addon">
@@ -29,9 +29,9 @@
                                 @endif
                             </div>
                         </div>
-                        <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">RESET MY PASSWORD</button>
+                        <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Enviar</button>
                         <div class="row m-t-20 m-b--5 align-center">
-                            <a href="/login">Sign In!</a>
+                            <a href="/login">Login</a>
                         </div>
                     </form>
                 </div>

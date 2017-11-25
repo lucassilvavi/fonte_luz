@@ -72,6 +72,10 @@ Route::get('/formDesableTelefone/{co_seq_telefone}', 'Perfil\TelefoneController@
 
 Route::post('/desableTelefone', 'Perfil\TelefoneController@desableTelefone');
 
+Route::post('/editarPerfil', 'Perfil\PerfilController@editarPerfil');
+
+
+
 //rotas do perfil do nivel de acesso
 
 Route::get('/perfilUsuario', 'PerfilUsuario\PerfilController@index');

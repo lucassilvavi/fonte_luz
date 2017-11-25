@@ -53,15 +53,6 @@ class PerfilService
             //Retorna as informacoes do erro.
 
             return '{"operacao":false}';
-        } catch (\Yajra\Pdo\Oci8\Exceptions\Oci8Exception $e) {
-
-            $exception = $e->getMessage() . $e->getTraceAsString();
-            Log::error($exception);
-
-            DB::rollback();
-
-            //Retorna as informacoes do erro.
-            return '{"operacao":false}';
         }
     }
 
@@ -97,15 +88,6 @@ class PerfilService
             //Retorna as informacoes do erro.
 
             return '{"operacao":false}';
-        } catch (\Yajra\Pdo\Oci8\Exceptions\Oci8Exception $e) {
-
-            $exception = $e->getMessage() . $e->getTraceAsString();
-            Log::error($exception);
-
-            DB::rollback();
-
-            //Retorna as informacoes do erro.
-            return '{"operacao":false}';
         }
 
     }
@@ -135,15 +117,6 @@ class PerfilService
             //Retorna as informacoes do erro.
 
             return '{"operacao":false}';
-        } catch (\Yajra\Pdo\Oci8\Exceptions\Oci8Exception $e) {
-
-            $exception = $e->getMessage() . $e->getTraceAsString();
-            Log::error($exception);
-
-            DB::rollback();
-
-            //Retorna as informacoes do erro.
-            return '{"operacao":false}';
         }
 
     }
@@ -170,15 +143,6 @@ class PerfilService
             DB::rollback();
             //Retorna as informacoes do erro.
 
-            return '{"operacao":false}';
-        } catch (\Yajra\Pdo\Oci8\Exceptions\Oci8Exception $e) {
-
-            $exception = $e->getMessage() . $e->getTraceAsString();
-            Log::error($exception);
-
-            DB::rollback();
-
-            //Retorna as informacoes do erro.
             return '{"operacao":false}';
         }
 

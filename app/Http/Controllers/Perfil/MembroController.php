@@ -115,6 +115,8 @@ class MembroController extends Controller
         $dados['telefones'] = $this->telefoneRepository->getTelefonesAtivos($id_usuarioByAdm);
         $dados['usuario'] = $this->usuario->find($id_usuarioByAdm);
         $dados['perfis'] = $this->perfilRepository->getAtivos();
+        $dados['adm'] = 'true';
+        $dados['actionEditarPerfil'] = "Perfil\PerfilController@editarPerfil";
 
 
         return view('perfil.perfil')->with('dados', $dados);

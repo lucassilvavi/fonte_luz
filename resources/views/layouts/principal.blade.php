@@ -673,7 +673,7 @@
         <div class="pull-right hidden-xs">
         </div>
         <!-- Default to the left -->
-        <strong> <a href=""></strong>
+        {{--<strong> <a href=""></strong>--}}
     </footer>
 
     <!-- Control Sidebar -->

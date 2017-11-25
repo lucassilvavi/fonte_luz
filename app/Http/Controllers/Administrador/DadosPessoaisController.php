@@ -21,7 +21,7 @@ class DadosPessoaisController
 
     function selecionarUsuario()
     {
-        $dados['usuarios'] = $this->usuarioRepository->all();
+        $dados['usuarios'] = $this->usuarioRepository->getUsuarioMenosProprio(\Illuminate\Support\Facades\Auth::user()->id);
         return view('administrador.dadosPessoais')->with('dados', $dados);
     }
 }

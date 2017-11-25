@@ -18,4 +18,9 @@ class UsuarioRepository extends Repository
     {
         $this->model = $usuario;
     }
+
+    function getUsuarioMenosProprio($id)
+    {
+        return $this->model->where('id', '!=', $id)->get();
+    }
 }
