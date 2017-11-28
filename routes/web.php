@@ -12,35 +12,38 @@
 |
 */
 Auth::routes();
-
-//rotas do inicio do sistema
+//dasboard
 Route::get('/', 'Home\HomeController@index');
 
-Route::get('/formContribuicao', 'Home\ContribuicaoController@formContribuicao');
 
-Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@formEditarContribuicao');
+//rotas do inicio do sistema
+Route::get('/contribuicao', 'Contribuicao\HomeController@index');
 
-Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}','Home\ComprovanteController@formEditaComprovante');
+Route::get('/formContribuicao', 'Contribuicao\ContribuicaoController@formContribuicao');
 
-Route::post('/adicionarComprovante', 'Home\ComprovanteController@adicionarComprovante');
+Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formEditarContribuicao');
 
-Route::get('/formExcluirContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@formExcluirContribuicao');
+Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}','Contribuicao\ComprovanteController@formEditaComprovante');
 
-Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Home\ContribuicaoController@excluirContribuicao');
+Route::post('/adicionarComprovante', 'Contribuicao\ComprovanteController@adicionarComprovante');
+
+Route::get('/formExcluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formExcluirContribuicao');
+
+Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@excluirContribuicao');
 
 
 
-Route::get('/excluirComprovante/{co_comprovante}', 'Home\ComprovanteController@excluirComprovante');
+Route::get('/excluirComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@excluirComprovante');
 
-Route::post('/editarComprovante/', 'Home\ComprovanteController@editarComprovante');
+Route::post('/editarComprovante/', 'Contribuicao\ComprovanteController@editarComprovante');
 
-Route::get('/desativarComprovante/{co_comprovante}', 'Home\ComprovanteController@desativarComprovante');
+Route::get('/desativarComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@desativarComprovante');
 
-Route::post('/cadastroMensalidadePorPeriodo', 'Home\PagamentoController@pagamentoPeriodo');
+Route::post('/cadastroMensalidadePorPeriodo', 'Contribuicao\PagamentoController@pagamentoPeriodo');
 
-Route::post('/cadastroMensalidadePorMes', 'Home\PagamentoController@pagamentoMes');
+Route::post('/cadastroMensalidadePorMes', 'Contribuicao\PagamentoController@pagamentoMes');
 
-Route::post('/editarMensalidade', 'Home\PagamentoController@editarMensalidade');
+Route::post('/editarMensalidade', 'Contribuicao\PagamentoController@editarMensalidade');
 
 Route::get('/comprovantes/{co_seq_comprovante}', 'Comprovante\DownloadController@comprovantes');
 
@@ -112,9 +115,17 @@ Route::get('/formDesableGrupo/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoP
 
 Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDesableGrupo');
 
-//rotas do grupo do nivel de acesso
+//rotas do grupo de alterar conteúdo do usuario
 
 Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecionarUsuario');
+
+//rotas do grupo de tesouraria
+
+Route::get('/tesouraria', 'Tesouraria\IndexController@index');
+
+
+
+
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');

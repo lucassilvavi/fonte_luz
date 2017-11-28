@@ -111,7 +111,6 @@
                         @foreach(  $dados['anos'] as $anos)
                             <option value="{{$anos}}">{{$anos}}</option>
                         @endforeach
-
                     </select>
                     <small class="help-block"></small>
                 </div>
@@ -199,10 +198,10 @@
 </script>
 <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 <script src="{{asset('assets/js/submit.js')}}"></script>
-<script src="{{asset('assets/js/home/submitPagamentoPorPeriodo.js')}}"></script>
-<script src="{{asset('assets/js/home/cadastrarImagemPorPeriodo.js')}}"></script>
-<script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/submitPagamentoPorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/cadastrarImagemPorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/excluirComprovantePorPeriodo.js')}}"></script>
 
-<script src="{{asset('assets/js/home/cadastrarImagemPorMes.js')}}"></script>
-<script src="{{asset('assets/js/home/submitPagamentoPorMes.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/cadastrarImagemPorMes.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/submitPagamentoPorMes.js')}}"></script>
 

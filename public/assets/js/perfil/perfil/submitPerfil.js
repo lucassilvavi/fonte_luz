@@ -3,7 +3,7 @@ $('#formEditarPerfil').on("submit", function () {
     submit('#formEditarPerfil', function (validate) {
         $('#salvarPerfil').attr('disabled', true);
         if ($.parseJSON(validate).operacao) {
-            MsgSucessoPessoal();
+            MsgSucessoPerfil();
         } else {
             $("#salvarPerfil").prop("disabled", false);
 
@@ -11,7 +11,7 @@ $('#formEditarPerfil').on("submit", function () {
     });
 });
 
-function MsgSucessoPessoal() {
+function MsgSucessoPerfil() {
 // Override global options
     toastr.success('Perfil alterado com sucesso!', '', {
         closeButton: false,

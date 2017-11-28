@@ -6,7 +6,7 @@
  * Time: 20:18
  */
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Contribuicao;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -37,7 +37,6 @@ class ComprovanteController extends Controller
         //a stdClass é uma classe pra criar objetos
         $photo_object = new \stdClass();
         $photo_object->name = str_replace('photos/', '', $photo->getClientOriginalName());
-
         $destinationPath = 'comprovantes/' . \Auth::user()->id;
         //aqui vamos criar o diretorio para salvar a imagem
         if (!file_exists($destinationPath)) {
@@ -56,7 +55,6 @@ class ComprovanteController extends Controller
             return false;
         }
         $photos[] = $photo_object;
-
         return $photos;
     }
 
@@ -70,15 +68,6 @@ class ComprovanteController extends Controller
         return false;
     }
 
-    function formEditaComprovante($co_seq_controle_contribuicao)
-    {
-        $dados['comprovantes'] = $this->comprovanteRepository->getComprovantes($co_seq_controle_contribuicao);
-        $dados['baixar'] = "/comprovantes/";
-        $dados['action'] = "Home\ComprovanteController@editarComprovante";
-        $dados['co_seq_controle_contribuicao'] = $co_seq_controle_contribuicao;
-        return view('home.modalEditarComprovante')->with('dados', $dados);
-    }
-
     function desativarComprovante($co_seq_comprovante)
     {
         $endero = $this->comprovanteRepository->getComprovanteForDesable($co_seq_comprovante);
@@ -87,6 +76,14 @@ class ComprovanteController extends Controller
         }
         return "Aprovado";
 
+    }
+    function formEditaComprovante($co_seq_controle_contribuicao)
+    {
+        $dados['comprovantes'] = $this->comprovanteRepository->getComprovantes($co_seq_controle_contribuicao);
+        $dados['baixar'] = "/comprovantes/";
+        $dados['action'] = "Contribuicao\ComprovanteController@editarComprovante";
+        $dados['co_seq_controle_contribuicao'] = $co_seq_controle_contribuicao;
+        return view('contribuicao.modalEditarComprovante')->with('dados', $dados);
     }
 
     function editarComprovante(Request $request)

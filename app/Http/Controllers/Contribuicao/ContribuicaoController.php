@@ -6,7 +6,7 @@
  * Time: 13:50
  */
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Contribuicao;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Data;
@@ -33,9 +33,9 @@ class ContribuicaoController extends Controller
     {
         $dados['anos'] = $this->data->ano();
         $dados['meses'] = $this->data->mes();
-        $dados['actionPorPeriodo'] = "Home\PagamentoController@pagamentoPeriodo";
-        $dados['actionPorMes'] = "Home\PagamentoController@pagamentoMes";
-        return view('home.modalCadastroContribuicao')->with('dados', $dados);
+        $dados['actionPorPeriodo'] = "Contribuicao\PagamentoController@pagamentoPeriodo";
+        $dados['actionPorMes'] = "Contribuicao\PagamentoController@pagamentoMes";
+        return view('contribuicao.modalCadastroContribuicao')->with('dados', $dados);
     }
 
     function formEditarContribuicao($co_seq_controle_contribuicao)
@@ -43,21 +43,20 @@ class ContribuicaoController extends Controller
         $dados['contribuicao'] = $this->controleContribuicaoRepository->findBy('co_seq_controle_contribuicao', $co_seq_controle_contribuicao);
         $dados['anos'] = $this->data->ano();
         $dados['meses'] = $this->data->mes();
-        $dados['action'] = "Home\PagamentoController@editarMensalidade";
+        $dados['action'] = "Contribuicao\PagamentoController@editarMensalidade";
 
-        return view('home.modalEditarContribuicao')->with('dados', $dados);
+        return view('contribuicao.modalEditarContribuicao')->with('dados', $dados);
     }
 
     function formExcluirContribuicao($co_seq_controle_contribuicao)
     {
         $dados['co_seq_controle_contribuicao'] = $co_seq_controle_contribuicao;
 
-        return view('home.modalExcluirContribuicao')->with('dados', $dados);
+        return view('contribuicao.modalExcluirContribuicao')->with('dados', $dados);
     }
 
     public function excluirContribuicao($co_seq_controle_contribuicao)
     {
-
         $contribuicao = $this->controleContribuicaoRepository->
         findBy('co_seq_controle_contribuicao', $co_seq_controle_contribuicao);
         if (!empty($contribuicao->dt_confirmacao_financeiro)) {

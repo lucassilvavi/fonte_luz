@@ -345,32 +345,36 @@
                     @endforeach
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="tabsPerfil">
-                <form action="{{action($dados['actionEditarPerfil'])}}" method="post" id="formEditarPerfil">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="usuario" id="usuario" value="{{$dados['usuario']->id}}">
-                    <div class="row">
-                        <div class="form-group col-md-5">
-                            <label for="inputState" class="col-form-label">Perfil</label>
-                            <select id="inputState" name="perfil" class="form-control">
-                                @foreach( $dados['perfis'] as $perfis)
-                                    <option value="{{$perfis->co_seq_perfil}}"
-                                            @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) selected
-                                            @endif>{{$perfis->no_perfil}}</option>
-                                @endforeach
-                            </select>
-                            <small class="help-block"></small>
-                        </div>
+            @can('editar perfil')
+                @if(isset($dados['adm']))
+                    <div role="tabpanel" class="tab-pane" id="tabsPerfil">
+                        <form action="{{action($dados['actionEditarPerfil'])}}" method="post" id="formEditarPerfil">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="usuario" id="usuario" value="{{$dados['usuario']->id}}">
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label for="inputState" class="col-form-label">Perfil</label>
+                                    <select id="inputState" name="perfil" class="form-control">
+                                        @foreach( $dados['perfis'] as $perfis)
+                                            <option value="{{$perfis->co_seq_perfil}}"
+                                                    @if($dados['pessoa']->co_perfil == $perfis->co_seq_perfil) selected
+                                                    @endif>{{$perfis->no_perfil}}</option>
+                                        @endforeach
+                                    </select>
+                                    <small class="help-block"></small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <button type="submit" class="btn btn-success btn-sm btn-block" id="salvarPerfil">
+                                        Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-success btn-sm btn-block" id="salvarPerfil">
-                                Salvar
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                @endif
+            @endcan
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" data-backdrop="static">

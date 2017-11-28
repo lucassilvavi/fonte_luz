@@ -6,7 +6,7 @@
  * Time: 17:12
  */
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Contribuicao;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FormContribuicaoPorPeriodoRequest;

@@ -29,12 +29,12 @@
         function getComprovantes($co_seq_controle_contribuicao)
         {
             return DB::select("
-        SELECT TC.co_seq_comprovante,TC.ds_endereco_comprovante,TC.co_seq_comprovante 
-        FROM tb_controle_contribuicao tcc
-        INNER JOIN rl_compr_controle RCC ON TCC.co_seq_controle_contribuicao = RCC.co_seq_controle_contribuicao
-        INNER JOIN tb_comprovante TC ON RCC.co_seq_comprovante = TC.co_seq_comprovante
-        WHERE tc.dt_exclusao_anexo is null
-        AND tcc.co_seq_controle_contribuicao = $co_seq_controle_contribuicao");
+                       SELECT tc.co_seq_comprovante,tc.ds_endereco_comprovante 
+                        from tb_controle_contribuicao tcc
+                        inner JOIN rl_compr_controle rcc on tcc.co_seq_controle_contribuicao = rcc.co_seq_controle_contribuicao
+                        inner join tb_comprovante tc on rcc.co_seq_comprovante = tc.co_seq_comprovante
+                        WHERE tc.dt_exclusao_anexo is null
+                        and tcc.co_seq_controle_contribuicao = $co_seq_controle_contribuicao");
         }
 
         function getComprovanteForDesable($co_seq_comprovante)

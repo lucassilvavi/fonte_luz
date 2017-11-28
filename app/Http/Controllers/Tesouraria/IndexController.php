@@ -1,12 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lucas
+ * Date: 28/11/2017
+ * Time: 20:24
+ */
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Tesouraria;
+
 
 use App\Http\Controllers\Controller;
 
-
-class HomeController extends Controller
+class IndexController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -26,6 +33,6 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('home.home');
+        return view('tesouraria.index');
     }
 }

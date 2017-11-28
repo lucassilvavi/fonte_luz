@@ -69,9 +69,9 @@
         $('.modal').modal('hide');
     });
 </script>
-<script src="{{asset('assets/js/home/excluirEditarComprovante.js')}}"></script>
-<script src="{{asset('assets/js/home/cadastrarImagemPorMes.js')}}"></script>
-<script src="{{asset('assets/js/home/excluirComprovantePorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/excluirEditarComprovante.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/cadastrarImagemPorMes.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/excluirComprovantePorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/submit.js')}}"></script>
 <script>
     $("#formComprovantePorMes").on("submit", function () {

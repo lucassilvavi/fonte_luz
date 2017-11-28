@@ -16,6 +16,6 @@
         $('.modal').modal('hide');
     });
 </script>
-<script src="{{asset('assets/js/home/submitExcluirContribuicao.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/submitExcluirContribuicao.js')}}"></script>
 
 

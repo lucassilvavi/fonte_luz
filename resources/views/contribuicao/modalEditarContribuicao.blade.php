@@ -55,7 +55,7 @@
 </script>
 <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 <script src="{{asset('assets/js/submit.js')}}"></script>
-<script src="{{asset('assets/js/home/submitEditarContribuicao.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/submitEditarContribuicao.js')}}"></script>
 
 
 
