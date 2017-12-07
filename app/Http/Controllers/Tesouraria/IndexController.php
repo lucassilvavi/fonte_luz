@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Tesouraria;
 
 
 use App\Http\Controllers\Controller;
+use App\Repositories\UsuarioRepository;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
@@ -19,20 +21,30 @@ class IndexController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    private $usuarioRepository;
+
+    public function __construct(UsuarioRepository $usuarioRepository)
     {
+        $this->usuarioRepository = $usuarioRepository;
         $this->middleware('auth');
 
     }
 
     /**
-     * Show the application dashboard.
+     *
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $dados['usuarios'] = $this->usuarioRepository->all();
+        $dados['action'] = "Tesouraria\IndexController@getContribuicoes";
 
-        return view('tesouraria.index');
+        return view('tesouraria.index')->with('dados', $dados);
+    }
+
+    public function getContribuicoes(Request $request)
+    {
+        dd($request->all());
     }
 }

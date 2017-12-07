@@ -123,6 +123,8 @@ Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecion
 
 Route::get('/tesouraria', 'Tesouraria\IndexController@index');
 
+Route::post('/getContribuicoes', 'Tesouraria\IndexController@getContribuicoes');
+
 
 
 
