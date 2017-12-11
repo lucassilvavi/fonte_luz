@@ -6,19 +6,22 @@
 @extends('layouts.principal')
 @section('title','Tesouraria')
 @section('content')
-    <form method="POST" action="{{action($dados['action'])}}">
+    <form method="POST" id="formContribuicao" action="{{action($dados['action'])}}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="container form-group col-md-4">
             <fieldset>
                 <legend>Classificação do Pagamento:</legend>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pagamentos Validados"> Pagamentos Validados</label>
+                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pagamentos Validados">
+                        Pagamentos Validados</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pendente de Validação"> Pendente de Validação</label>
+                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pendente de Validação">
+                        Pendente de Validação</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pendente com Observação"> Pendente com Observação</label>
+                    <label><input type="checkbox" name="classificacaoPagamento[]" value="Pendente com Observação">
+                        Pendente com Observação</label>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" name="classificacaoPagamento[]" value="Reprovado"> Reprovado</label>
@@ -52,7 +55,7 @@
         </div>
     </form>
 
-    <div class="row">
+    <div class="row resultadoBusca">
         <table id="tb_tesouraria" class="table table-bordered " cellspacing="0" width="100%">
             <thead class="bordaTable">
             <tr>
@@ -89,5 +92,14 @@
 @section('scripts')
     <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
     <script src="{{asset('assets/js/tesouraria/dataTableTesouraria.js')}}"></script>
+    {{--<script src="{{asset('assets/js/submit.js')}}"></script>--}}
+
+    {{--<script>--}}
+        {{--$("#formContribuicao").on("submit", function () {--}}
+            {{--submit('#formContribuicao', function (validate) {--}}
+                {{--console.log(validate);--}}
+            {{--});--}}
+        {{--});--}}
+    {{--// </script>--}}
 @endsection
 
