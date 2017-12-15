@@ -1,201 +1,209 @@
 <?php
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Auth::routes();
+    /*
+    |--------------------------------------------------------------------------
+    | Web Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register web routes for your application. These
+    | routes are loaded by the RouteServiceProvider within a group which
+    | contains the "web" middleware group. Now create something great!
+    |
+    */
+    Auth::routes();
 //dasboard
-Route::get('/', 'Home\HomeController@index');
+    Route::get('/', 'Home\HomeController@index');
 
 
 //rotas do inicio do sistema
-Route::get('/contribuicao', 'Contribuicao\HomeController@index');
+    Route::get('/contribuicao', 'Contribuicao\HomeController@index');
 
-Route::get('/formContribuicao', 'Contribuicao\ContribuicaoController@formContribuicao');
+    Route::get('/formContribuicao', 'Contribuicao\ContribuicaoController@formContribuicao');
 
-Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formEditarContribuicao');
+    Route::get('/formEditarContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formEditarContribuicao');
 
-Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}','Contribuicao\ComprovanteController@formEditaComprovante');
+    Route::get('/formEditaComprovante/{co_seq_controle_contribuicao}', 'Contribuicao\ComprovanteController@formEditaComprovante');
 
-Route::post('/adicionarComprovante', 'Contribuicao\ComprovanteController@adicionarComprovante');
+    Route::post('/adicionarComprovante', 'Contribuicao\ComprovanteController@adicionarComprovante');
 
-Route::get('/formExcluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formExcluirContribuicao');
+    Route::get('/formExcluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@formExcluirContribuicao');
 
-Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@excluirContribuicao');
+    Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@excluirContribuicao');
 
 
+    Route::get('/excluirComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@excluirComprovante');
 
-Route::get('/excluirComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@excluirComprovante');
+    Route::post('/editarComprovante/', 'Contribuicao\ComprovanteController@editarComprovante');
 
-Route::post('/editarComprovante/', 'Contribuicao\ComprovanteController@editarComprovante');
+    Route::get('/desativarComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@desativarComprovante');
 
-Route::get('/desativarComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@desativarComprovante');
+    Route::post('/cadastroMensalidadePorPeriodo', 'Contribuicao\PagamentoController@pagamentoPeriodo');
 
-Route::post('/cadastroMensalidadePorPeriodo', 'Contribuicao\PagamentoController@pagamentoPeriodo');
+    Route::post('/cadastroMensalidadePorMes', 'Contribuicao\PagamentoController@pagamentoMes');
 
-Route::post('/cadastroMensalidadePorMes', 'Contribuicao\PagamentoController@pagamentoMes');
+    Route::post('/editarMensalidade', 'Contribuicao\PagamentoController@editarMensalidade');
 
-Route::post('/editarMensalidade', 'Contribuicao\PagamentoController@editarMensalidade');
-
-Route::get('/comprovantes/{co_seq_comprovante}', 'Comprovante\DownloadController@comprovantes');
-
+    Route::get('/comprovantes/{co_seq_comprovante}', 'Comprovante\DownloadController@comprovantes');
 
 
 //perfil dados Pessoais
 
-Route::get('/getCidade/{co_uf}', 'Perfil\CidadeController@getCidadeWithUf');
+    Route::get('/getCidade/{co_uf}', 'Perfil\CidadeController@getCidadeWithUf');
 
-Route::get('/perfil/{id?}', 'Perfil\MembroController@index');
+    Route::get('/perfil/{id?}', 'Perfil\MembroController@index');
 
-Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
+    Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 
-Route::get('/changePhoto/{co_seq_foto}/{usuario}', 'Perfil\FotosController@changePhoto');
+    Route::get('/changePhoto/{co_seq_foto}/{usuario}', 'Perfil\FotosController@changePhoto');
 
-Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
+    Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
 
-Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
+    Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
 
-Route::get('/formDesableHabilidade/{co_seq_usuario_profissao}', 'Perfil\TrabalhoController@formDesableHabilidade');
+    Route::get('/formDesableHabilidade/{co_seq_usuario_profissao}', 'Perfil\TrabalhoController@formDesableHabilidade');
 
-Route::post('/desableHabilidade', 'Perfil\TrabalhoController@desableHabilidade');
+    Route::post('/desableHabilidade', 'Perfil\TrabalhoController@desableHabilidade');
 
-Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho');
+    Route::post('/cadastrarTrabalho', 'Perfil\TrabalhoController@cadastrarTrabalho');
 
-Route::post('/cadastrarTelefone', 'Perfil\TelefoneController@cadastrarTelefone');
+    Route::post('/cadastrarTelefone', 'Perfil\TelefoneController@cadastrarTelefone');
 
-Route::get('/formDesableTelefone/{co_seq_telefone}', 'Perfil\TelefoneController@formDesableTelefone');
+    Route::get('/formDesableTelefone/{co_seq_telefone}', 'Perfil\TelefoneController@formDesableTelefone');
 
-Route::post('/desableTelefone', 'Perfil\TelefoneController@desableTelefone');
+    Route::post('/desableTelefone', 'Perfil\TelefoneController@desableTelefone');
 
-Route::post('/editarPerfil', 'Perfil\PerfilController@editarPerfil');
-
+    Route::post('/editarPerfil', 'Perfil\PerfilController@editarPerfil');
 
 
 //rotas do perfil do nivel de acesso
 
-Route::get('/perfilUsuario', 'PerfilUsuario\PerfilController@index');
+    Route::get('/perfilUsuario', 'PerfilUsuario\PerfilController@index');
 
-Route::post('/savePerfil', 'PerfilUsuario\PerfilController@savePerfil');
+    Route::post('/savePerfil', 'PerfilUsuario\PerfilController@savePerfil');
 
-Route::get('/formPerfil/{action}', 'PerfilUsuario\PerfilController@formPerfil');
+    Route::get('/formPerfil/{action}', 'PerfilUsuario\PerfilController@formPerfil');
 
-Route::get('/modalPerfilPermissao/{co_perfil}', 'PerfilUsuario\PerfilController@modalPerfilPermissao');
+    Route::get('/modalPerfilPermissao/{co_perfil}', 'PerfilUsuario\PerfilController@modalPerfilPermissao');
 
-Route::post('/savePerfilPermissao', 'PerfilUsuario\PerfilController@savePerfilPermissao');
+    Route::post('/savePerfilPermissao', 'PerfilUsuario\PerfilController@savePerfilPermissao');
 
 //rotas do permissões do nivel de acesso
 
-Route::get('/permissoes', 'Permissoes\PermissaoController@index');
+    Route::get('/permissoes', 'Permissoes\PermissaoController@index');
 
-Route::get('/formPermissao/{action}', 'Permissoes\PermissaoController@formPerfil');
+    Route::get('/formPermissao/{action}', 'Permissoes\PermissaoController@formPerfil');
 
-Route::post('/savePermissao', 'Permissoes\PermissaoController@savePermissao');
+    Route::post('/savePermissao', 'Permissoes\PermissaoController@savePermissao');
 
-Route::get('/modalDetalhePermissao/{co_permissao}', 'Permissoes\PermissaoController@modalDetalhePermissao');
+    Route::get('/modalDetalhePermissao/{co_permissao}', 'Permissoes\PermissaoController@modalDetalhePermissao');
 
 //rotas do grupo do nivel de acesso
 
-Route::get('/grupoPermissao', 'GrupoPermissao\GrupoPermissaoController@index');
+    Route::get('/grupoPermissao', 'GrupoPermissao\GrupoPermissaoController@index');
 
-Route::get('/formGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@formGrupoPermissao');
+    Route::get('/formGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@formGrupoPermissao');
 
-Route::post('/saveGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@saveGrupoPermissao');
+    Route::post('/saveGrupoPermissao', 'GrupoPermissao\GrupoPermissaoController@saveGrupoPermissao');
 
-Route::get('/modalGrupoPermissao/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@modalGrupoPermissao');
+    Route::get('/modalGrupoPermissao/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@modalGrupoPermissao');
 
-Route::get('/formDesableGrupo/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@formDesableGrupo');
+    Route::get('/formDesableGrupo/{co_seq_grupo_permissoes}', 'GrupoPermissao\GrupoPermissaoController@formDesableGrupo');
 
-Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDesableGrupo');
+    Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDesableGrupo');
 
 //rotas do grupo de alterar conteúdo do usuario
 
-Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecionarUsuario');
+    Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecionarUsuario');
 
 //rotas do grupo de tesouraria
 
-Route::get('/tesouraria', 'Tesouraria\IndexController@index');
+    Route::get('/tesouraria', 'Tesouraria\IndexController@index');
 
-Route::post('/getContribuicoes', 'Tesouraria\IndexController@getContribuicoes');
+    Route::get('/getContribuicoes/{classificacaoPagamento}/{periodeDe}/{periodeAte}/{membro}', 'Tesouraria\IndexController@getContribuicoes');
+
+    Route::get('/tesouraria/comprovante/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formComprovante');
+
+    Route::get('/tesouraria/formObservacao/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formObservacao');
+
+    Route::post('/tesouraria/saveObservacao', 'Tesouraria\IndexController@saveObservacao');
+
+    Route::get('/tesouraria/formConfirmaContribuicao/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formConfirmaContribuicao');
+
+    Route::get('/tesouraria/saveConfirmacaoContribuicao/{co_seq_grupo_permissoes}', 'Tesouraria\IndexController@saveConfirmacaoContribuicao');
+
+    Route::get('/tesouraria/formReprovaContribuicao/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formReprovaContribuicao');
+
+    Route::get('/tesouraria/saveReprovaContribuicao/{co_seq_grupo_permissoes}', 'Tesouraria\IndexController@saveReprovaContribuicao');
 
 
+    Route::get('/clear-cache', function () {
+        $exitCode = Artisan::call('cache:clear');
+        // return what you want
+    });
 
 
+    Route::get('/tables', function () {
+        return view('example-view.tables');
+    });
 
-Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    // return what you want
-});
+    Route::get('/calendario', function () {
+        return view('example-view.calendario');
+    });
 
+    Route::get('/inputs', function () {
+        return view('example-view.inputs');
+    });
 
-Route::get('/tables', function () {
-    return view('example-view.tables');
-});
+    Route::get('/mascaras', function () {
+        return view('example-view.mascaras');
+    });
 
-Route::get('/calendario', function () {
-    return view('example-view.calendario');
-});
+    Route::get('/icones', function () {
+        return view('example-view.icons');
+    });
 
-Route::get('/inputs', function () {
-    return view('example-view.inputs');
-});
+    Route::get('/notification', function () {
 
-Route::get('/mascaras', function () {
-    return view('example-view.mascaras');
-});
+        Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+        Toastr::info('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+        Toastr::warning('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+        Toastr::error('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
 
-Route::get('/icones', function () {
-    return view('example-view.icons');
-});
+        return view('example-view.notification');
+    });
 
-Route::get('/notification', function () {
+    Route::get('/sessao', function () {
+        return Session::flash('status', 'Task was successful!');
+    });
 
-    Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
-    Toastr::info('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
-    Toastr::warning('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
-    Toastr::error('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+    Route::get('/buttons', function () {
+        return view('example-view.buttons');
+    });
 
-    return view('example-view.notification');
-});
+    Route::get('/modals', function () {
+        return view('example-view.modals');
+    });
 
-Route::get('/sessao', function () {
-    return Session::flash('status', 'Task was successful!');
-});
+    Route::get('/tabs', function () {
+        return view('example-view.tabs');
+    });
 
-Route::get('/buttons', function () {
-    return view('example-view.buttons');
-});
-
-Route::get('/modals', function () {
-    return view('example-view.modals');
-});
-
-Route::get('/tabs', function () {
-    return view('example-view.tabs');
-});
-
-Route::get('/progress-bar', function () {
-    return view('example-view.progress-bar');
-});
+    Route::get('/progress-bar', function () {
+        return view('example-view.progress-bar');
+    });
 //
 //Route::get('/login', function () {
 //    return view('example-view.login');
 //});
 
 
-/* CHART.JS */
-Route::get('/charts-js', function () {
-    return view('example-view.charts-js');
-});
+    /* CHART.JS */
+    Route::get('/charts-js', function () {
+        return view('example-view.charts-js');
+    });
 
-/* Google Charts */
-Route::get('/google-chart', function () {
-    return view('example-view.google-chart');
-});
+    /* Google Charts */
+    Route::get('/google-chart', function () {
+        return view('example-view.google-chart');
+    });

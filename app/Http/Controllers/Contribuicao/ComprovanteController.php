@@ -32,6 +32,7 @@ class ComprovanteController extends Controller
 
     function adicionarComprovante(Request $request)
     {
+
         $photos = [];
         $photo = $request->image;
         //a stdClass é uma classe pra criar objetos
@@ -42,11 +43,13 @@ class ComprovanteController extends Controller
         if (!file_exists($destinationPath)) {
             mkdir($destinationPath, 0755, true);
         }
+
         $ext = strrchr($photo_object->name, '.');
         $imagem = time() . uniqid(md5($photo_object->name)) . $ext;
         $salvarFoto = $photo->move($destinationPath, $imagem);
         $endereco = $destinationPath . "/" . $imagem;
         if ($salvarFoto) {
+
             $comprovante = $this->comprovanteService->novo($endereco);
             if ($comprovante != false) {
                 return array('comprovante' => $comprovante['id'], 'nome' => $photo_object->name);

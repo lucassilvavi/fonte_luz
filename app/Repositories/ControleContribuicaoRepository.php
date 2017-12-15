@@ -27,12 +27,14 @@ class ControleContribuicaoRepository extends Repository
             ->where('dt_exclusao_registro', "=", null)->get();
     }
 
-    function getContribuicaoPorPeriodo($de, $ate)
+    function getContribuicao( $query)
     {
         return DB::select("
-        SELECT * from tb_controle_contribuicao
-        WHERE dt_contribuicao BETWEEN $de AND $ate
+        SELECT * from tb_controle_contribuicao tcc
+        INNER JOIN tb_usuario tu ON tcc.id = tu.id
+         $query 
         ");
     }
+
 
 }

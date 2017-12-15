@@ -66,8 +66,7 @@
 @endsection
 
 @section('scripts')
-    @push('scripts')
-    @endpush
+
     <script src="{{asset('assets/js/contribuicao/dataTableHome.js')}}"></script>
     <script src="{{asset('assets/js/contribuicao/layoutDataTable.js')}}"></script>
     <script src="{{asset('assets/js/contribuicao/modalCadastroContribuicao.js')}}"></script>
