@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Contribuicao;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Data;
-use Illuminate\Http\Request;
 use App\Repositories\ControleContribuicaoRepository;
 use App\Services\ControleContribuicaoService;
 

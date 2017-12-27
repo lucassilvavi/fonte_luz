@@ -566,10 +566,10 @@
                         {{--</ul>--}}
                     {{--</li>--}}
                     <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
+                    {{--<li class="dropdown user user-menu">--}}
+                        {{--<!-- Menu Toggle Button -->--}}
+                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                            {{--<!-- The user image in the navbar-->--}}
                             {{--@if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())--}}
                                 {{--<img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"--}}
                                      {{--class="user-image" alt="User Image">--}}
@@ -578,42 +578,42 @@
                                      {{--class="img-circle" alt="User Image">--}}
                         {{--@endif--}}
 
-                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{Auth::user()->no_nome}}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                @if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())
-                                    <img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"
-                                         class="img-circle" alt="User Image">
-                                @else
-                                    <img  src="/fotos/newPerson.jpg"
-                                          class="img-circle" alt="User Image">
-                                @endif
-                                <p>
-                                    {{Auth::user()->no_nome}}
-                                </p>
-                            </li>
+                        {{--<!-- hidden-xs hides the username on small devices so only the image appears. -->--}}
+                            {{--<span class="hidden-xs">{{Auth::user()->no_nome}}</span>--}}
+                        {{--</a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--<!-- The user image in the menu -->--}}
+                            {{--<li class="user-header">--}}
+                                {{--@if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())--}}
+                                    {{--<img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"--}}
+                                         {{--class="img-circle" alt="User Image">--}}
+                                {{--@else--}}
+                                    {{--<img  src="/fotos/newPerson.jpg"--}}
+                                          {{--class="img-circle" alt="User Image">--}}
+                                {{--@endif--}}
+                                {{--<p>--}}
+                                    {{--{{Auth::user()->no_nome}}--}}
+                                {{--</p>--}}
+                            {{--</li>--}}
 
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="/perfil" class="btn btn-default btn-flat">Meu Perfil</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                                       class="btn btn-default btn-flat">Sair</a>
-                                </div>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                            {{--<!-- Menu Footer-->--}}
+                            {{--<li class="user-footer">--}}
+                                {{--<div class="pull-left">--}}
+                                    {{--<a href="/perfil" class="btn btn-default btn-flat">Meu Perfil</a>--}}
+                                {{--</div>--}}
+                                {{--<div class="pull-right">--}}
+                                    {{--<a href="{{ route('logout') }}"--}}
+                                       {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();"--}}
+                                       {{--class="btn btn-default btn-flat">Sair</a>--}}
+                                {{--</div>--}}
+                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
+                                      {{--style="display: none;">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                {{--</form>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
 
                 </ul>
             </div>

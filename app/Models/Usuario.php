@@ -71,6 +71,7 @@ class Usuario extends Authenticatable
         return $this->hasAnyRoles($permission);
     }
 
+
     public function hasAnyRoles($permission)
     {
 

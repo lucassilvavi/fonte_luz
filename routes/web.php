@@ -31,6 +31,16 @@
 
     Route::get('/excluirContribuicao/{co_seq_controle_contribuicao}', 'Contribuicao\ContribuicaoController@excluirContribuicao');
 
+    Route::get('/isencao/contribuicao', 'Contribuicao\IsencaoController@index');
+
+    Route::get('/isencao/modalCadastro', 'Contribuicao\IsencaoController@modalCadastroIsencao');
+
+    Route::post('/isencao/saveIsencao', 'Contribuicao\IsencaoController@saveCadastroIsencao');
+
+    Route::get('/isencao/modalEditar/{co_seq_isencao_contribuicao}', 'Contribuicao\IsencaoController@modalEditarIsencao');
+
+    Route::post('/isencao/saveEditarIsencao', 'Contribuicao\IsencaoController@saveEditarIsencao');
+
 
     Route::get('/excluirComprovante/{co_comprovante}', 'Contribuicao\ComprovanteController@excluirComprovante');
 

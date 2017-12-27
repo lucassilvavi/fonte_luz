@@ -4,12 +4,27 @@
         </a>
     </li>
     <li>
+        <a href="/perfil"><i class="fa fa-user"></i> <span>Dados Pessoais</span>
+        </a>
+    </li>
+    <li>
         <a href="/contribuicao"><i class="fa fa-money"></i> <span>Contribuição</span>
         </a>
     </li>
     <li>
-        <a href="/tesouraria"><i class="fa fa-diamond"></i> <span>Tesouraria</span>
+        <a href="/isencao/contribuicao"><i class="fa fa-minus"></i> <span>Insenção de Contribuição</span>
         </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-diamond"></i> <span>Controle de Contribuição</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="/tesouraria"><i class="fa fa-circle-o"></i>Tesouraria</a></li>
+        </ul>
     </li>
     <li>
         <a href="#"><i class="fa fa-th-large"></i> <span>Forms</span>
@@ -118,4 +133,14 @@
         </ul>
     </li>
         @endcan
+    <li>
+        <a  href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span>Sair</span>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+              style="display: none;">
+            {{ csrf_field() }}
+        </form>
+    </li>
 </ul>
