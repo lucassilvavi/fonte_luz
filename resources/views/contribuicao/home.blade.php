@@ -2,6 +2,7 @@
     .confirmaPagamento {
         background-color: #DCDCDC !important;
     }
+    
 
     .confirmadoPagamento {
         background-color: #90EE90 !important;
