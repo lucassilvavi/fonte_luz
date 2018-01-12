@@ -27,9 +27,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($co_usuario = null)
     {
-        $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicaoAtiva(\auth::user()->id);
+        if (empty($co_usuario)){
+            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicaoAtiva(\auth::user()->id);
+        }else{
+            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicaoAtiva($co_usuario);
+        }
 
         return view('contribuicao.home')->with('dados', $dados);
     }

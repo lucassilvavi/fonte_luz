@@ -29,7 +29,8 @@ class ControleContribuicao extends Model
         'dt_cadastro_registro',
         'dt_exclusao_registro',
         'dt_confirmacao_financeiro',
-        'ds_observacao_financeiro'
+        'ds_observacao_financeiro',
+        'tp_contribuicao'
 
     ];
 

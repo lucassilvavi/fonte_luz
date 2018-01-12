@@ -21,7 +21,7 @@
         public function ano()
         {
             $ano = date('Y');
-            return array($ano => $ano, $ano - 1 => $ano - 1, $ano + 1 => $ano + 1);
+            return array($ano + 1 => $ano + 1, $ano => $ano, $ano - 1 => $ano - 1, $ano - 2 => $ano - 2);
         }
 
         public function montaData($mes, $ano)
@@ -46,5 +46,13 @@
         {
             $dataForm = date('d/m/Y', strtotime($data));
             return substr($dataForm, 6, 4);
+        }
+
+        public function dataSql($data)
+        {
+            $data = str_replace("-", "-", $data);
+            $dataForm = date('Y-m-d', strtotime($data));
+            return "'$dataForm'";
+
         }
     }

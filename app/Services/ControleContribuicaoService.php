@@ -36,10 +36,10 @@
                 $ate = $dadosForm['atemesperiodo'];
                 $ateAno = $dadosForm['ateanoperiodo'];
                 if ($de == $ate && $deAno == $ateAno) {
-                    $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                    $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
                 } elseif ($de != $ate && $deAno == $ateAno) {
                     for ($i = $de; $i <= $ate; $i++) {
-                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
                     }
 
                 } elseif ($deAno != $ateAno) {
@@ -47,10 +47,10 @@
                         return '{"erroAno":true}';
                     }
                     for ($i = $de; $i <= 12; $i++) {
-                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
                     }
                     for ($s = 1; $s <= $ate; $s++) {
-                        $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante']);
+                        $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'], $dadosForm['tipoContribuicao']);
                     }
                 }
 
@@ -74,7 +74,7 @@
             try {
                 $deAno = $dadosForm['anoMes'];
                 $de = $dadosForm['demes'];
-                $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaomes'], $dadosForm['dtdepositomes'], $dadosForm['comprovante']);
+                $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaomes'], $dadosForm['dtdepositomes'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
                 DB::commit();
                 return '{"operacao":true}';
             } catch
@@ -88,7 +88,7 @@
             }
         }
 
-        function pagamento($ano, $mes, $valorContribuicaoPeriodo, $dtdepositoperiodo, $comprovantes)
+        function pagamento($ano, $mes, $valorContribuicaoPeriodo, $dtdepositoperiodo, $comprovantes,$tp_contribuicao)
         {
             DB::beginTransaction();
 
@@ -97,6 +97,7 @@
                 $dados['vl_contribuicao_mes'] = $this->trataMoeda($valorContribuicaoPeriodo);
                 $dados['nu_ano'] = $ano;
                 $dados['nu_mes'] = $mes;
+                $dados['tp_contribuicao'] = $tp_contribuicao;
                 $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dtdepositoperiodo));
                 $dados['dt_cadastro_registro'] = date("Y-m-d");
                 $controle = $this->controleContribuicaoRepository->create($dados);
@@ -125,6 +126,7 @@
 
                 $dados['nu_ano'] = $dadosForm['anoMes'];
                 $dados['nu_mes'] = $dadosForm['demes'];
+                $dados['tp_contribuicao'] = $dadosForm['tipoContribuicao'];
                 $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dadosForm['dtdepositomes']));
                 $dados['vl_contribuicao_mes'] = $this->trataMoeda($dadosForm['vlcontribuicaomes']);
                 $this->controleContribuicaoRepository->update($dados, $dadosForm['co_seq_controle_contribuicao'], 'co_seq_controle_contribuicao');

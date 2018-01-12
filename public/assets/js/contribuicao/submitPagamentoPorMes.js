@@ -3,6 +3,7 @@ $("#formComprovantePorMes").on("submit", function () {
     $(".sair").prop("disabled", true);
     $(".excluir").prop("disabled", true);
     submit('#formComprovantePorMes', function (validate) {
+
         if (validate == false) {
             MsgFaltaComprovante();
             $("#salvarMes").prop("disabled", false);

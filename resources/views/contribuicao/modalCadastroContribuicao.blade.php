@@ -46,6 +46,14 @@
                     <input type="text" class="form-control money" name="vlcontribuicaomes" value="">
                     <small class="help-block"></small>
                 </div>
+                <div class="form-group col-md-10">
+                    <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
+                    <select name="tipoContribuicao" class="form-control">
+                            <option value="1">Depósito Bancário</option>
+                            <option value="2">Via Gaveta (na Fonte de Luz)</option>
+                    </select>
+                    <small class="help-block"></small>
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -146,6 +154,14 @@
                     <label for="vlcontribuicaoperiodo" class="control-label">* Valor da Contribuição
                         Mensal: </label>
                     <input type="text" class="form-control money" name="vlcontribuicaoperiodo" value="">
+                    <small class="help-block"></small>
+                </div>
+                <div class="form-group col-md-10">
+                    <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
+                    <select name="tipoContribuicao" class="form-control">
+                        <option value="1">Depósito Bancário</option>
+                        <option value="2">Via Gaveta (na Fonte de Luz)</option>
+                    </select>
                     <small class="help-block"></small>
                 </div>
             </div>

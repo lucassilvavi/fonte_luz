@@ -12,6 +12,7 @@
             </select>
             <small class="help-block"></small>
         </div>
+
         <div class="form-group col-md-5">
             <label for="anoMes" class="control-label">* Ano Contribuição: </label>
             <select name="anoMes" class="form-control">
@@ -34,7 +35,15 @@
             <label for="vlcontribuicaomes" class="control-label">* Valor da Contribuição
                 Mensal: </label>
             <input type="text" class="form-control money" name="vlcontribuicaomes"
-                   value="{{JansenFelipe\Utils\Utils::moeda($dados['contribuicao']->vl_contribuicao_mes,"")}}">
+                   value="{{trim(JansenFelipe\Utils\Utils::moeda($dados['contribuicao']->vl_contribuicao_mes,''))}}">
+            <small class="help-block"></small>
+        </div>
+        <div class="form-group col-md-10">
+            <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
+            <select name="tipoContribuicao" class="form-control">
+                <option @if($dados['contribuicao']->tp_contribuicao == 1) selected @endif value="1">Depósito Bancário</option>
+                <option @if($dados['contribuicao']->tp_contribuicao == 2) selected @endif value="2">Via Gaveta (na Fonte de Luz)</option>
+            </select>
             <small class="help-block"></small>
         </div>
     </div>

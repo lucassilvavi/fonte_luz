@@ -36,6 +36,7 @@ class PagamentoController extends Controller
         if (!$request->get('comprovante')) {
             return '{"operacao":false}';
         }
+
         return $this->controleContribuicaoService->novoPorMes($request->all());
     }
     function editarMensalidade(FormEditarContribuicaoRequest $request){

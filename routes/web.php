@@ -17,7 +17,7 @@
 
 
 //rotas do inicio do sistema
-    Route::get('/contribuicao', 'Contribuicao\HomeController@index');
+    Route::get('/contribuicao/{co_usuario?}', 'Contribuicao\HomeController@index');
 
     Route::get('/formContribuicao', 'Contribuicao\ContribuicaoController@formContribuicao');
 
@@ -145,6 +145,28 @@
     Route::get('/tesouraria/formReprovaContribuicao/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formReprovaContribuicao');
 
     Route::get('/tesouraria/saveReprovaContribuicao/{co_seq_grupo_permissoes}', 'Tesouraria\IndexController@saveReprovaContribuicao');
+
+    Route::post('/tesouraria/saveAprovarSelecionados', 'Tesouraria\IndexController@saveAprovarSelecionados');
+
+    Route::post('/tesouraria/saveReprovacaoSelecionados', 'Tesouraria\IndexController@saveReprovacaoSelecionados');
+
+
+    //rotas do ajuste de contribuições
+
+    Route::get('/ajuste/contribuicao', 'Contribuicao\AjusteContribuicaoController@index');
+
+    //rotas do tipo de contribuicao
+
+    Route::get('/tipo/contribuicao/deposito', 'TipoContribuicao\ContribuicaoController@deposito');
+
+    Route::get('/tipo/contribuicao/gaveta', 'TipoContribuicao\ContribuicaoController@gaveta');
+
+    Route::get('/getTipoContribuicaoDeposito/{periodeDe}/{periodeAte}/{membro}', 'TipoContribuicao\ContribuicaoController@getdeposito');
+
+    Route::get('/getTipoContribuicaoGaveta/{periodeDe}/{periodeAte}/{membro}', 'TipoContribuicao\ContribuicaoController@getgaveta');
+
+    //totas Pendente de Contribuicao
+    Route::get('/pedente/contribuicao', 'Contribuicao\PedenteController@index');
 
 
     Route::get('/clear-cache', function () {

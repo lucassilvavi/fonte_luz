@@ -1,40 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lucas
- * Date: 09/11/2017
- * Time: 22:15
- */
+    /**
+     * Created by PhpStorm.
+     * User: lucas
+     * Date: 09/11/2017
+     * Time: 22:15
+     */
 
-namespace App\Repositories;
+    namespace App\Repositories;
 
-use App\Repositories\Repository;
-use App\Models\ControleContribuicao;
-use Illuminate\Support\Facades\DB;
+    use App\Repositories\Repository;
+    use App\Models\ControleContribuicao;
+    use Illuminate\Support\Facades\DB;
 
-class ControleContribuicaoRepository extends Repository
-{
-    private $controleContribuicao;
-
-    public function __construct(ControleContribuicao $controleContribuicao)
+    class ControleContribuicaoRepository extends Repository
     {
-        $this->model = $controleContribuicao;
-    }
+        private $controleContribuicao;
 
-    function getContribuicaoAtiva($id)
-    {
-        return $this->model->where('id', $id)
-            ->where('dt_exclusao_registro', "=", null)->get();
-    }
+        public function __construct(ControleContribuicao $controleContribuicao)
+        {
+            $this->model = $controleContribuicao;
+        }
 
-    function getContribuicao( $query)
-    {
-        return DB::select("
+        function getContribuicaoAtiva($id)
+        {
+            return $this->model->where('id', $id)
+                ->where('dt_exclusao_registro', "=", null)->get();
+        }
+
+        function getContribuicao($query)
+        {
+            return DB::select("
         SELECT * from tb_controle_contribuicao tcc
         INNER JOIN tb_usuario tu ON tcc.id = tu.id
          $query 
         ");
+        }
+
+
     }
-
-
-}
