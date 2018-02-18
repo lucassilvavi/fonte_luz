@@ -34,7 +34,7 @@
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
                                 <input name="image" id="selecionarArquivoMes"
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
-                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg">
+                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg, .pdf">
                               </span>
                 <span class="form-control"></span>
             </div>

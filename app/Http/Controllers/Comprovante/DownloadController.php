@@ -46,6 +46,9 @@
                     case "jpg":
                         $tipo = "image/jpeg";
                         break;
+                    case "pdf":
+                        $tipo = "image/pdf";
+                        break;
                 }
 
                 header("Content-Type: " . $tipo); // informa o tipo do arquivo ao navegador

@@ -49,8 +49,8 @@
                 <div class="form-group col-md-10">
                     <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
                     <select name="tipoContribuicao" class="form-control">
-                            <option value="1">Depósito Bancário</option>
-                            <option value="2">Via Gaveta (na Fonte de Luz)</option>
+                        <option value="1">Depósito Bancário</option>
+                        <option value="2">Via Gaveta (na Fonte de Luz)</option>
                     </select>
                     <small class="help-block"></small>
                 </div>
@@ -64,7 +64,7 @@
                                        onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
                                  <input name="image" id="selecionarArquivoMes"
                                         onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
-                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg">
+                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg,.pdf">
                                </span>
                         <span class="form-control"></span>
                     </div>
@@ -174,7 +174,7 @@
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
                                 <input name="image" id="selecionarArquivo"
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
-                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg">
+                                       style="display: none;" type="file" accept=".png, .jpg, .jpeg, .pdf">
                               </span>
                         <span class="form-control"></span>
                     </div>
