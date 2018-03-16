@@ -57,11 +57,11 @@
                             <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="logradouro" class="col-form-label">Endereço da Naturalidade</label>
+                            <label for="logradouro" class="col-form-label">Informe a Cidade quando a Nacionalidade for diferente do Brasil</label>
                             <input type="text" class="form-control" name="endereco_naturalidade"
                                    id="endereco_naturalidade"
                                    value="@if(!empty($dados['usuario']->no_cidade_pais)) {{$dados['usuario']->no_cidade_pais}} @endif"
-                                   placeholder="Endereco da naturalidade">
+                                   placeholder="Informe a Cidade">
                             <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-4">
@@ -181,10 +181,12 @@
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <button type="submit" id="btnSubmitHabilidade" class="btn btn-success btn-sm btn-block">
-                            Salvar
-                        </button>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" id="btnSubmitHabilidade" class="btn btn-success btn-sm btn-block">
+                                Salvar
+                            </button>
+                        </div>
                     </div>
                 </form>
                 <table id="tb_habilidade" class="table table-striped table-bordered" cellspacing="0" width="100%">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repositories\UnidadeFederativaRepository;
+use App\Repositories\UsuarioRepository;
 
 class RegisterController extends Controller
 {
@@ -29,16 +30,20 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    private $usuarioRepository;
+    private $unidadeFederativaRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UnidadeFederativaRepository $unidadeFederativaRepository)
+    public function __construct(UnidadeFederativaRepository $unidadeFederativaRepository,
+                                UsuarioRepository $usuarioRepository)
     {
         $this->middleware('guest');
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
+        $this->usuarioRepository = $usuarioRepository;
     }
 
     /**
@@ -50,11 +55,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
 
+//        return Validator::make($data, [
+//            'no_nome' => 'required|string|max:255',
+//            'email' => 'required|string|email|max:255|unique:tb_usuario',
+//            'password' => 'required|string|min:6|confirmed',
+//            'nu_cpf' => 'required|string|max:11|unique:tb_usuario',
+//            'dt_nascimento' => 'required',
+//            'logradouro' => 'required|string|max:55',
+//            'bairro' => 'required|string|max:55',
+//            'co_uf' => 'required',
+//            'co_cidade' => 'required',
+//            'vl_contribuicao' => 'required',
+//        ]);
         return Validator::make($data, [
             'no_nome' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:tb_usuario',
+            'email' => 'required|string|email|max:255|',
             'password' => 'required|string|min:6|confirmed',
-            'nu_cpf' => 'required|string|max:11|unique:tb_usuario',
+            'nu_cpf' => 'required|string|max:11|',
             'dt_nascimento' => 'required',
             'logradouro' => 'required|string|max:55',
             'bairro' => 'required|string|max:55',
@@ -73,6 +90,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($data['idUsuario'])) {
+            $resultado = $this->usuarioRepository->update([
+                'no_nome' => $data['no_nome'],
+                'co_perfil' => 2,
+                'nu_cpf' => $data['nu_cpf'],
+                'dt_nascimento' => '2018-02-05',
+                'email' => $data['email'],
+                'logradouro' => $data['logradouro'],
+                'bairro' => $data['bairro'],
+                'co_uf' => $this->unidadeFederativaRepository->getCoUnidade($data['co_uf']),
+                'co_cidade' => $data['co_cidade'],
+                'vl_contribuicao' => $this->trataMoeda($data['vl_contribuicao']),
+                'password' => bcrypt($data['password']),
+            ], $data['idUsuario'], 'id');
+        }
         return Usuario::create([
             'no_nome' => $data['no_nome'],
             'co_perfil' => 2,

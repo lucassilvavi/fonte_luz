@@ -9,6 +9,8 @@
     namespace App\Http\Controllers\Contribuicao;
 
     use App\Repositories\UsuarioRepository;
+    use Gate;
+
 
     class PedenteController
     {
@@ -21,6 +23,9 @@
 
         public function index()
         {
+            if (Gate::denies('tesouraria')) {
+                return redirect()->back();
+            }
             $dados['usuarios'] = $this->usuarioRepository->all();
             return view('pendeteContribuicao.index')->with('dados', $dados);
         }

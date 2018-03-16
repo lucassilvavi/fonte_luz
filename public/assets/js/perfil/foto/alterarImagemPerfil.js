@@ -1,6 +1,6 @@
 $(".ativarFoto").click(function () {
 
-    p co_seq_foto = $(this).val();
+    var co_seq_foto = $(this).val();
     var usuario = $('#usuario').val();
     $.ajax({
         type: "get",

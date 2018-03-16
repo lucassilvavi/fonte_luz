@@ -4,30 +4,32 @@
 @section('title-form','Pendete de Contribuição')
 
 @section('content')
-    <div class="container">
-        <div class="form-group col-md-2">
-            <label for="periodeDe" class="control-label">* Periodo De: </label>
-            <input type="text" id="periodeDe" class="form-control date" name="periodeDe" value="">
-            <small class="help-block"></small>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="periodeAte" class="control-label">* Até: </label>
-            <input type="text" id="periodeAte" class="form-control date" name="periodeAte" value="">
-            <small class="help-block"></small>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="membro" class="control-label">Membros: </label>
-            <select name="membro" id="membro" class="form-control">
-                <option value=""></option>
-                @foreach( $dados['usuarios'] as $usuario)
-                    <option value="{{$usuario->id}}">{{$usuario->no_nome}}</option>
-                @endforeach
-            </select>
-            <small class="help-block"></small>
-        </div>
-        <div class="form-group col-md-4">
-            <label  class="control-label"></label>
-            <button type="button" id="pesquisar" class="btn btn-info btn-block">Pesquisar</button>
+    <div class="row">
+        <div class="container">
+            <div class="form-group col-md-2">
+                <label for="periodeDe" class="control-label">* Periodo De: </label>
+                <input type="text" id="periodeDe" class="form-control date" name="periodeDe" value="">
+                <small class="help-block"></small>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="periodeAte" class="control-label">* Até: </label>
+                <input type="text" id="periodeAte" class="form-control date" name="periodeAte" value="">
+                <small class="help-block"></small>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="membro" class="control-label">Membros: </label>
+                <select name="membro" id="membro" class="form-control">
+                    <option value=""></option>
+                    @foreach( $dados['usuarios'] as $usuario)
+                        <option value="{{$usuario->id}}">{{$usuario->no_nome}}</option>
+                    @endforeach
+                </select>
+                <small class="help-block"></small>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label"></label>
+                <button type="button" id="pesquisar" class="btn btn-info btn-block">Pesquisar</button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -46,7 +48,7 @@
                 var membro = $('#membro').val();
                 $.ajax({
                     type: "get",
-                    url: "/getTipoContribuicaoGaveta/"+ valueNull(date(periodeDe)) + '/' + valueNull(date(periodeAte)) + '/' + valueNull(membro),
+                    url: "/getTipoContribuicaoGaveta/" + valueNull(date(periodeDe)) + '/' + valueNull(date(periodeAte)) + '/' + valueNull(membro),
                     beforeSend: function () {
                     },
                     success: function (unidades) {

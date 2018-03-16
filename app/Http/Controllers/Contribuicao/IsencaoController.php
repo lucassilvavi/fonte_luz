@@ -16,6 +16,7 @@
     use App\Http\Requests\FormIsencaoContribuicaoRequest;
     use App\Services\IsencaoContribuicaoService;
     use App\Repositories\IsencaoContribuicaoRepository;
+    use Gate;
 
     class IsencaoController extends Controller
     {
@@ -38,6 +39,9 @@
 
         public function index()
         {
+            if (Gate::denies('isencao de contribuicao')) {
+                return redirect()->back();
+            }
             $dados['isencoes'] = $this->isencaoContribuicaoRepository->all();
             $dados['data'] = $this->data;
 

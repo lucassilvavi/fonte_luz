@@ -11,6 +11,8 @@
     use App\Repositories\UsuarioRepository;
     use App\Http\Controllers\Data;
     use App\Repositories\ControleContribuicaoRepository;
+    use Gate;
+
 
     class ContribuicaoController
     {
@@ -29,11 +31,17 @@
 
         public function deposito()
         {
+            if (Gate::denies('tesouraria')) {
+                return redirect()->back();
+            }
             $dados['usuarios'] = $this->usuarioRepository->all();
             return view('tipoContribuicao.deposito')->with('dados', $dados);
         }
         public function gaveta()
         {
+            if (Gate::denies('tesouraria')) {
+                return redirect()->back();
+            }
             $dados['usuarios'] = $this->usuarioRepository->all();
             return view('tipoContribuicao.gaveta')->with('dados', $dados);
         }

@@ -4,6 +4,7 @@
 
     <form class="form-horizontal" id="sign_up" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
+        <div class="idUsuario"></div>
         <div class="msg">Cadastro</div>
         <div class="input-group {{ $errors->has('no_nome') ? ' has-error' : '' }}">
               <span class="input-group-addon">
@@ -11,7 +12,7 @@
               </span>
             <div class="form-line">
                 <input type="text" class="form-control" name="no_nome" value="{{ old('no_nome') }}"
-                       placeholder="Nome Completo"
+                       placeholder="Nome Completo" id="no_nome"
                        required autofocus>
                 @if ($errors->has('no_nome'))
                     <span class="help-block">
@@ -26,7 +27,7 @@
               </span>
             <div class="form-line">
                 <input type="text" class="form-control" name="nu_cpf" value="{{ old('nu_cpf') }}" placeholder="CPF"
-                       maxlength="11" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                       maxlength="11" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="cpf"
                        required autofocus>
                 @if ($errors->has('nu_cpf'))
                     <span class="help-block">
@@ -41,7 +42,7 @@
                  </span>
             <div class="form-line">
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}"
-                       placeholder="Endereço de E-mail" required>
+                       placeholder="Endereço de E-mail" id="email" required>
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -55,7 +56,7 @@
                  </span>
             <div class="form-line">
                 <input type="text" class="form-control date" name="dt_nascimento" value="{{ old('dt_nascimento') }}"
-                       placeholder="Data de Nascimento">
+                       placeholder="Data de Nascimento" id="dt_nascimento">
                 <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                 @if ($errors->has('dt_nascimento'))
                     <span class="help-block">
@@ -71,7 +72,7 @@
             <div class="form-line">
                 <select type="co_uf" name="co_uf" id="uf" class="form-control" required>
                     @foreach(\App\Http\Controllers\Facade\UFAtivo::getUf() as $uf)
-                        <option value="{{$uf->sg_uf}}">{{$uf->no_uf}}<option>
+                        <option value="{{$uf->sg_uf}}">{{$uf->no_uf}}</option>
                     @endforeach
                 </select>
                 {{--<input type="uf" class="form-control" name="uf" value="{{ old('uf') }}"--}}
@@ -106,7 +107,7 @@
                  </span>
             <div class="form-line">
                 <input type="logradouro" class="form-control" name="logradouro" value="{{ old('logradouro') }}"
-                       placeholder="Logradouro" required>
+                       placeholder="Logradouro" id="logradouro" required>
                 @if ($errors->has('logradouro'))
                     <span class="help-block">
                         <strong>{{ $errors->first('logradouro') }}</strong>
@@ -120,7 +121,7 @@
                  </span>
             <div class="form-line">
                 <input type="bairro" class="form-control" name="bairro" value="{{ old('bairro') }}"
-                       placeholder="Bairro" required>
+                       placeholder="Bairro" id="bairro" required>
                 @if ($errors->has('bairro'))
                     <span class="help-block">
                         <strong>{{ $errors->first('bairro') }}</strong>
@@ -171,5 +172,32 @@
             <a href="login">Você já é Membro?</a>
         </div>
     </form>
+
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#cpf').keyup(function () {
+                var cpf = $(this).val();
+                if (cpf.length == 11) {
+                    $.ajax({
+                        type: "get",
+                        url: "/getDadosUsuarios/" + cpf,
+                        success: function (dados) {
+                            console.log(dados)
+                            $('#no_nome').val(dados.no_nome);
+                            $('#email').val(dados.email);
+                            $('#dt_nascimento').val(dados.dt_nascimento);
+                            $('#logradouro').val(dados.logradouro);
+                            $('#bairro').val(dados.bairro);
+                            $('#money').val(dados.vl_contribuicao);
+                            $('.idUsuario').append('<input type="hidden" name="idUsuario" value=' + dados.id + ' />');
+
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 @endsection

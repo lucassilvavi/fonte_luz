@@ -24,4 +24,11 @@ class DadosPessoaisController
         $dados['usuarios'] = $this->usuarioRepository->getUsuarioMenosProprio(\Illuminate\Support\Facades\Auth::user()->id);
         return view('administrador.dadosPessoais')->with('dados', $dados);
     }
+
+    function getDadosUsuarios($cpf)
+    {
+        $dados = $this->usuarioRepository->findBy('nu_cpf', $cpf);
+
+        return $dados;
+    }
 }

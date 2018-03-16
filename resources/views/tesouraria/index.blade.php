@@ -39,7 +39,7 @@
                 <input type="text" id="periodeAte" class="form-control date" name="periodeAte" value="">
                 <small class="help-block"></small>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="membro" class="control-label">Membros: </label>
                 <select name="membro" id="membro" class="form-control">
                     <option value=""></option>
@@ -49,7 +49,7 @@
                 </select>
                 <small class="help-block"></small>
             </div>
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-7">
                 <button type="button" id="pesquisar" class="btn btn-info btn-block">Pesquisar</button>
             </div>
         </div>
