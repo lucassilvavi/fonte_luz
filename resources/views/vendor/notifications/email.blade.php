@@ -67,14 +67,6 @@ $style = [
         <tr>
             <td style="{{ $style['email-wrapper'] }}" align="center">
                 <table width="100%" cellpadding="0" cellspacing="0">
-                    <!-- Logo -->
-                    <tr>
-                        <td style="{{ $style['email-masthead'] }}">
-                            <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                {{ config('app.name') }}
-                            </a>
-                        </td>
-                    </tr>
 
                     <!-- Email Body -->
                     <tr>
@@ -90,7 +82,7 @@ $style = [
                                                 @if ($level == 'error')
                                                     Whoops!
                                                 @else
-                                                    Hello!
+                                                    Ola!
                                                 @endif
                                             @endif
                                         </h1>
@@ -140,7 +132,7 @@ $style = [
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Regards,<br>{{ config('app.name') }}
+                                            Saudações,<br>{{ config('app.name') }}
                                         </p>
 
                                         <!-- Sub Copy -->
@@ -149,8 +141,8 @@ $style = [
                                                 <tr>
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
-                                                            copy and paste the URL below into your web browser:
+                                                            Se você está tendo problemas para clicar no "{{ $actionText }}" botão,
+                                                            copie e cole o URL abaixo em seu navegador web:
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
@@ -162,23 +154,6 @@ $style = [
                                                 </tr>
                                             </table>
                                         @endif
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- Footer -->
-                    <tr>
-                        <td>
-                            <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
-                                        <p style="{{ $style['paragraph-sub'] }}">
-                                            &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a>.
-                                            All rights reserved.
-                                        </p>
                                     </td>
                                 </tr>
                             </table>
