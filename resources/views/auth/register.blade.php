@@ -192,7 +192,7 @@
                             $('#bairro').val(dados.bairro);
                             $('#money').val(dados.vl_contribuicao);
                             $('.idUsuario').append('<input type="hidden" name="idUsuario" value=' + dados.id + ' />');
-
+                            $('#sign_up').attr('action', '/register/update');
                         }
                     });
                 }

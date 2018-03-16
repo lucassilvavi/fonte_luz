@@ -15,6 +15,9 @@ Auth::routes();
 //dasboard
 Route::get('/', 'Home\HomeController@index');
 
+Route::post('/register/update', 'Auth\UpdateRegisterController@update');
+
+
 
 //rotas do inicio do sistema
 Route::get('/contribuicao/{co_usuario?}', 'Contribuicao\HomeController@index');
@@ -125,6 +128,7 @@ Route::post('/saveDesableGrupo', 'GrupoPermissao\GrupoPermissaoController@saveDe
 //rotas do grupo de alterar conteúdo do usuario
 
 Route::get('/selecionarUsuario', 'Administrador\DadosPessoaisController@selecionarUsuario');
+
 Route::get('/getDadosUsuarios/{cpf}', 'Administrador\DadosPessoaisController@getDadosUsuarios');
 
 //rotas do grupo de tesouraria
