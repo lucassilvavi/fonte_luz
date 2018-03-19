@@ -15,20 +15,17 @@ use App\Repositories\UnidadeFederativaRepository;
 use App\Repositories\UsuarioRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class UpdateRegisterController extends Controller
+class UpdateRegisterController extends LoginController
 {
 
     private $unidadeFederativaRepository;
     private $usuarioRepository;
-    private $authenticatesUsers;
 
     public function __construct(UnidadeFederativaRepository $unidadeFederativaRepository,
-                                UsuarioRepository $usuarioRepository,
-                                AuthenticatesUsers $authenticatesUsers)
+                                UsuarioRepository $usuarioRepository)
     {
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
         $this->usuarioRepository = $usuarioRepository;
-        $this->authenticatesUsers = $authenticatesUsers;
     }
 
     public function update(UpdateRegister $request)
@@ -47,11 +44,10 @@ class UpdateRegisterController extends Controller
         $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['vl_contribuicao']);
         $dados['password'] = bcrypt($dadosForm['password']);
 
-
         $resultado = $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
 
         if ($resultado == 1 ) {
-            return $this->authenticatesUsers->login($dados);
+
         }
 
     }
