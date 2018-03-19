@@ -19,6 +19,10 @@ use Gate;
 
 class PerfilController extends Controller
 {
+    private $perfilRepository;
+    private $perfilService;
+    private $permissoesRepository;
+    private $rlPerfilPermissoesRepository;
 
     public function __construct(PerfilRepository $perfilRepository,
                                 PerfilService $perfilService,
@@ -62,6 +66,7 @@ class PerfilController extends Controller
         $dados['rlPerfilPermissoesRepository'] = $this->rlPerfilPermissoesRepository;
         return view('perfilUsuario.modalPermissao')->with('dados', $dados);
     }
+
     public function savePerfilPermissao(GenericaRequest $request)
     {
 
