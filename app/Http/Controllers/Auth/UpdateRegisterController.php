@@ -13,22 +13,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRegister;
 use App\Repositories\UnidadeFederativaRepository;
 use App\Repositories\UsuarioRepository;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateRegisterController extends Controller
 {
 
     private $unidadeFederativaRepository;
     private $usuarioRepository;
-    private $authenticatesUsers;
 
     public function __construct(UnidadeFederativaRepository $unidadeFederativaRepository,
-                                UsuarioRepository $usuarioRepository,
-                                AuthenticatesUsers $authenticatesUsers)
+                                UsuarioRepository $usuarioRepository)
     {
         $this->unidadeFederativaRepository = $unidadeFederativaRepository;
         $this->usuarioRepository = $usuarioRepository;
-        $this->authenticatesUsers = $authenticatesUsers;
     }
 
     public function update(UpdateRegister $request)
@@ -46,16 +43,11 @@ class UpdateRegisterController extends Controller
         $dados['co_cidade'] = $dadosForm['co_cidade'];
         $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['vl_contribuicao']);
         $dados['password'] = bcrypt($dadosForm['password']);
-
-
-        $resultado = $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
-
-        if ($resultado == 1) {
-            return $this->authenticatesUsers->login($request);
+        $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
+        if (Auth::attempt(['nu_cpf' => $dadosForm['nu_cpf'], 'password' => $dadosForm['password']])) {
+            return redirect("/");
         }
-
     }
-
 
     public function trataMoeda($valor)
     {
