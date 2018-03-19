@@ -6,21 +6,6 @@
         {{ csrf_field() }}
         <div class="idUsuario"></div>
         <div class="msg">Cadastro</div>
-        <div class="input-group {{ $errors->has('no_nome') ? ' has-error' : '' }}">
-              <span class="input-group-addon">
-                   <i class="material-icons">person</i>
-              </span>
-            <div class="form-line">
-                <input type="text" class="form-control" name="no_nome" value="{{ old('no_nome') }}"
-                       placeholder="Nome Completo" id="no_nome"
-                       required autofocus>
-                @if ($errors->has('no_nome'))
-                    <span class="help-block">
-                   <strong>{{ $errors->first('no_nome') }}</strong>
-                   </span>
-                @endif
-            </div>
-        </div>
         <div class="input-group {{ $errors->has('nu_cpf') ? ' has-error' : '' }}">
               <span class="input-group-addon">
                    <i class="material-icons">border_color</i>
@@ -32,6 +17,21 @@
                 @if ($errors->has('nu_cpf'))
                     <span class="help-block">
                    <strong>{{ $errors->first('nu_cpf') }}</strong>
+                   </span>
+                @endif
+            </div>
+        </div>
+        <div class="input-group {{ $errors->has('no_nome') ? ' has-error' : '' }}">
+              <span class="input-group-addon">
+                   <i class="material-icons">person</i>
+              </span>
+            <div class="form-line">
+                <input type="text" class="form-control" name="no_nome" value="{{ old('no_nome') }}"
+                       placeholder="Nome Completo" id="no_nome"
+                       required autofocus>
+                @if ($errors->has('no_nome'))
+                    <span class="help-block">
+                   <strong>{{ $errors->first('no_nome') }}</strong>
                    </span>
                 @endif
             </div>
@@ -184,15 +184,26 @@
                         type: "get",
                         url: "/getDadosUsuarios/" + cpf,
                         success: function (dados) {
-                            console.log(dados)
-                            $('#no_nome').val(dados.no_nome);
-                            $('#email').val(dados.email);
-                            $('#dt_nascimento').val(dados.dt_nascimento);
-                            $('#logradouro').val(dados.logradouro);
-                            $('#bairro').val(dados.bairro);
-                            $('#money').val(dados.vl_contribuicao);
-                            $('.idUsuario').append('<input type="hidden" name="idUsuario" value=' + dados.id + ' />');
-                            $('#sign_up').attr('action', '/register/update');
+                            console.log(dados);
+                            if (dados != 'naoPossui') {
+                                $('#no_nome').val(dados.no_nome);
+                                $('#email').val(dados.email);
+                                $('#dt_nascimento').val(dados.dt_nascimento);
+                                $('#logradouro').val(dados.logradouro);
+                                $('#bairro').val(dados.bairro);
+                                $('#money').val(dados.vl_contribuicao);
+                                $('.idUsuario').append('<input type="hidden" name="idUsuario" value=' + dados.id + ' />');
+                                $('#sign_up').attr('action', '/register/update');
+                            } else {
+                                $('#no_nome').val("");
+                                $('#email').val('');
+                                $('#dt_nascimento').val('');
+                                $('#logradouro').val('');
+                                $('#bairro').val('');
+                                $('#money').val('');
+                                $('#sign_up').attr('action', '/register');
+                            }
+
                         }
                     });
                 }

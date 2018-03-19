@@ -15,7 +15,7 @@
     use App\Repositories\UsuarioRepository;
     use Illuminate\Support\Facades\Auth;
 
-    class UpdateRegisterController extends LoginController
+    class UpdateRegisterController extends Controller
     {
 
         private $unidadeFederativaRepository;
@@ -41,14 +41,15 @@
             $dados['bairro'] = $dadosForm['bairro'];
             $dados['co_uf'] = $this->unidadeFederativaRepository->getCoUnidade($dadosForm['co_uf']);
             $dados['co_cidade'] = $dadosForm['co_cidade'];
+            $dados['carga'] = 0;
             $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['vl_contribuicao']);
             $dados['password'] = bcrypt($dadosForm['password']);
 
-            $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
-            if (Auth::attempt(['nu_cpf' => $dadosForm['nu_cpf'], 'password' => $dadosForm['password']])) {
+            $resultado = $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
+            if ($resultado && Auth::attempt(['nu_cpf' => $dadosForm['nu_cpf'], 'password' => $dadosForm['password']])) {
                 return redirect("/");
-
             }
+            return redirect("/login");
         }
 
         public function trataMoeda($valor)

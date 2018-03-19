@@ -37,6 +37,7 @@ class Usuario extends Authenticatable
         'vl_contribuicao',
         'password',
         'co_perfil',
+        'carga',
         'dt_ultima_alteracao'
     ];
 
