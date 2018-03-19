@@ -46,7 +46,9 @@ class UpdateRegisterController extends LoginController
 
         $resultado = $this->usuarioRepository->update($dados, $dadosForm['idUsuario'], 'id');
 
-        if ($resultado == 1 ) {
+
+        if ($resultado == 1) {
+            return $this->authenticatesUsers->login($request);
 
         }
 
