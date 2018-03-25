@@ -33,7 +33,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="/controle/contribuicao"><i class="fa fa-circle-o"></i>Controle de Contribuição</a></li>
-                <li><a href="/pedente/contribuicao"><i class="fa fa-circle-o"></i>Pendente de Contribuição</a></li>
+                {{--<li><a href="/pedente/contribuicao"><i class="fa fa-circle-o"></i>Pendente de Contribuição</a></li>--}}
                 <li>
                     <a href="#"><i class="fa fa-circle-o"></i>Tipo de Contribuição
                         <span class="pull-right-container">

@@ -57,8 +57,8 @@
 <!-- jQuery Mask Plugin -->
 <script src="{{asset('assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
 <!-- Custom Js -->
-<script src="{{asset('assets/js/admin.js')}}"></script>
-<script src="{{asset('assets/js/sign-in.js')}}"></script>
+{{--<script src="{{asset('assets/js/admin.js')}}"></script>--}}
+{{--<script src="{{asset('assets/js/sign-in.js')}}"></script>--}}
 <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 <script src="{{asset('assets/js/perfil/pessoal/getCidadeByUf.js')}}"></script>
 </body>

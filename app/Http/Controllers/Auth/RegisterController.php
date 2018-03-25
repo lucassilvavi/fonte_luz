@@ -79,19 +79,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-            return Usuario::create([
-                'no_nome' => $data['no_nome'],
-                'co_perfil' => 2,
-                'nu_cpf' => $data['nu_cpf'],
-                'dt_nascimento' => $this->dateEmMysql($data['dt_nascimento']),
-                'email' => $data['email'],
-                'logradouro' => $data['logradouro'],
-                'bairro' => $data['bairro'],
-                'co_uf' => $this->unidadeFederativaRepository->getCoUnidade($data['co_uf']),
-                'co_cidade' => $data['co_cidade'],
-                'vl_contribuicao' => $this->trataMoeda($data['vl_contribuicao']),
-                'password' => bcrypt($data['password']),
-            ]);
+        return Usuario::create([
+            'no_nome' => $data['no_nome'],
+            'co_perfil' => 2,
+            'nu_cpf' => $data['nu_cpf'],
+            'dt_nascimento' => $this->dateEmMysql($data['dt_nascimento']),
+            'email' => $data['email'],
+            'logradouro' => $data['logradouro'],
+            'bairro' => $data['bairro'],
+            'co_uf' => $this->unidadeFederativaRepository->getCoUnidade($data['co_uf']),
+            'co_cidade' => $data['co_cidade'],
+            'vl_contribuicao' => $this->trataMoeda($data['vl_contribuicao']),
+            'carga' => 0,
+            'password' => bcrypt($data['password']),
+        ]);
 
     }
 

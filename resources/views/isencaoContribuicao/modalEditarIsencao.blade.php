@@ -41,12 +41,13 @@
             </select>
             <small class="help-block"></small>
         </div>
+
         <div class="form-group col-md-10">
             <label for="membro" class="control-label">* Membro: </label>
             <select name="membro" class="form-control">
                 <option value=""></option>
                 @foreach($dados['usuario'] as $usuario)
-                    <option @if($dados['isencao']->id_usuario  === $usuario->id) selected @endif value="{{$usuario->id}}">{{$usuario->no_nome}}</option>
+                    <option @if($dados['isencao']->id_usuario == $usuario->id) selected @endif value="{{$usuario->id}}">{{$usuario->no_nome}}</option>
                 @endforeach
             </select>
             <small class="help-block"></small>

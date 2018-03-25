@@ -70,7 +70,7 @@
                     <i class="material-icons">map</i>
                  </span>
             <div class="form-line">
-                <select type="co_uf" name="co_uf" id="uf" class="form-control" required>
+                <select type="co_uf" name="co_uf" id="uf" class="form-control uf" required>
                     @foreach(\App\Http\Controllers\Facade\UFAtivo::getUf() as $uf)
                         <option value="{{$uf->sg_uf}}">{{$uf->no_uf}}</option>
                     @endforeach
@@ -89,7 +89,7 @@
                     <i class="material-icons">location_city</i>
                  </span>
             <div class="form-line">
-                <select type="co_cidade" name="co_cidade" id="cidade" class="form-control" required>
+                <select type="co_cidade" name="co_cidade" id="cidade" class="form-control cidade" required>
                     <option value="">Cidade</option>
                 </select>
                 {{--<input type="cidade" class="form-control" name="cidade" value="{{ old('cidade') }}"--}}
@@ -184,8 +184,10 @@
                         type: "get",
                         url: "/getDadosUsuarios/" + cpf,
                         success: function (dados) {
-                            console.log(dados);
+
                             if (dados != 'naoPossui') {
+                                selectedUf(dados.sg_uf);
+                                selectedCidade(dados.no_cidade, dados.co_cidade);
                                 $('#no_nome').val(dados.no_nome);
                                 $('#email').val(dados.email);
                                 $('#dt_nascimento').val(dados.dt_nascimento);
@@ -208,6 +210,17 @@
                     });
                 }
             });
+            function selectedUf(uf) {
+                $('.uf option').each(function () {
+                    if ($(this).val() == uf) {
+                        $(this).prop("selected", true);
+                    }
+                });
+            }
+
+            function selectedCidade(cidade, value) {
+                $('.cidade').append('<option selected value=' + value + '>' + cidade + '</option>');
+            }
         });
     </script>
 
