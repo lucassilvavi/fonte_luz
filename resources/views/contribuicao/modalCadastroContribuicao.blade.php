@@ -11,7 +11,7 @@
 <!-- Tab panes -->
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
-        <form method="POST" action="{{action($dados['actionPorMes'])}}" id="formComprovantePorMes">
+        <form method="POST" action="{{$dados['actionPorMes']}}" id="formComprovantePorMes">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="row">
                 <div class="form-group col-md-5">
@@ -100,7 +100,7 @@
         </form>
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
-        <form method="POST" action="{{action($dados['actionPorPeriodo'])}}" id="formComprovantePeriodo">
+        <form method="POST" action="{{$dados['actionPorPeriodo']}}" id="formComprovantePeriodo">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="row">
                 <div class="form-group col-md-5">
@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
-                    <select name="tipoContribuicao" class="form-control">
+                    <select name="tipoContribuicao"   class="form-control">
                         <option value="1">Depósito Bancário</option>
                         <option value="2">Via Gaveta (na Fonte de Luz)</option>
                     </select>

@@ -1,7 +1,7 @@
 $("#btnSalvarDocumentoMes").click(function (event) {
     event.preventDefault();
-    var imagem = $("#selecionarArquivoMes").val();
-    if (imagem == "") {
+    let imagem = $("#selecionarArquivoMes").val();
+    if (imagem === "") {
         MsgFaltaComprovante();
     }
     else {
@@ -13,7 +13,6 @@ $("#btnSalvarDocumentoMes").click(function (event) {
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log(response);
                 $(".fotosGravadasMes").append("<tr> <td>" + response['nome'] + " <td>" +
                     "<button type='button' class='btn btn-block btn-danger excluir'" +
                     " onclick='excluir(" + response['comprovante'] + ")' value=" + response['comprovante'] + ">Excluir</button>" +

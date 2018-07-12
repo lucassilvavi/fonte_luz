@@ -74,12 +74,12 @@
 <script src="{{asset('assets/js/contribuicao/excluirComprovantePorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/submit.js')}}"></script>
 <script>
-    $("#formComprovantePorMes").on("submit", function () {
+    $("#formComprovantePorMes").on("submit", function (event) {
         $("#salvarMes").prop("disabled", true);
         $(".sair").prop("disabled", true);
         $(".excluir").prop("disabled", true);
         $(".exluirComprovante").prop("disabled", true);
-        submit('#formComprovantePorMes', function (validate) {
+        submit(event,'#formComprovantePorMes', function (validate) {
             if (validate == false) {
                 MsgFaltaComprovante();
                 $("#salvarMes").prop("disabled", false);

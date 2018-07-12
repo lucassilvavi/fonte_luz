@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Services\ComprovanteService;
 use App\Repositories\ComprovanteRepository;
 use App\Repositories\ControleContribuicaoRepository;
+use Illuminate\Auth;
 
 
 class ComprovanteController extends Controller
@@ -38,6 +39,7 @@ class ComprovanteController extends Controller
         //a stdClass é uma classe pra criar objetos
         $photo_object = new \stdClass();
         $photo_object->name = str_replace('photos/', '', $photo->getClientOriginalName());
+
         $destinationPath = 'comprovantes/' . \Auth::user()->id;
         //aqui vamos criar o diretorio para salvar a imagem
         if (!file_exists($destinationPath)) {

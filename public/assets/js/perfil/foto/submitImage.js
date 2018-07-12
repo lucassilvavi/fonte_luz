@@ -8,8 +8,8 @@ $("#btnSalvar").click(function () {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response);
-            if (response == 'true') {
+            console.log(response === 'true');
+            if (response === 'true') {
                 sucessoFoto();
             }
             else if (response == 'image and title') {

@@ -78,6 +78,7 @@ class IndexController extends Controller
         if (!empty($periodeDe) && !empty($periodeAte) && empty($membro) && !isset($classificacaoPagamento)) {
             $de = self::dataFomatada($periodeDe);
             $ate = self::dataFomatada($periodeAte);
+
             $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao WHERE dt_contribuicao >= $de AND dt_contribuicao <= $ate");
 
         } elseif (!empty($periodeDe) && empty($periodeAte) && empty($membro) && !isset($classificacaoPagamento)) {
@@ -123,6 +124,7 @@ class IndexController extends Controller
             }
 
         } elseif (!empty($periodeDe) && empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
+
             $de = self::dataFomatada($periodeDe);
             if ($classificacaoPagamento == "Pendente de Validação") {
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao >= $de");
@@ -134,6 +136,7 @@ class IndexController extends Controller
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de");
             }
         } elseif (empty($periodeDe) && !empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
+
             $ate = self::dataFomatada($periodeAte);
             if ($classificacaoPagamento == "Pendente de Validação") {
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("where dt_confirmacao_financeiro is null and dt_reprovacao_financeiro is null and dt_contribuicao <= $ate");
@@ -146,6 +149,7 @@ class IndexController extends Controller
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate");
             }
         } elseif (!empty($periodeDe) && !empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
+
             $ate = self::dataFomatada($periodeAte);
             $de = self::dataFomatada($periodeDe);
             if ($classificacaoPagamento == "Pendente de Validação") {
@@ -159,6 +163,7 @@ class IndexController extends Controller
             }
 
         } elseif (!empty($periodeDe) && empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
+
             $de = self::dataFomatada($periodeDe);
             if ($classificacaoPagamento == "Pendente de Validação") {
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
@@ -170,6 +175,7 @@ class IndexController extends Controller
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
             }
         } elseif (empty($periodeDe) && !empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
+
             $ate = self::dataFomatada($periodeAte);
             if ($classificacaoPagamento == "Pendente de Validação") {
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
@@ -181,6 +187,7 @@ class IndexController extends Controller
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
             }
         } elseif (!empty($periodeDe) && !empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
+
             $ate = self::dataFomatada($periodeAte);
             $de = self::dataFomatada($periodeDe);
             if ($classificacaoPagamento == "Pendente de Validação") {
@@ -194,7 +201,20 @@ class IndexController extends Controller
             } elseif ($classificacaoPagamento == "Reprovado") {
                 $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
             }
-        } else {
+        } elseif (empty($periodeDe) && empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
+            if ($classificacaoPagamento == "Pendente de Validação") {
+                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL  AND tu.ID = " . $membro);
+            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
+
+                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL  AND  tu.ID = " . $membro);
+
+            } elseif ($classificacaoPagamento == "Pendente com Observação") {
+                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL  AND  tu.ID = " . $membro);
+            } elseif ($classificacaoPagamento == "Reprovado") {
+                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL  AND tu.ID = " . $membro);
+            }
+        }else {
+
             $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE 1");
         }
         return view('tesouraria.dataTableContribuicao')->with('dados', $dados);

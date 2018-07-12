@@ -12,7 +12,6 @@ use App\Repositories\UsuarioRepository;
 use App\Http\Controllers\Data;
 
 
-
 class DadosPessoaisController
 {
     private $usuarioRepository;
@@ -33,10 +32,14 @@ class DadosPessoaisController
 
     function getDadosUsuarios($cpf)
     {
+
         $dados = $this->usuarioRepository->getUsuarioDaCarga($cpf);
+
         if (count($dados) >= 1) {
-            $dados[0]['dt_nascimento'] = $this->data->formatarDataBR($dados[0]['dt_nascimento']);
-            $dados[0]['vl_contribuicao'] = \JansenFelipe\Utils\Utils::moeda($dados[0]['vl_contribuicao'],"");
+            if ($dados[0]->dt_nascimento != null) {
+                $dados[0]->dt_nascimento = $this->data->formatarDataBR($dados[0]->dt_nascimento);
+            }
+            $dados[0]->vl_contribuicao = \JansenFelipe\Utils\Utils::moeda($dados[0]->vl_contribuicao, "");
 
             return $dados[0];
         }

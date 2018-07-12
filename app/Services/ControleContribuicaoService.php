@@ -26,7 +26,7 @@
             $this->comprovanteRepository = $comprovanteRepository;
         }
 
-        public function novoPorPeriodo($dadosForm)
+        public function novoPorPeriodo($dadosForm,$comprovante = null)
         {
             DB::beginTransaction();
 
@@ -35,22 +35,22 @@
                 $de = $dadosForm['demesperiodo'];
                 $ate = $dadosForm['atemesperiodo'];
                 $ateAno = $dadosForm['ateanoperiodo'];
-                if ($de == $ate && $deAno == $ateAno) {
-                    $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
+                if ($de == $ate && $deAno == $ateAno ) {
+                    $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'],$comprovante,$dadosForm['tipoContribuicao']);
                 } elseif ($de != $ate && $deAno == $ateAno) {
                     for ($i = $de; $i <= $ate; $i++) {
-                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
+                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $comprovante,$dadosForm['tipoContribuicao']);
                     }
 
-                } elseif ($deAno != $ateAno) {
+                } elseif ($deAno != $ateAno ) {
                     if ($deAno > $ateAno) {
                         return '{"erroAno":true}';
                     }
                     for ($i = $de; $i <= 12; $i++) {
-                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
+                        $this->pagamento($deAno, $i, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'],$comprovante,$dadosForm['tipoContribuicao']);
                     }
                     for ($s = 1; $s <= $ate; $s++) {
-                        $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'], $dadosForm['comprovante'], $dadosForm['tipoContribuicao']);
+                        $this->pagamento($deAno, $s, $dadosForm['vlcontribuicaoperiodo'], $dadosForm['dtdepositoperiodo'],$comprovante, $dadosForm['tipoContribuicao']);
                     }
                 }
 
@@ -67,14 +67,14 @@
             }
         }
 
-        function novoPorMes($dadosForm)
+        function novoPorMes($dadosForm,$comprovante = null)
         {
             DB::beginTransaction();
 
             try {
                 $deAno = $dadosForm['anoMes'];
                 $de = $dadosForm['demes'];
-                $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaomes'], $dadosForm['dtdepositomes'], $dadosForm['comprovante'],$dadosForm['tipoContribuicao']);
+                $this->pagamento($deAno, $de, $dadosForm['vlcontribuicaomes'], $dadosForm['dtdepositomes'], $comprovante,$dadosForm['tipoContribuicao']);
                 DB::commit();
                 return '{"operacao":true}';
             } catch
@@ -101,9 +101,12 @@
                 $dados['dt_contribuicao'] = date('Y-m-d', strtotime($dtdepositoperiodo));
                 $dados['dt_cadastro_registro'] = date("Y-m-d");
                 $controle = $this->controleContribuicaoRepository->create($dados);
-                foreach ($comprovantes as $comprovante) {
-                    $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
+                if($comprovantes != null){
+                    foreach ($comprovantes as $comprovante) {
+                        $controle->comprovante()->attach($comprovante, ['st_ativo' => 'S']);
+                    }
                 }
+
                 DB::commit();
                 return '{"operacao":true}';
             } catch

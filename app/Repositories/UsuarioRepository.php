@@ -31,6 +31,24 @@ class UsuarioRepository extends Repository
             ->join('tb_cidade', 'tb_usuario.co_cidade', 'tb_cidade.co_seq_cidade')
             ->where('nu_cpf', $cpf)
             ->where('carga', 1)
+            ->select('id',
+            'nu_cpf',
+            'no_nome',
+            'dt_nascimento',
+            'email',
+            'logradouro',
+            'bairro',
+            'nu_cep',
+            'vl_contribuicao',
+            'co_uf',
+            'co_cidade',
+            'naturalidade',
+            'co_pais',
+            'carga',
+            'co_seq_cidade',
+            'no_cidade',
+            'sg_uf',
+            'co_ibge')
             ->get();
     }
 }

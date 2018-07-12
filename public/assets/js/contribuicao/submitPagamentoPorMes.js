@@ -1,8 +1,8 @@
-$("#formComprovantePorMes").on("submit", function () {
+$("#formComprovantePorMes").on("submit", function (event) {
     $("#salvarMes").prop("disabled", true);
     $(".sair").prop("disabled", true);
     $(".excluir").prop("disabled", true);
-    submit('#formComprovantePorMes', function (validate) {
+    submit(event, '#formComprovantePorMes', function (validate) {
 
         if (validate == false) {
             MsgFaltaComprovante();
@@ -11,13 +11,22 @@ $("#formComprovantePorMes").on("submit", function () {
             $(".excluir").prop("disabled", false);
         } else if (($.parseJSON(validate).operacao)) {
             MsgSucessoPorPeriodo();
-        }else{
+        } else {
             MsgErroAno();
             $("#salvarMes").prop("disabled", false);
             $(".sair").prop("disabled", false);
         }
+
     });
 });
+
+$('#formComprovantePorMes').on("submit", function () {
+
+    submit('#formComprovantePorMes', function (validate) {
+
+    });
+});
+
 
 function MsgFaltaComprovante() {
     //// Override global options
@@ -28,6 +37,7 @@ function MsgFaltaComprovante() {
         positionClass: 'toast-top-center'
     });
 }
+
 function MsgErroAno() {
     //// Override global options
     toastr.warning('O campo "Até Ano Contribuição" deve ser menos que o campo "De Ano Contribuição" !', '', {

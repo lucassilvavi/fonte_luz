@@ -26,20 +26,29 @@ class PagamentoController extends Controller
 
     function pagamentoPeriodo(FormContribuicaoPorPeriodoRequest $request)
     {
-        if (!$request->get('comprovante')) {
+        if ($request->get('tipoContribuicao') == 2) {
+            return $this->controleContribuicaoService->novoPorPeriodo($request->all());
+        } elseif(!$request->get('comprovante') && $request->get('tipoContribuicao') == 1) {
             return '{"operacao":false}';
         }
-        return $this->controleContribuicaoService->novoPorPeriodo($request->all());
+            return $this->controleContribuicaoService->novoPorPeriodo($request->all(),$request->get('comprovante'));
+
+
     }
+
     function pagamentoMes(FormContribuicaoPorMes $request)
     {
-        if (!$request->get('comprovante')) {
+
+        if ($request->get('tipoContribuicao') == 2) {
+            return $this->controleContribuicaoService->novoPorMes($request->all());
+        } elseif (!$request->get('comprovante') &&  $request->get('tipoContribuicao') == 1) {
             return '{"operacao":false}';
         }
-
-        return $this->controleContribuicaoService->novoPorMes($request->all());
+        return $this->controleContribuicaoService->novoPorMes($request->all(),$request->get('comprovante'));
     }
-    function editarMensalidade(FormEditarContribuicaoRequest $request){
-      return $this->controleContribuicaoService->editar($request->all());
+
+    function editarMensalidade(FormEditarContribuicaoRequest $request)
+    {
+        return $this->controleContribuicaoService->editar($request->all());
     }
 }

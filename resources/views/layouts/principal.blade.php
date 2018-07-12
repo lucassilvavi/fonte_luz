@@ -15,7 +15,7 @@
 
     <link href="{{asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<!-- Font Awesome -->--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="{{asset('/assets/vendor/Font-Awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     {{--<!-- Data Tables -->--}}
     <link href="{{asset('/assets/vendor/datatables/media/css/dataTables.foundation.min.css')}}" rel="stylesheet">
     <link href="{{asset('/assets/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css')}}"
@@ -29,14 +29,12 @@
     <link href="{{asset('/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}"
           rel="stylesheet">
 
-    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="{{asset('/assets/vendor/datatables.net/css/buttons.dataTables.min.css')}}" rel="stylesheet">
 
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/ionicons/css/ionicons.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -44,8 +42,7 @@
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
+    <link href="{{asset('/assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet">
     @section('style')
 
     @show
@@ -83,15 +80,10 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                        {{--<i class="fa fa-envelope-o"></i>--}}
-                        {{--<span class="label label-success">4</span>--}}
-                        {{--</a>--}}
+
 
                         <ul class="dropdown-menu">
-                        {{--<li class="header">You have 4 messages</li>--}}
-                        {{--<li>--}}
+
                         <!-- inner menu: contains the messages -->
                             <ul class="menu">
                                 <li><!-- start message -->
@@ -107,13 +99,6 @@
                                                      class="img-circle" alt="User Image">
                                             @endif
                                         </div>
-                                        {{--<!-- Message title and timestamp -->--}}
-                                        {{--<h4>--}}
-                                        {{--Support Team--}}
-                                        {{--<small><i class="fa fa-clock-o"></i> 5 mins</small>--}}
-                                        {{--</h4>--}}
-                                        {{--<!-- The message -->--}}
-                                        {{--<p>Why not buy a new awesome theme?</p>--}}
                                     </a>
                                 </li>
                                 <!-- end message -->
@@ -124,117 +109,6 @@
                         </ul>
                     </li>
                     <!-- /.messages-menu -->
-
-                    <!-- Notifications Menu -->
-                {{--<li class="dropdown notifications-menu">--}}
-                {{--<!-- Menu toggle button -->--}}
-                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                {{--<i class="fa fa-bell-o"></i>--}}
-                {{--<span class="label label-warning">10</span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                {{--<li class="header">You have 10 notifications</li>--}}
-                {{--<li>--}}
-                {{--<!-- Inner Menu: contains the notifications -->--}}
-                {{--<ul class="menu">--}}
-                {{--<li><!-- start notification -->--}}
-                {{--<a href="#">--}}
-                {{--<i class="fa fa-users text-aqua"></i> 5 new members joined today--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end notification -->--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li class="footer"><a href="#">View all</a></li>--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                <!-- Tasks Menu -->
-                {{--<li class="dropdown tasks-menu">--}}
-                {{--<!-- Menu Toggle Button -->--}}
-                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                {{--<i class="fa fa-flag-o"></i>--}}
-                {{--<span class="label label-danger">9</span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                {{--<li class="header">You have 9 tasks</li>--}}
-                {{--<li>--}}
-                {{--<!-- Inner menu: contains the tasks -->--}}
-                {{--<ul class="menu">--}}
-                {{--<li><!-- Task item -->--}}
-                {{--<a href="#">--}}
-                {{--<!-- Task title and progress text -->--}}
-                {{--<h3>--}}
-                {{--Design some buttons--}}
-                {{--<small class="pull-right">20%</small>--}}
-                {{--</h3>--}}
-                {{--<!-- The progress bar -->--}}
-                {{--<div class="progress xs">--}}
-                {{--<!-- Change the css width attribute to simulate progress -->--}}
-                {{--<div class="progress-bar progress-bar-aqua" style="width: 20%"--}}
-                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
-                {{--aria-valuemax="100">--}}
-                {{--<span class="sr-only">20% Complete</span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end task item -->--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li class="footer">--}}
-                {{--<a href="#">View all tasks</a>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                <!-- User Account Menu -->
-                    {{--<li class="dropdown user user-menu">--}}
-                    {{--<!-- Menu Toggle Button -->--}}
-                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                    {{--<!-- The user image in the navbar-->--}}
-                    {{--@if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())--}}
-                    {{--<img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"--}}
-                    {{--class="user-image" alt="User Image">--}}
-                    {{--@else--}}
-                    {{--<img src=""--}}
-                    {{--class="img-circle" alt="User Image">--}}
-                    {{--@endif--}}
-
-                    {{--<!-- hidden-xs hides the username on small devices so only the image appears. -->--}}
-                    {{--<span class="hidden-xs">{{Auth::user()->no_nome}}</span>--}}
-                    {{--</a>--}}
-                    {{--<ul class="dropdown-menu">--}}
-                    {{--<!-- The user image in the menu -->--}}
-                    {{--<li class="user-header">--}}
-                    {{--@if(\App\Http\Controllers\Facade\FotoAtiva::getFoto())--}}
-                    {{--<img src="{{ asset("/fotos/".\App\Http\Controllers\Facade\FotoAtiva::getFoto()[0]->ds_endereco_foto) }}"--}}
-                    {{--class="img-circle" alt="User Image">--}}
-                    {{--@else--}}
-                    {{--<img  src="/fotos/newPerson.jpg"--}}
-                    {{--class="img-circle" alt="User Image">--}}
-                    {{--@endif--}}
-                    {{--<p>--}}
-                    {{--{{Auth::user()->no_nome}}--}}
-                    {{--</p>--}}
-                    {{--</li>--}}
-
-                    {{--<!-- Menu Footer-->--}}
-                    {{--<li class="user-footer">--}}
-                    {{--<div class="pull-left">--}}
-                    {{--<a href="/perfil" class="btn btn-default btn-flat">Meu Perfil</a>--}}
-                    {{--</div>--}}
-                    {{--<div class="pull-right">--}}
-                    {{--<a href="{{ route('logout') }}"--}}
-                    {{--onclick="event.preventDefault();--}}
-                    {{--document.getElementById('logout-form').submit();"--}}
-                    {{--class="btn btn-default btn-flat">Sair</a>--}}
-                    {{--</div>--}}
-                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
-                    {{--style="display: none;">--}}
-                    {{--{{ csrf_field() }}--}}
-                    {{--</form>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
-                    {{--</li>--}}
 
                 </ul>
             </div>
@@ -294,7 +168,7 @@
         <div class="pull-right hidden-xs">
         </div>
         <!-- Default to the left -->
-        {{--<strong> <a href=""></strong>--}}
+
     </footer>
 
     <!-- Control Sidebar -->
@@ -380,9 +254,9 @@
 <script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/metisMenu/dist/metisMenu.min.js')}}"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="{{asset('/assets/vendor/jquery/dist/jquery.form.js')}}"></script>
 {{--<!-- Toastr - Notificações -->--}}
-{{--<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>--}}
+<script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>
 <!-- Data Tables -->
 <script src="{{asset('/assets/vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/assets/vendor/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
@@ -401,8 +275,7 @@
 <!-- jQuery Mask Plugin -->
 <script src="{{asset('/assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
 <script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-
+<script src="{{asset('/assets/vendor/toastr/toastr.min.js')}}"></script>
 @section('scripts')
 
 @show

@@ -69,7 +69,7 @@
                             <select id="uf" name="uf" class="form-control">
                                 <option value=""></option>
                                 @foreach( $dados['ufs'] as $uf)
-                                    <option @if( $dados['repositoryUsuario']->findBy('co_uf',$uf['co_seq_uf'])) selected
+                                    <option @if( $dados['usuario']->co_uf == $uf['co_seq_uf'])) selected
                                             @endif
                                             value="{{$uf['sg_uf']}}">{{$uf['no_uf']}}</option>
                                 @endforeach

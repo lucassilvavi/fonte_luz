@@ -43,7 +43,7 @@
 <script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 
 <script src="{{asset('/assets/vendor/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="{{asset('/assets/vendor/jquery/dist/jquery.form.js')}}"></script>
 
 <!-- Waves Effect Plugin Js -->
 <script src="{{asset('assets/vendor/node-waves/waves.js')}}"></script>

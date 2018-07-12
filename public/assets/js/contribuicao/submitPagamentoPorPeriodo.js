@@ -1,8 +1,8 @@
-$("#formComprovantePeriodo").on("submit", function () {
+$("#formComprovantePeriodo").on("submit", function (event) {
     $("#salvarPorPeriodo").prop("disabled", true);
     $(".sair").prop("disabled", true);
     $(".excluir").prop("disabled", true);
-    submit('#formComprovantePeriodo', function (validate) {
+    submit(event,'#formComprovantePeriodo', function (validate) {
         if (validate == false) {
             MsgFaltaComprovante();
             $("#salvarPorPeriodo").prop("disabled", false);
