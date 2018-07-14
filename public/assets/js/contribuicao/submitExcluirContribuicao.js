@@ -1,14 +1,15 @@
 $("#salvar").click(function (event) {
     event.preventDefault();
-    var co_seq_controle_contribuicao = $("#co_seq_controle_contribuicao").val();
+    let co_seq_controle_contribuicao = $("#co_seq_controle_contribuicao").val();
     $("#salvar").prop("disabled", true);
     $(".sair").prop("disabled", true);
     $.ajax({
         type: "get",
-        url: "excluirContribuicao/" + co_seq_controle_contribuicao,
+        url: "/excluirContribuicao/" + co_seq_controle_contribuicao,
         beforeSend: function () {
         },
         success: function (dados) {
+
             if (dados == 'Confirmado') {
                 MsgConfirmado();
                 $("#salvar").prop("disabled", false);

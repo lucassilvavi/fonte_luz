@@ -1,6 +1,6 @@
-$("#formTrabalho").on("submit", function() {
+$("#formTrabalho").on("submit", function(e) {
     $("#btnSubmitHabilidade").prop("disabled", true);
-    submit('#formTrabalho', function(validate) {
+    submit(e,'#formTrabalho', function(validate) {
         if ($.parseJSON(validate).operacao) {
             MsgSucessoTrabalho();
         }else {

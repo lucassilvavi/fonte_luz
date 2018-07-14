@@ -1,7 +1,7 @@
-$("#formIsencaoContribuicao").on("submit", function () {
+$("#formIsencaoContribuicao").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
     $("#sair").prop("disabled", true);
-    submit('#formIsencaoContribuicao', function (validate) {
+    submit(e,'#formIsencaoContribuicao', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgIsencaoSucesso();
         } else if (validate != false) {

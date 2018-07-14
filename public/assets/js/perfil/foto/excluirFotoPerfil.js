@@ -1,5 +1,5 @@
 $(".excluirFoto").click(function () {
-    var co_seq_foto = $(this).val();
+    let co_seq_foto = $(this).val();
     $.ajax({
         type: "get",
         url: "/deletePhoto/"+co_seq_foto,

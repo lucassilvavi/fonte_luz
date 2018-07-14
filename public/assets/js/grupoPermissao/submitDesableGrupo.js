@@ -1,7 +1,7 @@
-$("#formModalDesableGrupo").on("submit", function () {
+$("#formModalDesableGrupo").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
     $("#sair").prop("disabled", true);
-    submit('#formModalDesableGrupo', function (validate) {
+    submit(e,'#formModalDesableGrupo', function (validate) {
 
         if ($.parseJSON(validate).operacao) {
             MsgDesableGrupo();

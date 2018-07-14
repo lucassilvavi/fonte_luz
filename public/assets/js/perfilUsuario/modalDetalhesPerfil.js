@@ -1,5 +1,5 @@
 $(".detalhes").click(function () {
-    var co_perfil = $(this).val();
+    let co_perfil = $(this).val();
     $.ajax({
         type: "get",
         url: "/modalPerfilPermissao/"+co_perfil,

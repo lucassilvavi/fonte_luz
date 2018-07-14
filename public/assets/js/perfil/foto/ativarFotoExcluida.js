@@ -1,6 +1,6 @@
 $(".fotoExcluida").click(function () {
-    var co_seq_foto = $(this).val();
-    var usuario = $('#usuario').val();
+    let co_seq_foto = $(this).val();
+    let usuario = $('#usuario').val();
     $.ajax({
         type: "get",
         url: "/changePhoto/"+co_seq_foto+'/'+usuario,

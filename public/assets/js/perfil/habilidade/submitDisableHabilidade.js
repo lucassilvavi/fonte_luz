@@ -1,7 +1,7 @@
-$("#formModalDesableHabilidade").on("submit", function () {
+$("#formModalDesableHabilidade").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
     $("#sair").prop("disabled", true);
-    submit('#formModalDesableHabilidade', function (validate) {
+    submit(e,'#formModalDesableHabilidade', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgDesableHabilidade();
         } else if (validate != false){

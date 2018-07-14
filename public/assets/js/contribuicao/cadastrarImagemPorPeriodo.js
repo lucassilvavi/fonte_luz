@@ -1,6 +1,6 @@
 $("#btnSalvarDocumento1").click(function (event) {
     event.preventDefault();
-    var imagem = $("#selecionarArquivo").val();
+    let imagem = $("#selecionarArquivo").val();
 
     if (imagem == "") {
         MsgFaltaComprovante();

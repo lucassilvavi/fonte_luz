@@ -1,7 +1,7 @@
-$("#formVincularPermissao").on("submit", function () {
+$("#formVincularPermissao").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
     $("#sair").prop("disabled", true);
-    submit('#formVincularPermissao', function (validate) {
+    submit(e,'#formVincularPermissao', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgVincularPermissao();
         } else if (validate != false) {

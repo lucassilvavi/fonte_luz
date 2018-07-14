@@ -1,6 +1,6 @@
-$('#formEditarPerfil').on("submit", function () {
+$('#formEditarPerfil').on("submit", function (e) {
     $("#salvarPerfil").prop("disabled", true);
-    submit('#formEditarPerfil', function (validate) {
+    submit(e,'#formEditarPerfil', function (validate) {
         $('#salvarPerfil').attr('disabled', true);
         if ($.parseJSON(validate).operacao) {
             MsgSucessoPerfil();

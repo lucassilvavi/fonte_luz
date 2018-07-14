@@ -1,9 +1,9 @@
 $("#aprovarSelecionados").on('click', function () {
-    var form = new Array();
+    let form = new Array();
     $("input[name='controle_contribuicao[]']:checked").each(function () {
         form.push($(this).val());
     });
-    if (form == "") {
+    if (form === "") {
         MsgFaltaSelecionarContribuicao()
     } else {
         $.ajax({

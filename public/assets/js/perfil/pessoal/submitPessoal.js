@@ -1,6 +1,6 @@
-$('#formPessoal').on("submit", function () {
+$('#formPessoal').on("submit", function (e) {
     $("#btnSalvarPessoal").prop("disabled", true);
-    submit('#formPessoal', function (validate) {
+    submit(e,'#formPessoal', function (validate) {
         $('#btnSalvarPessoal').attr('disabled', true);
         if ($.parseJSON(validate).operacao) {
             MsgSucessoPessoal();

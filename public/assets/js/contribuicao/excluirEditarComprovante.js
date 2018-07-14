@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(".exluirComprovante").on('click', function () {
-        var co_seq_comprovante = $(this).val();
+        let co_seq_comprovante = $(this).val();
         $.ajax({
             type: "get",
             url: "/desativarComprovante/" + co_seq_comprovante,
@@ -10,10 +10,10 @@ $(document).ready(function () {
                 if (data == "Aprovado") {
                     MsgAnalisado();
                 } else if (($.parseJSON(data).operacao)) {
-                    var tds = document.querySelectorAll(".exluirComprovante");
+                    let tds = document.querySelectorAll(".exluirComprovante");
                     tds.forEach(function (td) {
                         if (td.value == co_seq_comprovante) {
-                            var tr = td.parentNode;
+                            let tr = td.parentNode;
                             tr.parentNode.innerHTML = "";
                         }
                     });

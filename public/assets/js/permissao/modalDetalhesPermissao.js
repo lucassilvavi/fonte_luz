@@ -1,5 +1,5 @@
 $(".detalhes").click(function () {
-    var co_permissao = $(this).val();
+    let co_permissao = $(this).val();
     $.ajax({
         type: "get",
         url: "/modalDetalhePermissao/"+co_permissao,

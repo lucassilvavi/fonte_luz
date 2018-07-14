@@ -5,10 +5,10 @@ function excluir(co_comprovante) {
         beforeSend: function () {
         },
         success: function (data) {
-            var inputs = document.getElementsByName("comprovante[]");
+            let inputs = document.getElementsByName("comprovante[]");
             inputs.forEach(function (input) {
                 if (input.value == co_comprovante) {
-                    var td = input.parentNode;
+                    let td = input.parentNode;
                     td.parentNode.innerHTML = "";
                 }
             });

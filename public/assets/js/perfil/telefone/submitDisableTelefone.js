@@ -1,7 +1,7 @@
-$("#formModalDesableTelefone").on("submit", function () {
+$("#formModalDesableTelefone").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
     $("#sair").prop("disabled", true);
-    submit('#formModalDesableTelefone', function (validate) {
+    submit(e,'#formModalDesableTelefone', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgDesableTelefone();
         } else if (validate != false){

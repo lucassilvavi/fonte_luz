@@ -1,5 +1,5 @@
 $("#tb_Insencao_contribuicao ").on('click', '.editarIsencao', function () {
-    var co_seq_isencao_contribuicao = $(this).val();
+    let co_seq_isencao_contribuicao = $(this).val();
     $.ajax({
         type: "get",
         url: "/isencao/modalEditar/" + co_seq_isencao_contribuicao,

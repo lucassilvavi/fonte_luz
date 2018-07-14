@@ -26,7 +26,7 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="co_seq_controle_contribuicao" value="{{ $dados['co_seq_controle_contribuicao']}}">
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-12">
             <label>Anexar Comprovante:</label>
             <div class="input-group">
                               <span class="input-group-btn">

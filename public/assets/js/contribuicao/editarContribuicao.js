@@ -1,5 +1,5 @@
 $("#tb_home ").on('click', '.editarContribuicao', function () {
-    var co_seq_controle_contribuicao = $(this).val();
+    let co_seq_controle_contribuicao = $(this).val();
     $.ajax({
         type: "get",
         url: "/formEditarContribuicao/" + co_seq_controle_contribuicao,

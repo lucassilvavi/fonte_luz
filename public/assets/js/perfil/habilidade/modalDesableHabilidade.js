@@ -1,5 +1,5 @@
 $(".btnExcluirHabilidade").click(function () {
-    var co_seq_usuario_profissao = $(this).val();
+    let co_seq_usuario_profissao = $(this).val();
         $.ajax({
             type: "get",
             url: "/formDesableHabilidade/" + co_seq_usuario_profissao,

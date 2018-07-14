@@ -1,6 +1,6 @@
-$("#formPermissao").on("submit", function () {
+$("#formPermissao").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
-    submit('#formPermissao', function (validate) {
+    submit(e,'#formPermissao', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgPermissao();
         } else if (validate != false){

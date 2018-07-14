@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var estado = $("#uf");
-    var selecionado = $('#cidade :selected').text();
+    let estado = $("#uf");
+    let selecionado = $('#cidade :selected').text();
     if(selecionado == ''){
         $('#cidade').attr('disabled', true);
     }

@@ -1,5 +1,5 @@
 $("#tb_tesouraria ").on( 'click', '.comprovante', function () {
-    var co_seq_controle_contribuicao = $(this).val();
+    let co_seq_controle_contribuicao = $(this).val();
 
     $.ajax({
         type: "get",

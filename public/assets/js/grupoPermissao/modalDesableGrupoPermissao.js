@@ -1,5 +1,5 @@
 $(".excluir").click(function () {
-    var co_seq_grupo_permissoes = $(this).val();
+    let co_seq_grupo_permissoes = $(this).val();
     $.ajax({
         type: "get",
         url: "/formDesableGrupo/"+co_seq_grupo_permissoes,

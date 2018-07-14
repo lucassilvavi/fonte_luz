@@ -1,7 +1,7 @@
-$("#formObservacao").on("submit", function () {
+$("#formObservacao").on("submit", function (e) {
     $(".salvar").prop("disabled", true);
     $(".sair").prop("disabled", true);
-    submit('#formObservacao', function (validate) {
+    submit(e,'#formObservacao', function (validate) {
         if (($.parseJSON(validate).operacao)) {
             MsgSucessoObservacao();
         }else{

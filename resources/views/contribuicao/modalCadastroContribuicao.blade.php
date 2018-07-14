@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label>Anexar Comprovante:</label>
                     <div class="input-group">
                                <span class="input-group-btn">
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label>Anexar Comprovante:</label>
                     <div class="input-group">
                               <span class="input-group-btn">

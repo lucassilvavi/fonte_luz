@@ -1,7 +1,7 @@
 
-$("#formGrupoPermissao").on("submit", function () {
+$("#formGrupoPermissao").on("submit", function (e) {
     $("#salvar").prop("disabled", true);
-    submit('#formGrupoPermissao', function (validate) {
+    submit(e,'#formGrupoPermissao', function (validate) {
         if ($.parseJSON(validate).operacao) {
             MsgPerfilUsuario();
         } else if (validate != false) {

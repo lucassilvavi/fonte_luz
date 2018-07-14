@@ -1,5 +1,5 @@
 $(".sim").click(function () {
-    var co_seq_controle_contribuicao = $("#co_seq_controle_contribuicao").val();
+    let co_seq_controle_contribuicao = $("#co_seq_controle_contribuicao").val();
     $.ajax({
         type: "get",
         url: "/tesouraria/saveReprovaContribuicao/" + co_seq_controle_contribuicao,
@@ -11,10 +11,10 @@ $(".sim").click(function () {
                 $(".sim").prop("disabled", true);
                 $(".sair").prop("disabled", true);
                 MsgSucessoReprovada();
-                var tds = document.querySelectorAll(".confirma_contribuicao");
+                let tds = document.querySelectorAll(".confirma_contribuicao");
                 tds.forEach(function (td) {
                     if (td.value == dados.operacao) {
-                        var tr = td.parentNode.parentNode;
+                        let tr = td.parentNode.parentNode;
                         tr.innerHTML = "";
                     }
                 });
