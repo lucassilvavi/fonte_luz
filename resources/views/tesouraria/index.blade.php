@@ -4,7 +4,7 @@
     }
 </style>
 @extends('layouts.principal')
-@section('title','Tesouraria')
+@section('title','Controle Contribuição')
 @section('content')
     <form method="get" id="formContribuicao">
         <input type="hidden" name="_token" value="{{csrf_token()}}">

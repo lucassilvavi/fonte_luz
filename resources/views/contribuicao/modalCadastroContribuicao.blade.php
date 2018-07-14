@@ -48,17 +48,18 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
-                    <select name="tipoContribuicao" class="form-control">
+                    <select name="tipoContribuicao" class="form-control tipoContribuicaoM">
                         <option value="1">Depósito Bancário</option>
                         <option value="2">Via Gaveta (na Fonte de Luz)</option>
                     </select>
                     <small class="help-block"></small>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label>Anexar Comprovante:</label>
-                    <div class="input-group">
+            <div class="anexarDocumentoMes">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Anexar Comprovante:</label>
+                        <div class="input-group">
                                <span class="input-group-btn">
                                  <span class="btn btn-primary"
                                        onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
@@ -66,29 +67,31 @@
                                         onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
                                         style="display: none;" type="file" accept=".png, .jpg, .jpeg,.pdf">
                                </span>
-                        <span class="form-control"></span>
+                            <span class="form-control"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <button class="btn btn-success" id="btnSalvarDocumentoMes" type="button">Salvar Documento
-                    </button>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <button class="btn btn-success" id="btnSalvarDocumentoMes" type="button">Salvar Documento
+                        </button>
+                    </div>
+
                 </div>
 
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Arquivos</th>
+                        <th>Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody class="fotosGravadasMes">
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Arquivos</th>
-                    <th>Excluir</th>
-                </tr>
-                </thead>
-                <tbody class="fotosGravadasMes">
-                <tr>
-                </tr>
-                </tbody>
-            </table>
             <div class="row">
                 <div class="col-md-6 col-md-offset-0 form-group">
                     <button type="button" class="btn btn-block btn-danger sair" id="sair">Sair</button>
@@ -158,17 +161,18 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label for="tipoContribuicao" class="control-label">* Tipo da contribuição: </label>
-                    <select name="tipoContribuicao"   class="form-control">
+                    <select name="tipoContribuicao" class="form-control tipoContribuicaoP">
                         <option value="1">Depósito Bancário</option>
                         <option value="2">Via Gaveta (na Fonte de Luz)</option>
                     </select>
                     <small class="help-block"></small>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label>Anexar Comprovante:</label>
-                    <div class="input-group">
+            <div class="anexarDocumentoPeriodo">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Anexar Comprovante:</label>
+                        <div class="input-group">
                               <span class="input-group-btn">
                                 <span class="btn btn-primary"
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
@@ -176,25 +180,26 @@
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg, .pdf">
                               </span>
-                        <span class="form-control"></span>
+                            <span class="form-control"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <button class="btn btn-success" id="btnSalvarDocumento1" type="button">Salvar Documento</button>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <button class="btn btn-success" id="btnSalvarDocumento1" type="button">Salvar Documento</button>
+                    </div>
                 </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Arquivos</th>
+                        <th>Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody class="fotosGravadas">
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Arquivos</th>
-                    <th>Excluir</th>
-                </tr>
-                </thead>
-                <tbody class="fotosGravadas">
-                </tbody>
-            </table>
             <div class="row">
                 <div class="col-md-6 col-md-offset-0 form-group">
                     <button type="button" class="btn btn-block btn-danger sair">Sair</button>
@@ -203,6 +208,7 @@
                     <button type="submit" class="btn btn-block btn-success" id="salvarPorPeriodo">Salvar</button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
@@ -217,6 +223,7 @@
 <script src="{{asset('assets/js/contribuicao/submitPagamentoPorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/contribuicao/cadastrarImagemPorPeriodo.js')}}"></script>
 <script src="{{asset('assets/js/contribuicao/excluirComprovantePorPeriodo.js')}}"></script>
+<script src="{{asset('assets/js/contribuicao/hiddenAnexarDocumento.js')}}"></script>
 
 <script src="{{asset('assets/js/contribuicao/cadastrarImagemPorMes.js')}}"></script>
 <script src="{{asset('assets/js/contribuicao/submitPagamentoPorMes.js')}}"></script>

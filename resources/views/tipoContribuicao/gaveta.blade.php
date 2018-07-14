@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 
-@section('title','Tipo contribuição Gaveta')
-@section('title-form','Tipo contribuição Gaveta')
+@section('title','Gaveta')
+@section('title-form','Gaveta')
 
 @section('content')
     <div class="container">

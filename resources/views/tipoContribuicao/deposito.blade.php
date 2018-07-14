@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 
-@section('title','Tipo contribuição Deposito')
-@section('title-form','Tipo contribuição Deposito')
+@section('title','Deposito')
+@section('title-form','Deposito')
 
 @section('content')
     <div class="container">

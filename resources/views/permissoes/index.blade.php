@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 
-@section('title','Exemplo de Abas')
-@section('title-form','Abas')
+@section('title','Permissão')
+@section('title-form','Permissão')
 
 @section('content')
     <h3>Lista de Permissões</h3>

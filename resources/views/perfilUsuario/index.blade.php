@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 
-@section('title','Exemplo de Abas')
-@section('title-form','Abas')
+@section('title','Perfil')
+@section('title-form','Perfil')
 
 @section('content')
     <h3>Lista de Perfis</h3>
