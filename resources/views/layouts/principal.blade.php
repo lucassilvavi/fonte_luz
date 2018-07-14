@@ -11,8 +11,9 @@
 
     <title>@yield('title')</title>
 
-    <!-- Bootstrap -->
+    <link rel="icon" href="{{asset('assets/favicon.ico')}}" type="image/gif" sizes="16x16">
 
+    <!-- Bootstrap -->
     <link href="{{asset('/assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<!-- Font Awesome -->--}}
     <link href="{{asset('/assets/vendor/Font-Awesome/css/font-awesome.min.css')}}" rel="stylesheet">
