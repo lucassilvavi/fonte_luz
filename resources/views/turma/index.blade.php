@@ -26,6 +26,9 @@
             <div class="form-group col-md-2">
                 <label class="control-label"></label>
                 <button type="button" id="pesquisar" class="btn btn-info btn-block">Pesquisar</button>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label"></label>
                 <button type="button" class="btn btn-primary btn-block cadastrarTurma">Cadastrar Turma</button>
             </div>
         </div>
