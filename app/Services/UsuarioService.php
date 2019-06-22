@@ -20,12 +20,37 @@ class UsuarioService
     {
         $this->usuarioRepository = $usuarioRepository;
     }
+
     public function editarPerfil($perfil, $usuario)
     {
         DB::beginTransaction();
         try {
             $dados['co_perfil'] = $perfil;
             $this->usuarioRepository->update($dados, $usuario, "id");
+
+            DB::commit();
+            return '{"operacao":true}';
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            $exception = $e->getMessage() . $e->getTraceAsString();
+            Log::error($exception);
+
+            DB::rollback();
+            //Retorna as informacoes do erro.
+            return '{"operacao":false}';
+        }
+    }
+
+    public function excluirUsuario($idUsuario)
+    {
+        DB::beginTransaction();
+        try {
+            $dados['st_ativo'] = "N";
+            $dados['password'] = "";
+            $dados['dt_ultima_alteracao'] = date("Y-m-d");
+            $dados['carga'] = 1;
+
+            $this->usuarioRepository->update($dados, $idUsuario, "id");
 
             DB::commit();
             return '{"operacao":true}';

@@ -75,7 +75,7 @@
     <script src="{{asset('assets/js/contribuicao/editarComprovante.js')}}"></script>
     <script>
         $("#tb_home ").on('click', '.excluirContribuicao', function () {
-            var co_seq_controle_contribuicao = $(this).val();
+            let co_seq_controle_contribuicao = $(this).val();
             $.ajax({
                 type: "get",
                 url: "/formExcluirContribuicao/"+co_seq_controle_contribuicao,

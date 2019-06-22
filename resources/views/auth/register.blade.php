@@ -50,6 +50,20 @@
                 @endif
             </div>
         </div>
+        <div class="input-group {{ $errors->has('nu_telefone') ? ' has-error' : '' }}">
+                <span class="input-group-addon">
+                    <i class="material-icons">phone</i>
+                 </span>
+            <div class="form-line">
+                <input type="text" class="form-control phone_with_ddd" name="nu_telefone" value="{{ old('nu_telefone') }}"
+                       id="nu_telefone" required>
+                @if ($errors->has('nu_telefone'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('nu_telefone') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
         <div class="input-group {{ $errors->has('dt_nascimento') ? ' has-error' : '' }}">
                 <span class="input-group-addon">
                     <i class="material-icons">date_range</i>
@@ -178,7 +192,7 @@
     <script>
         $(document).ready(function () {
             $('#cpf').keyup(function () {
-                var cpf = $(this).val();
+                let cpf = $(this).val();
                 if (cpf.length == 11) {
                     $.ajax({
                         type: "get",
@@ -190,6 +204,7 @@
                                 selectedCidade(dados.no_cidade, dados.co_cidade);
                                 $('#no_nome').val(dados.no_nome);
                                 $('#email').val(dados.email);
+                                $('#nu_telefone').val(dados.email);
                                 $('#dt_nascimento').val(dados.dt_nascimento);
                                 $('#logradouro').val(dados.logradouro);
                                 $('#bairro').val(dados.bairro);
@@ -199,6 +214,7 @@
                             } else {
                                 $('#no_nome').val("");
                                 $('#email').val('');
+                                $('#nu_telefone').val('');
                                 $('#dt_nascimento').val('');
                                 $('#logradouro').val('');
                                 $('#bairro').val('');
@@ -223,5 +239,5 @@
             }
         });
     </script>
-
+    <script src="{{asset('assets/js/mascaras/mascaras.js')}}"></script>
 @endsection

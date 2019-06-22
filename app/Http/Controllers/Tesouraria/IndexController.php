@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Tesouraria;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormDesvincularRequest;
 use App\Http\Requests\GenericaRequest;
 use App\Repositories\UsuarioRepository;
 use Illuminate\Http\Request;
@@ -32,11 +33,12 @@ class IndexController extends Controller
     private $comprovanteRepository;
     private $controleContribuicaoService;
 
-    public function __construct(UsuarioRepository $usuarioRepository,
-                                ControleContribuicaoRepository $controleContribuicaoRepository,
-                                ComprovanteRepository $comprovanteRepository,
-                                ControleContribuicaoService $controleContribuicaoService)
-    {
+    public function __construct(
+        UsuarioRepository $usuarioRepository,
+        ControleContribuicaoRepository $controleContribuicaoRepository,
+        ComprovanteRepository $comprovanteRepository,
+        ControleContribuicaoService $controleContribuicaoService
+    ) {
         $this->usuarioRepository = $usuarioRepository;
         $this->controleContribuicaoRepository = $controleContribuicaoRepository;
         $this->comprovanteRepository = $comprovanteRepository;
@@ -68,155 +70,15 @@ class IndexController extends Controller
         return $parament;
     }
 
-    public function getContribuicoes($classificacaoPagamentoS, $periodeDeS, $periodeAteS, $membroS)
-    {
+    public function getContribuicoes($classificacaoPagamentoS, $periodeDeS, $periodeAteS, $membroS) {
         $classificacaoPagamento = self::valueNull($classificacaoPagamentoS);
         $periodeDe = self::valueNull($periodeDeS);
         $periodeAte = self::valueNull($periodeAteS);
         $membro = self::valueNull($membroS);
+        $periodeDe =  !is_null($periodeDe)?self::dataFomatada($periodeDe):$periodeDe;
+        $periodeAte =  !is_null($periodeAte)?self::dataFomatada($periodeAte):$periodeAte;
+        $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao($classificacaoPagamento,$periodeDe,$periodeAte,$membro);
 
-        if (!empty($periodeDe) && !empty($periodeAte) && empty($membro) && !isset($classificacaoPagamento)) {
-            $de = self::dataFomatada($periodeDe);
-            $ate = self::dataFomatada($periodeAte);
-
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao WHERE dt_contribuicao >= $de AND dt_contribuicao <= $ate");
-
-        } elseif (!empty($periodeDe) && empty($periodeAte) && empty($membro) && !isset($classificacaoPagamento)) {
-
-            $de = self::dataFomatada($periodeDe);
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao >= $de");
-
-        } elseif (empty($periodeDe) && !empty($periodeAte) && empty($membro) && !isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao <= $ate");
-
-        } else if (!empty($periodeDe) && !empty($periodeAte) && !empty($membro) && !isset($classificacaoPagamento)) {
-
-            $de = self::dataFomatada($periodeDe);
-            $ate = self::dataFomatada($periodeAte);
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao WHERE dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-
-        } elseif (!empty($periodeDe) && empty($periodeAte) && !empty($membro) && !isset($classificacaoPagamento)) {
-
-            $de = self::dataFomatada($periodeDe);
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao >= $de  AND tu.ID = " . $membro);
-
-        } elseif (empty($periodeDe) && !empty($periodeAte) && !empty($membro) && !isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE dt_contribuicao <= $ate AND tu.ID = " . $membro);
-
-        } elseif (empty($periodeDe) && empty($periodeAte) && !empty($membro) && !isset($classificacaoPagamento)) {
-
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE ID = " . $membro);
-
-        } elseif (empty($periodeDe) && empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
-
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL");
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL");
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL");
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL");
-            }
-
-        } elseif (!empty($periodeDe) && empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
-
-            $de = self::dataFomatada($periodeDe);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao >= $de");
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de");
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de");
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de");
-            }
-        } elseif (empty($periodeDe) && !empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("where dt_confirmacao_financeiro is null and dt_reprovacao_financeiro is null and dt_contribuicao <= $ate");
-
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate");
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate");
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate");
-            }
-        } elseif (!empty($periodeDe) && !empty($periodeAte) && empty($membro) && isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            $de = self::dataFomatada($periodeDe);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao >= $de AND dt_contribuicao <= $ate");
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate");
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate");
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate");
-            }
-
-        } elseif (!empty($periodeDe) && empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
-
-            $de = self::dataFomatada($periodeDe);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao >= $de AND tu.ID = " . $membro);
-            }
-        } elseif (empty($periodeDe) && !empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            }
-        } elseif (!empty($periodeDe) && !empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
-
-            $ate = self::dataFomatada($periodeAte);
-            $de = self::dataFomatada($periodeDe);
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL  AND  dt_contribuicao >= $de AND dt_contribuicao <= $ate AND tu.ID = " . $membro);
-            }
-        } elseif (empty($periodeDe) && empty($periodeAte) && !empty($membro) && isset($classificacaoPagamento)) {
-            if ($classificacaoPagamento == "Pendente de Validação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL  AND tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Pagamentos Validados") {
-
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NOT NULL  AND  tu.ID = " . $membro);
-
-            } elseif ($classificacaoPagamento == "Pendente com Observação") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_CONFIRMACAO_FINANCEIRO IS NULL AND DT_REPROVACAO_FINANCEIRO IS NULL AND DS_OBSERVACAO_FINANCEIRO IS NOT NULL  AND  tu.ID = " . $membro);
-            } elseif ($classificacaoPagamento == "Reprovado") {
-                $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE DT_REPROVACAO_FINANCEIRO IS NOT NULL  AND tu.ID = " . $membro);
-            }
-        }else {
-
-            $dados['contribuicoes'] = $this->controleContribuicaoRepository->getContribuicao("WHERE 1");
-        }
         return view('tesouraria.dataTableContribuicao')->with('dados', $dados);
 
     }
@@ -230,7 +92,8 @@ class IndexController extends Controller
 
     public function formComprovante($co_seq_controle_contribuicao)
     {
-        $dados['comprovantes'] = $this->comprovanteRepository->getComprovantes($co_seq_controle_contribuicao);
+        $dados['comprovantes']
+            = $this->comprovanteRepository->getComprovantes($co_seq_controle_contribuicao);
         $dados['baixar'] = "/comprovantes/";
         return view('tesouraria.comprovante')->with('dados', $dados);
     }
@@ -238,7 +101,8 @@ class IndexController extends Controller
     public function formObservacao($co_seq_controle_contribuicao)
     {
 
-        $dados['contribuicao'] = $this->controleContribuicaoRepository->find($co_seq_controle_contribuicao);
+        $dados['contribuicao']
+            = $this->controleContribuicaoRepository->find($co_seq_controle_contribuicao);
         $dados['action'] = 'Tesouraria\IndexController@saveObservacao';
         return view('tesouraria.observacao')->with('dados', $dados);
     }
@@ -246,13 +110,15 @@ class IndexController extends Controller
     public function saveObservacao(Request $request)
     {
         $dados['form'] = $request->all();
-        return $this->controleContribuicaoService->editarObservacao(trim($dados['form']['observacao']), $dados['form']['co_seq_controle_contribuicao']);
+        return $this->controleContribuicaoService->editarObservacao(trim($dados['form']['observacao']),
+            $dados['form']['co_seq_controle_contribuicao']);
     }
 
     public function formConfirmaContribuicao($co_seq_controle_contribuicao)
     {
         $dados = $co_seq_controle_contribuicao;
-        return view('tesouraria.modalConfirmaContribuicao')->with('dados', $dados);
+        return view('tesouraria.modalConfirmaContribuicao')->with('dados',
+            $dados);
     }
 
     public function saveConfirmacaoContribuicao($co_seq_controle_contribuicao)
@@ -262,13 +128,28 @@ class IndexController extends Controller
 
     public function formReprovaContribuicao($co_seq_controle_contribuicao)
     {
-        $dados = $co_seq_controle_contribuicao;
-        return view('tesouraria.modalReprovaContribuicao')->with('dados', $dados);
+        $dados['co_seq_controle_contribuicao'] = $co_seq_controle_contribuicao;
+        $dados['action'] = "/tesouraria/saveReprovaContribuicao";
+
+        return view('tesouraria.modalReprovaContribuicao')->with('dados',
+            $dados);
     }
 
-    public function saveReprovaContribuicao($co_seq_controle_contribuicao)
+    public function saveReprovaContribuicao(FormDesvincularRequest $request)
     {
-        return $this->controleContribuicaoService->reprovaContribuicao($co_seq_controle_contribuicao);
+
+        $resultado
+            = $this->controleContribuicaoService->reprovaContribuicao($request->get('co_seq_controle_contribuicao'),
+            $request->get('motivo'));
+
+        if ($resultado['operacao'] == false) {
+            return ['operacao' => false];
+        } else {
+            return [
+                'operacao' => true,
+                'id'       => $resultado['id']
+            ];
+        }
     }
 
     public function saveAprovarSelecionados(GenericaRequest $request)
@@ -276,7 +157,8 @@ class IndexController extends Controller
         $contribuicoes = $request->get('form');
         foreach ($contribuicoes as $k => $contribuicao) {
 
-            $resultados[] = $this->controleContribuicaoService->confirmaContribuicao($contribuicao);
+            $resultados[]
+                = $this->controleContribuicaoService->confirmaContribuicao($contribuicao);
         }
         foreach ($resultados as $resultado) {
             $testeResultado[] = in_array(false, $resultado);
@@ -288,12 +170,16 @@ class IndexController extends Controller
         }
     }
 
-    public function saveReprovacaoSelecionados(GenericaRequest $request)
+    public function saveReprovacaoSelecionados(FormDesvincularRequest $request)
     {
-        $contribuicoes = $request->get('form');
+
+        $contribuicoes
+            = json_decode($request->get('co_seq_controle_contribuicao'));
         foreach ($contribuicoes as $k => $contribuicao) {
 
-            $resultados[] = $this->controleContribuicaoService->reprovaContribuicao($contribuicao);
+            $resultados[]
+                = $this->controleContribuicaoService->reprovaContribuicao($contribuicao,
+                $request->get('motivo'));
         }
         foreach ($resultados as $resultado) {
             $testeResultado[] = in_array(false, $resultado);
@@ -301,8 +187,22 @@ class IndexController extends Controller
         if (in_array(true, $testeResultado)) {
             return ['operacao' => false];
         } else {
-            return ['operacao' => true];
+            return [
+                'operacao' => true,
+                'id'       => 'varios'
+            ];
         }
+    }
+
+    public function formReprovaContribuicaoSelecionados(
+        $co_seq_controle_contribuicao
+    ) {
+
+        $dados['co_seq_controle_contribuicao'] = $co_seq_controle_contribuicao;
+        $dados['action'] = "/tesouraria/saveReprovacaoSelecionados";
+
+        return view('tesouraria.modalReprovaContribuicao')->with('dados',
+            $dados);
     }
 
 

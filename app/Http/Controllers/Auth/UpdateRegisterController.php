@@ -42,6 +42,7 @@
             $dados['co_uf'] = $this->unidadeFederativaRepository->getCoUnidade($dadosForm['co_uf']);
             $dados['co_cidade'] = $dadosForm['co_cidade'];
             $dados['carga'] = 0;
+            $dados['st_ativo'] = "S";
             $dados['vl_contribuicao'] = $this->trataMoeda($dadosForm['vl_contribuicao']);
             $dados['password'] = bcrypt($dadosForm['password']);
 

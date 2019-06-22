@@ -12,16 +12,16 @@
         </a>
     </li>
     @can('isencao de contribuicao')
-    <li>
-        <a href="/isencao/contribuicao"><i class="fa fa-minus"></i> <span>Insenção de Contribuição</span>
-        </a>
-    </li>
+        <li>
+            <a href="/isencao/contribuicao"><i class="fa fa-minus"></i> <span>Insenção de Contribuição</span>
+            </a>
+        </li>
     @endcan
     @can('ajuste contribuicao')
-    <li>
-        <a href="/ajuste/contribuicao"><i class="fa fa-pencil"></i> <span>Ajuste da Contribuição</span>
-        </a>
-    </li>
+        <li>
+            <a href="/ajuste/contribuicao"><i class="fa fa-pencil"></i> <span>Ajuste da Contribuição</span>
+            </a>
+        </li>
     @endcan
     @can('tesouraria')
         <li class="treeview">
@@ -45,6 +45,17 @@
                         <li><a href="/tipo/contribuicao/gaveta"><i class="fa fa-circle-o"></i> Gaveta</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#"><i class="fa fa-circle-o"></i>Movimentação Financeira
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/tipo/lancamento"><i class="fa fa-circle-o"></i> Tipo Lançamento </a></li>
+                        <li><a href="/entrada/saida"><i class="fa fa-circle-o"></i> Entradas e Saídas </a></li>
+                    </ul>
+                </li>
             </ul>
         </li>
     @endcan
@@ -57,6 +68,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
+                <li><a href="/cursos"><i class="fa fa-circle-o"></i>Cursos</a></li>
                 <li>
                     <a href="#"><i class="fa fa-circle-o"></i> Dados dos Usuários
                         <span class="pull-right-container">
@@ -79,6 +91,20 @@
                         <li><a href="{{url('/grupoPermissao')}}"><i class="fa fa-circle-o"></i>Grupos</a></li>
                     </ul>
                 </li>
+            </ul>
+        </li>
+    @endcan
+    @can('Cadastro')
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-wpforms"></i> <span>Cadastro</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/turmas"><i class="fa fa-circle-o"></i>Turmas</a></li>
+
             </ul>
         </li>
     @endcan

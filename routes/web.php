@@ -18,7 +18,6 @@ Route::get('/', 'Home\HomeController@index');
 Route::post('/register/update', 'Auth\UpdateRegisterController@update');
 
 
-
 //rotas do inicio do sistema
 Route::get('/contribuicao/{co_usuario?}', 'Contribuicao\HomeController@index');
 
@@ -71,6 +70,10 @@ Route::post('/savePhoto', 'Perfil\FotosController@savePhoto');
 Route::get('/changePhoto/{co_seq_foto}/{usuario}', 'Perfil\FotosController@changePhoto');
 
 Route::post('/editarPessoal', 'Perfil\PessoalController@editarPessoal');
+
+Route::get('/modalExluirPerfil/{idUsuario}', 'Perfil\PessoalController@modalExluirPerfil');
+
+Route::get('/exluirPerfil/{idUsuario}', 'Perfil\PessoalController@excluirPerfil');
 
 Route::get('/deletePhoto/{co_seq_foto}', 'Perfil\FotosController@deletePhoto');
 
@@ -149,7 +152,9 @@ Route::get('/tesouraria/saveConfirmacaoContribuicao/{co_seq_grupo_permissoes}', 
 
 Route::get('/tesouraria/formReprovaContribuicao/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formReprovaContribuicao');
 
-Route::get('/tesouraria/saveReprovaContribuicao/{co_seq_grupo_permissoes}', 'Tesouraria\IndexController@saveReprovaContribuicao');
+Route::get('/tesouraria/formReprovaContribuicaoSelecionados/{co_seq_controle_contribuicao}', 'Tesouraria\IndexController@formReprovaContribuicaoSelecionados');
+
+Route::post('/tesouraria/saveReprovaContribuicao', 'Tesouraria\IndexController@saveReprovaContribuicao');
 
 Route::post('/tesouraria/saveAprovarSelecionados', 'Tesouraria\IndexController@saveAprovarSelecionados');
 
@@ -174,11 +179,88 @@ Route::get('/getTipoContribuicaoGaveta/{periodeDe}/{periodeAte}/{membro}', 'Tipo
 Route::get('/pedente/contribuicao', 'Contribuicao\PedenteController@index');
 
 
+//rota tipo lancamento
+
+Route::get('/tipo/lancamento', 'TipoLancamento\LancamentoController@index');
+
+Route::get('/modalCadTipoLancamento', 'TipoLancamento\LancamentoController@modalCadastro');
+
+Route::get('/modalEditTipoLancamento/{co_seq_tipo_lancamento}', 'TipoLancamento\LancamentoController@modalEditar');
+
+Route::post('/saveTipoLancamento', 'TipoLancamento\LancamentoController@salvar');
+
+Route::post('/editTipoLancamento', 'TipoLancamento\LancamentoController@editar');
+
+
+//rota lista entrada e saida
+
+Route::get('/entrada/saida/{periodeDe?}/{periodeAte?}/{nt_lancamento?}/{tipo_lancamento?}', 'TipoLancamento\EntradaSaidaController@index');
+
+Route::get('/modalCadEntradaSaida/{co_seq_financeiro?}/{action?}', 'TipoLancamento\EntradaSaidaController@modalCadastro');
+
+Route::post('/saveEntradaSaida', 'TipoLancamento\EntradaSaidaController@salvar');
+
+Route::post('/editEntradaSaida', 'TipoLancamento\EntradaSaidaController@editar');
+
+Route::get('/modalEditar/{co_seq_financeiro}', 'TipoLancamento\EntradaSaidaController@modalEstorno');
+
+Route::get('/saveEstornar/{co_seq_financeiro}', 'TipoLancamento\EntradaSaidaController@estonar');
+
+//rota dos cursos
+
+Route::get('/cursos', 'Administrador\CursoController@index');
+
+Route::get('/modalCadCursos/{action?}/{co_seq_curso?}', 'Administrador\CursoController@modalCadCurso');
+
+Route::post('/saveCurso', 'Administrador\CursoController@saveCurso');
+
+Route::post('/editarCurso', 'Administrador\CursoController@editar');
+
+Route::get('/modalDesativarCursos/{co_seq_curso}', 'Administrador\CursoController@modalDesativar');
+
+Route::get('/desativarCurso/{co_seq_curso}', 'Administrador\CursoController@desativarCurso');
+
+Route::get('/modalAtivarCursos/{co_seq_curso}', 'Administrador\CursoController@modalAtivar');
+
+Route::get('/ativarCurso/{co_seq_curso}', 'Administrador\CursoController@ativarCurso');
+
+
+//rota dos turma
+
+Route::get('/turmas/{sitacao?}/{curso?}', 'Cadastro\TurmasController@index');
+
+Route::get('/modalCadturmas', 'Cadastro\TurmasController@modalCadastrar');
+
+Route::post('/saveTurma', 'Cadastro\TurmasController@save');
+
+Route::get('/modalCadAluno/{co_seq_turma}', 'Cadastro\TurmasController@modalAluno');
+
+Route::get('/modalDesativar/{co_seq_turma}', 'Cadastro\TurmasController@modalDesativar');
+
+Route::get('/desativarTurma/{co_seq_turma}', 'Cadastro\TurmasController@desativar');
+
+Route::post('/vincularAluno', 'Cadastro\TurmasController@vincularAluno');
+
+Route::get('/modalMatriculados/{co_seq_turma}', 'Cadastro\TurmasController@modalMatriculados');
+
+Route::get('/desmatricular/{co_seq_turma_usuario}/{id}', 'Cadastro\TurmasController@desmatricular');
+
+Route::get('/modalDesmatricular/{co_seq_turma_usuario}', 'Cadastro\TurmasController@modalDesmatricular');
+
+Route::get('/modalMatricular/{co_seq_turma}', 'Cadastro\TurmasController@modalMatricular');
+
+Route::get('/saveMatricular/{co_seq_turma}/{id}', 'Cadastro\TurmasController@saveMatricular');
+
+Route::post('/desmatricularHome', 'Cadastro\TurmasController@desmatricularHome');
+
+Route::get('/getDadosUsuarioImportante/{id}/{co_seq_turma}', 'Cadastro\TurmasController@getDadosUsuario');
+
+
+
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     // return what you want
 });
-
 
 Route::get('/tables', function () {
     return view('example-view.tables');

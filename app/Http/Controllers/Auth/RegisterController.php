@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Telefone;
 use App\Models\Usuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'no_nome' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:tb_usuario',
+            'nu_telefone' => 'required',
             'password' => 'required|string|min:6|confirmed',
             'nu_cpf' => 'required|string|max:11|unique:tb_usuario',
             'dt_nascimento' => 'required',
@@ -79,7 +81,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        return Usuario::create([
+        $usuario = Usuario::create([
             'no_nome' => $data['no_nome'],
             'co_perfil' => 2,
             'nu_cpf' => $data['nu_cpf'],
@@ -91,8 +93,17 @@ class RegisterController extends Controller
             'co_cidade' => $data['co_cidade'],
             'vl_contribuicao' => $this->trataMoeda($data['vl_contribuicao']),
             'carga' => 0,
+            'st_ativo' => "S",
             'password' => bcrypt($data['password']),
+        ])->id;
+
+        Telefone::create([
+            'nu_telefone' => preg_replace("/\D+/", "", $data['nu_telefone']),
+            'tp_telefone' => 1,
+            'st_ativo' => "S",
+            'id' => $usuario,
         ]);
+        return $this->usuarioRepository->find($usuario);
 
     }
 

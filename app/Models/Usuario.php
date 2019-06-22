@@ -38,7 +38,8 @@ class Usuario extends Authenticatable
         'password',
         'co_perfil',
         'carga',
-        'dt_ultima_alteracao'
+        'dt_ultima_alteracao',
+        'st_ativo'
     ];
 
     /**

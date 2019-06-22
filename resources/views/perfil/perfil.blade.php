@@ -1,6 +1,7 @@
 @extends('layouts.principal')
 @section('title','Dados Pessoais')
 @section('content')
+    <script src="{{asset('assets/vendor/webcamjs/webcam.js')}}"></script>
     <div class="row colorBody">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -57,7 +58,8 @@
                             <small class="help-block"></small>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="logradouro" class="col-form-label">Informe a Cidade quando a Nacionalidade for diferente do Brasil</label>
+                            <label for="logradouro" class="col-form-label">Informe a Cidade quando a Nacionalidade for
+                                diferente do Brasil</label>
                             <input type="text" class="form-control" name="endereco_naturalidade"
                                    id="endereco_naturalidade"
                                    value="@if(!empty($dados['usuario']->no_cidade_pais)) {{$dados['usuario']->no_cidade_pais}} @endif"
@@ -157,6 +159,12 @@
                                        placeholder="Administrador" readonly>
                                 <small class="help-block"></small>
                             </div>
+                            <div class="form-group col-md-8" style=" padding-left: 50%">
+                                <label class="col-form-label">Deseja realmente exluir sua conta ?</label>
+                                <button type="button" class="btn btn-danger btn-sm btn-block" id="excluitConta">
+                                    Excluir Conta
+                                </button>
+                            </div>
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success btn-sm btn-block" id="btnSalvarPessoal">
@@ -217,7 +225,7 @@
                 <div class="row">
                     <form action="{{$dados['actionTelefone']}}" method="post" id="formTelefone">
                         {{ csrf_field() }}
-                        <input type="hidden" name="usuario" value="{{$dados['usuario']->id}}">
+                        <input type="hidden" class="idUsuario" name="usuario" value="{{$dados['usuario']->id}}">
                         <div class="form-group col-md-4">
                             <label for="nu_telefone">Tipo Telefone:</label>
                             <select class="form-control" name="tipoTelefone">
@@ -300,17 +308,27 @@
                               <span class="input-group-btn">
                                 <span class="btn btn-primary"
                                       onclick="$(this).parent().find('input[type=file]').click();">Pesquisar</span>
-                                <input name="image"
+                                <input name="image" id="imageFoto"
                                        onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
                                        style="display: none;" type="file" accept=".png, .jpg, .jpeg">
                               </span>
                             <span class="form-control"></span>
                         </div>
-
                     </div>
                     <div class="form-group">
+                        {{--<button class="btn btn-info" id="tirarFoto" type="button">Tirar Foto--}}
+                        {{--</button>--}}
                         <button class="btn btn-success upload-image" id="btnSalvar" type="button">Salvar Imagem</button>
                     </div>
+                    {{--<div id="tirarFotoWeb">--}}
+                    {{--<div class="form-group row" id="camera">--}}
+                    {{--<b>Câmera:</b>--}}
+                    {{--<div id="minha_camera"></div>--}}
+                    {{--<button type="button" class="btn btn-primary" onClick="bater_foto()">Tirar Foto</button>--}}
+                    {{--<b>Prévia:</b>--}}
+                    {{--<div id="results"></div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                 </form>
                 <div class="row">
                     @foreach($dados['fotos'] as $foto)
@@ -411,5 +429,44 @@
     <script src="{{asset('assets/js/perfil/telefone/dataTableTelefone.js')}}"></script>
     <script src="{{asset('assets/js/perfil/telefone/modalDesableTelefone.js')}}"></script>
     <script src="{{asset('assets/js/perfil/perfil/submitPerfil.js')}}"></script>
+    <script src="{{asset('assets/js/perfil/pessoal/modalExcluirConta.js')}}"></script>
+
+    <script>
+        $("#tirarFoto").click(function () {
+            $("#tirarFotoWeb").html(' ' +
+                '' +
+                ' <div class="form-group row" id="camera">' +
+                '      <b>Câmera:</b>\n' +
+                '    <div id="minha_camera"></div>\n' +
+                '        <button type="button" class="btn btn-primary" onClick="bater_foto()">Tirar Foto</button>\n' +
+                '       <b>Prévia:</b>\n' +
+                '        <div id="results"></div>\n' +
+                ' </div>');
+
+
+            window.onload = mostrar_camera();
+        });
+
+        function bater_foto() {
+            Webcam.snap(function (data_uri) {
+                document.getElementById('results').innerHTML = '<img id="base64image" src="' + data_uri + '"/><button onclick="salvar_foto();">Upload desta Foto</button>';
+            });
+        }
+
+        function mostrar_camera() {
+            Webcam.set({
+                width: 640,
+                height: 480,
+                dest_width: 640,
+                dest_height: 480,
+                crop_width: 300,
+                crop_height: 400,
+                image_format: 'jpeg',
+                jpeg_quality: 100,
+                flip_horiz: true
+            });
+            Webcam.attach('#minha_camera');
+        }
+    </script>
 @endsection
 

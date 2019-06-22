@@ -15,8 +15,14 @@ use App\Services\PermissaoService;
 use App\Repositories\GrupoPermissaoRepository;
 use App\Repositories\RlPerfilPermissoesRepository;
 use Gate;
+
 class PermissaoController extends Controller
 {
+    private $permissoesRepository;
+    private $permissaoService;
+    private $grupoPermissaoRepository;
+    private $rlPerfilPermissoesRepository;
+
     public function __construct(PermissoesRepository $permissoesRepository,
                                 PermissaoService $permissaoService,
                                 GrupoPermissaoRepository $grupoPermissaoRepository,
@@ -41,7 +47,7 @@ class PermissaoController extends Controller
     function formPerfil($action)
     {
         $dados['action'] = 'Permissoes\\' . $action;
-        $dados['grupos']= $this->grupoPermissaoRepository->grupoAtivos();
+        $dados['grupos'] = $this->grupoPermissaoRepository->grupoAtivos();
         return view('permissoes.modalFormCadastroPermissao')->with('dados', $dados);
     }
 
@@ -49,9 +55,9 @@ class PermissaoController extends Controller
     {
         return $this->permissaoService->nova($request->all());
     }
-    function modalDetalhePermissao($co_permissao){
 
-
+    function modalDetalhePermissao($co_permissao)
+    {
         $dados['perfis'] = $this->rlPerfilPermissoesRepository->getPerfisVinculadosPermissao($co_permissao);
         return view('permissoes.modalDetalhePermissao')->with('dados', $dados);
     }
